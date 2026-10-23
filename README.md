@@ -24,9 +24,9 @@ URL and comment IDs. The old WordPress server is not needed to build or publish
 this repository. New articles also need homepage/archive/search-index/sitemap
 and public-manifest updates; an authoring generator can be added separately.
 
-Actions -> Publish reviewed static blog -> Run workflow:
-- Leave production false for a preview with noindex metadata.
-- Use production true only when the domain routing and migration checks pass.
+Commit public HTML changes to main to build and publish automatically.
+Actions -> Publish reviewed static blog -> Run workflow also publishes production.
+Preview builds are local only; the live workflow cannot publish noindex previews.
 
 Only the built _site artifact is published. The workflow validates every mapped
 public post target and canonical URL before deploying. It does not upload raw
