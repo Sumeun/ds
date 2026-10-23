@@ -20,7 +20,8 @@ class Robots(HTMLParser):
     def handle_endtag(self, tag):
         if tag == 'head' and not self.head_closed:
             self.head_closed = True
-            if self.preview: self.output.append('<meta name="robots" content="noindex,nofollow">')
+            content = 'noindex,nofollow,max-image-preview:large' if self.preview else 'max-image-preview:large'
+            self.output.append('<meta name="robots" content="'+content+'">')
         self.output.append('</' + tag + '>')
     def handle_data(self, data): self.output.append(data)
     def handle_entityref(self, name): self.output.append('&' + name + ';')

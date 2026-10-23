@@ -267,22 +267,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
 <!-- End Google Tag Manager -->	   
     <!-- Wordpress Stats Manager -->
-    <script type="text/javascript">
-          var _wsm = _wsm || [];
-           _wsm.push(['trackPageView']);
-           _wsm.push(['enableLinkTracking']);
-           _wsm.push(['enableHeartBeatTimer']);
-          (function() {
-            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
-            _wsm.push(['setUrlReferrer', ""]);
-            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
-            _wsm.push(['setSiteId', "1"]);
-            _wsm.push(['setPageId', "0"]);
-            _wsm.push(['setWpUserId', "0"]);           
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
-          })();
-    </script>
+    <script type="text/javascript"></script>
     <!-- End Wordpress Stats Manager Code -->
       <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
 					.navbar-brand a,
@@ -817,58 +802,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </section>
         <div><!-- boxed layout or full-width layout end -->
     </div>
-    <script type="text/javascript">
-        jQuery(function(){
-        var arrLiveStats=[];
-        var WSM_PREFIX="wsm";
-		
-        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
-                var wsmFnSiteLiveStats=function(){
-                           jQuery.ajax({
-                               type: "POST",
-                               url: wsm_ajaxObject.ajax_url,
-                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
-                           }).done(function( strResponse ) {
-                                if(strResponse!="No"){
-                                    arrResponse=JSON.parse(strResponse);
-                                    jQuery.each(arrResponse, function(key,value){
-                                    
-                                        $element= document.getElementById(key);
-                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
-                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
-                                        $class="";
-                                        
-                                        if(diff>=0){
-                                            diff="+"+diff;
-                                        }else{
-                                            $class="wmcRedBack";
-                                        }
-
-                                        $element.setAttribute("data-value",value);
-                                        $element.innerHTML=diff;
-                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
-                                        
-                                        if(key=="SiteUserOnline")
-                                        {
-                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
-                                            if(jQuery("#wsmSiteUserOnline").length)
-                                            {
-                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
-                                            }
-                                        }
-                                    });
-                                    setTimeout(function() {
-                                        jQuery.each(arrResponse, function(key,value){
-                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
-                                        });
-                                    }, 1500);
-                                }
-                           });
-                       }
-                       if(arrLiveStats.length>0){
-                          setInterval(wsmFnSiteLiveStats, 10000);
-                       }});
-        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+    <script type="text/javascript"></script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>

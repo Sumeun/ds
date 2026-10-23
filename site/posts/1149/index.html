@@ -271,22 +271,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
 <!-- End Google Tag Manager -->	   
     <!-- Wordpress Stats Manager -->
-    <script type="text/javascript">
-          var _wsm = _wsm || [];
-           _wsm.push(['trackPageView']);
-           _wsm.push(['enableLinkTracking']);
-           _wsm.push(['enableHeartBeatTimer']);
-          (function() {
-            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
-            _wsm.push(['setUrlReferrer', ""]);
-            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
-            _wsm.push(['setSiteId', "1"]);
-            _wsm.push(['setPageId', "1149"]);
-            _wsm.push(['setWpUserId', "0"]);           
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
-          })();
-    </script>
+    <script type="text/javascript"></script>
     <!-- End Wordpress Stats Manager Code -->
       <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
 					.navbar-brand a,
@@ -2194,12 +2179,7 @@ extract(arr, &#39;school&#39;=c(&#39;A&#39;,&#39;B&#39;))
 </div><ol class="static-comment-list"><li id="comment-633"><p><strong>admin</strong> <time>2020-09-20 20:05:28</time></p><div class="comment-content"><p>좋은 의견 감사합니다. 하지만 xtab은 빈도표를 만드는 용도라서 글에서 설명한 내용과 다소 차이가 있는 듯 합니다.</p>
 </div></li></ol></li></ol></section>
         <ol class="children">
-        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-631"><p><strong>Dae Ho Kim</strong> <time>2020-09-16 02:51:03</time></p><div class="comment-content"><p>좋은 자료 감사합니다.</p>
-<p>그런데<br>
-데이터 프레임을 행렬/배열로 변환하는데 오류가 있습니다&#8230;..</p>
-<p>df를 배열과 행렬로 변환할 때 xtabs() 함수르 하는 것이 좋을 것 같습니다.</p>
-</div><ol class="static-comment-list"><li id="comment-633"><p><strong>admin</strong> <time>2020-09-20 20:05:28</time></p><div class="comment-content"><p>좋은 의견 감사합니다. 하지만 xtab은 빈도표를 만드는 용도라서 글에서 설명한 내용과 다소 차이가 있는 듯 합니다.</p>
-</div></li></ol></li></ol></section>
+        
         </li><!-- #comment-## -->
 </ol><!-- .children -->
 </li><!-- #comment-## -->
@@ -2530,58 +2510,7 @@ extract(arr, &#39;school&#39;=c(&#39;A&#39;,&#39;B&#39;))
         </section>
         <div><!-- boxed layout or full-width layout end -->
     </div>
-    <script type="text/javascript">
-        jQuery(function(){
-        var arrLiveStats=[];
-        var WSM_PREFIX="wsm";
-		
-        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
-                var wsmFnSiteLiveStats=function(){
-                           jQuery.ajax({
-                               type: "POST",
-                               url: wsm_ajaxObject.ajax_url,
-                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
-                           }).done(function( strResponse ) {
-                                if(strResponse!="No"){
-                                    arrResponse=JSON.parse(strResponse);
-                                    jQuery.each(arrResponse, function(key,value){
-                                    
-                                        $element= document.getElementById(key);
-                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
-                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
-                                        $class="";
-                                        
-                                        if(diff>=0){
-                                            diff="+"+diff;
-                                        }else{
-                                            $class="wmcRedBack";
-                                        }
-
-                                        $element.setAttribute("data-value",value);
-                                        $element.innerHTML=diff;
-                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
-                                        
-                                        if(key=="SiteUserOnline")
-                                        {
-                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
-                                            if(jQuery("#wsmSiteUserOnline").length)
-                                            {
-                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
-                                            }
-                                        }
-                                    });
-                                    setTimeout(function() {
-                                        jQuery.each(arrResponse, function(key,value){
-                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
-                                        });
-                                    }, 1500);
-                                }
-                           });
-                       }
-                       if(arrLiveStats.length>0){
-                          setInterval(wsmFnSiteLiveStats, 10000);
-                       }});
-        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+    <script type="text/javascript"></script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>

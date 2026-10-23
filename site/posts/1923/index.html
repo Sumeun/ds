@@ -271,22 +271,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
 <!-- End Google Tag Manager -->	   
     <!-- Wordpress Stats Manager -->
-    <script type="text/javascript">
-          var _wsm = _wsm || [];
-           _wsm.push(['trackPageView']);
-           _wsm.push(['enableLinkTracking']);
-           _wsm.push(['enableHeartBeatTimer']);
-          (function() {
-            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
-            _wsm.push(['setUrlReferrer', ""]);
-            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
-            _wsm.push(['setSiteId', "1"]);
-            _wsm.push(['setPageId', "1923"]);
-            _wsm.push(['setWpUserId', "0"]);           
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
-          })();
-    </script>
+    <script type="text/javascript"></script>
     <!-- End Wordpress Stats Manager Code -->
       <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
 					.navbar-brand a,
@@ -1472,23 +1457,9 @@ confint(lmMod, &quot;heights&quot;)
 </div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
 </div></li></ol></li></ol></section>
         </li><!-- #comment-## -->
-        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-973"><p><strong>EconStat</strong> <time>2021-01-17 20:49:52</time></p><div class="comment-content"><p>위에 예시중에 계량 모형 FE추정에서</p>
-<p>FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )</p>
-<p>이부분의 편향이 크게 나온 것이 u&#8217;i가 height 를 포함하는 오차인데 그것이 </p>
-<p>개체별 특성을 나타내지 못하기 때문인 것 같네요 </p>
-<p>즉, u&#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</p>
-</div></li><li id="comment-974"><p><strong>EconStat</strong> <time>2021-01-17 20:57:29</time></p><div class="comment-content"><p>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</p>
-</div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
-</div></li></ol></li></ol></section>
+        
         <ol class="children">
-        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-973"><p><strong>EconStat</strong> <time>2021-01-17 20:49:52</time></p><div class="comment-content"><p>위에 예시중에 계량 모형 FE추정에서</p>
-<p>FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )</p>
-<p>이부분의 편향이 크게 나온 것이 u&#8217;i가 height 를 포함하는 오차인데 그것이 </p>
-<p>개체별 특성을 나타내지 못하기 때문인 것 같네요 </p>
-<p>즉, u&#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</p>
-</div></li><li id="comment-974"><p><strong>EconStat</strong> <time>2021-01-17 20:57:29</time></p><div class="comment-content"><p>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</p>
-</div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
-</div></li></ol></li></ol></section>
+        
         </li><!-- #comment-## -->
 </ol><!-- .children -->
 </li><!-- #comment-## -->
@@ -1819,58 +1790,7 @@ confint(lmMod, &quot;heights&quot;)
         </section>
         <div><!-- boxed layout or full-width layout end -->
     </div>
-    <script type="text/javascript">
-        jQuery(function(){
-        var arrLiveStats=[];
-        var WSM_PREFIX="wsm";
-		
-        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
-                var wsmFnSiteLiveStats=function(){
-                           jQuery.ajax({
-                               type: "POST",
-                               url: wsm_ajaxObject.ajax_url,
-                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
-                           }).done(function( strResponse ) {
-                                if(strResponse!="No"){
-                                    arrResponse=JSON.parse(strResponse);
-                                    jQuery.each(arrResponse, function(key,value){
-                                    
-                                        $element= document.getElementById(key);
-                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
-                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
-                                        $class="";
-                                        
-                                        if(diff>=0){
-                                            diff="+"+diff;
-                                        }else{
-                                            $class="wmcRedBack";
-                                        }
-
-                                        $element.setAttribute("data-value",value);
-                                        $element.innerHTML=diff;
-                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
-                                        
-                                        if(key=="SiteUserOnline")
-                                        {
-                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
-                                            if(jQuery("#wsmSiteUserOnline").length)
-                                            {
-                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
-                                            }
-                                        }
-                                    });
-                                    setTimeout(function() {
-                                        jQuery.each(arrResponse, function(key,value){
-                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
-                                        });
-                                    }, 1500);
-                                }
-                           });
-                       }
-                       if(arrLiveStats.length>0){
-                          setInterval(wsmFnSiteLiveStats, 10000);
-                       }});
-        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+    <script type="text/javascript"></script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
 <script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>
