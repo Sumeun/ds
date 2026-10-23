@@ -1,0 +1,101 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1936" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1936/</link>
+	<description>R</description>
+	<lastBuildDate>Tue, 22 Nov 2022 01:46:05 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-947464</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Tue, 22 Nov 2022 01:46:05 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947464</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1936#comment-947459&amp;quot;&amp;gt;magic&amp;lt;/a&amp;gt;의 응답.
+
+다중 회귀 분석의 의미를 생각해보세요. y=b0 + b1 G (G: Gender)에서 b1는 유의미하지 않은 데, y=b0 + b1G + b2S (S:Socioeconomic status)에서 b1은 유의미하다면 Socioeconimic status가 동일한 집단 내에서는 b1이 유의미하다는 뜻입니다</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1936/#comment-947459"&gt;magic&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;다중 회귀 분석의 의미를 생각해보세요. y=b0 + b1 G (G: Gender)에서 b1는 유의미하지 않은 데, y=b0 + b1G + b2S (S:Socioeconomic status)에서 b1은 유의미하다면 Socioeconimic status가 동일한 집단 내에서는 b1이 유의미하다는 뜻입니다&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: magic		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-947459</link>
+
+		<dc:creator>magic</dc:creator>
+		<pubDate>Tue, 01 Nov 2022 09:38:01 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947459</guid>
+
+					<description>성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?</description>
+			<ns3:encoded>&lt;p&gt;성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-607</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sat, 27 Jun 2020 06:50:24 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-607</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1936#comment-576&amp;quot;&amp;gt;lim&amp;lt;/a&amp;gt;의 응답.
+
+&amp;quot;?garson&amp;quot;를 해보시면, 도움말을 확인할 수 있습니다.
+
+다음의 자료들을 한 번 확인해보시면 될 것 같습니다. 
+
+Beck, M.W. 2018. NeuralNetTools: Visualization and Analysis Tools for Neural Networks. Journal of Statistical Software. 85(11):1-20.
+
+Garson, G.D. 1991. Interpreting neural network connection weights. Artificial Intelligence Expert. 6(4):46-51.
+
+Goh, A.T.C. 1995. Back-propagation neural networks for modeling complex systems. Artificial Intelligence in Engineering. 9(3):143-151.
+
+Olden, J.D., Jackson, D.A. 2002. Illuminating the &amp;#039;black-box&amp;#039;: a randomization approach for understanding variable contributions in artificial neural networks. Ecological Modelling. 154:135-150.
+
+Olden, J.D., Joy, M.K., Death, R.G. 2004. An accurate comparison of methods for quantifying variable importance in artificial neural networks using simulated data. Ecological Modelling. 178:389-397.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1936/#comment-576"&gt;lim&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;&amp;#8220;?garson&amp;#8221;를 해보시면, 도움말을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;다음의 자료들을 한 번 확인해보시면 될 것 같습니다. &lt;/p&gt;
+&lt;p&gt;Beck, M.W. 2018. NeuralNetTools: Visualization and Analysis Tools for Neural Networks. Journal of Statistical Software. 85(11):1-20.&lt;/p&gt;
+&lt;p&gt;Garson, G.D. 1991. Interpreting neural network connection weights. Artificial Intelligence Expert. 6(4):46-51.&lt;/p&gt;
+&lt;p&gt;Goh, A.T.C. 1995. Back-propagation neural networks for modeling complex systems. Artificial Intelligence in Engineering. 9(3):143-151.&lt;/p&gt;
+&lt;p&gt;Olden, J.D., Jackson, D.A. 2002. Illuminating the &amp;#8216;black-box&amp;#8217;: a randomization approach for understanding variable contributions in artificial neural networks. Ecological Modelling. 154:135-150.&lt;/p&gt;
+&lt;p&gt;Olden, J.D., Joy, M.K., Death, R.G. 2004. An accurate comparison of methods for quantifying variable importance in artificial neural networks using simulated data. Ecological Modelling. 178:389-397.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: lim		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-576</link>
+
+		<dc:creator>lim</dc:creator>
+		<pubDate>Mon, 20 Apr 2020 08:44:59 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-576</guid>
+
+					<description>안녕하세요 포스팅 너무 좋은 자료가 공부에 도움이 되고 있습니다.
+다만 하나 궁금한게 있는데
+garson() 함수로 인공신경망 변수의 중요도가 나오는 부분에서
+어떤 공식으로 변수 중요도가 계산돼서 그려지는지 알 수 있을까요?</description>
+			<ns3:encoded>&lt;p&gt;안녕하세요 포스팅 너무 좋은 자료가 공부에 도움이 되고 있습니다.&lt;br&gt;
+다만 하나 궁금한게 있는데&lt;br&gt;
+garson() 함수로 인공신경망 변수의 중요도가 나오는 부분에서&lt;br&gt;
+어떤 공식으로 변수 중요도가 계산돼서 그려지는지 알 수 있을까요?&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

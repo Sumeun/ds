@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <title>ggplot2 dual axis &#8211; 숨은원리 데이터사이언스</title>
+<style>
+#wpadminbar #wp-admin-bar-wsm_free_top_button .ab-icon:before {
+	content: "\f239";
+	color: #FF9800;
+	top: 3px;
+}
+</style>
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="preconnect" href="//www.google-analytics.com">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 피드" href="https://ds.sumeun.org/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 댓글 피드" href="https://ds.sumeun.org/comments-feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » ggplot2 dual axis 댓글 피드" href="https://ds.sumeun.org/posts/2086/feed.xml">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/ds.sumeun.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="https://ds.sumeun.org/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="metaslider-blocks-editor-css-css" href="https://ds.sumeun.org/wp-content/plugins/ml-slider/admin/assets/dist/css/editor-block.css" type="text/css" media="all" property="stylesheet">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="wsm-style-css" href="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-style-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-purplous-theme-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-theme.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-css-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-lite-style.css" type="text/css" media="all">
+<style id="purplous-lite-css-inline-css" type="text/css">
+
+						.site-header .nav-wrapper .navbar .navbar-brand a {
+							color: # !important;
+						}
+						.slick-next:hover, .slick-prev:hover {
+						  background:  !important;
+						}
+						.post-content-wrap .slick-next {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev:hover, .post-content-wrap .slick-next:hover {
+						  background:  !important;
+						}
+
+						.nav-links .page-numbers {
+						  color: ;
+						  border: 1px solid ;
+						}
+						.nav-links .page-numbers:hover {
+						  background: ;
+						}
+
+						.nav-links .page-numbers.current {
+						  background: ;
+						}
+						a {
+						  color: ;
+						}
+
+						a:hover, a:focus {
+						  color: ;
+						}
+
+						a:visited {
+						  color: ;
+						}
+						.btn-default, .comment-respond .comment-form .btn-default {
+						  background: ;
+						  border: 2px solid  !important;
+						}
+						.btn-default:hover, .comment-respond .comment-form .btn-default:hover, .btn-default:focus, .comment-respond .comment-form .btn-default:focus {
+						  background: ;
+						}
+						.search-form label .search-field:focus {
+						  border: 1px solid ;
+						}
+						.search-form .search-submit {
+						  background: ;
+						}
+						blockquote {
+						  border-left: 5px solid ;
+						}
+
+						.continue-read a:hover i {
+						  color:  !important;
+						}
+						section.footer-sec .widget .widget-title:after {
+						  background-color: ;
+						}
+						.sec-title span {
+						  background: ;
+						}
+						.post-cat a {
+						  background: ;
+						}
+						span.post-love:hover i, span.post-comment:hover i {
+						  color: ;
+						}
+						.navbar-default .navbar-nav > li > a:hover {
+						  color:  !important;
+						}
+						.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+						  background:  !important;
+						  border-bottom: 1px solid  !important;
+						}
+
+						.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+						  color: ;
+						}
+						section.post-large-slider .slide-details-box h2 a:hover, section.post-large-slider .slide-details-box h2 a:focus {
+						  color: ;
+						}
+						.post-large-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox .post-content h2 a:hover {
+						  color: ;
+						}
+						.post-large-slider .slick-next {
+						  color: ;
+						}
+						.post-large-slider .slick-prev {
+						  color: ;
+						}
+						.post-med-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.postbox.post-small .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .postbox .continue-read a:hover i {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content h2.article-title a:hover {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content .btn-default {
+						  background: ;
+						}
+						.postbox .post-footer .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.post-date {
+						  background: ;
+						}
+						.postbox .continue-read a:hover i {
+						  color:  !important;
+						}
+						.blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.blog-post-wrapper .post-content-wrap .post-content h2 a:hover, .blog-post-wrapper .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content h2 a:hover, .related-posts .related-item .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.related-posts .related-item .post-content-wrap .post-date {
+						  background: ;
+						}
+						.related-posts .slick-prev {
+						  background: ;
+						}
+						.related-posts .slick-next {
+						  background: ;
+						}
+						.related-posts .related-item:hover .slick-next:before, .related-posts .related-item:hover .slick-prev:before {
+						  color: ;
+						}
+
+						.content-list .post-content .metabar-wrap .article-full-date i:hover, .content-list .post-content .metabar-wrap .article-full-date i:focus, .content-list .post-content .metabar-wrap .post-like-count i:hover, .content-list .post-content .metabar-wrap .post-like-count i:focus, .content-list .post-content .metabar-wrap post-like-count i:hover, .content-list .post-content .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.content-list .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.widget ul li a:hover {
+						  color: ;
+						}
+						.widget ul li a:focus {
+						  color: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn {
+						  background: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn:before {
+						  border-color: transparent transparent  transparent;
+						}
+						.calendar_wrap table caption {
+						  background: ;
+						}
+						.jetpack_subscription_widget #subscribe-submit input {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.widget_mc4wp_form_widget .mc4wp-form-fields input[type='submit'] {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.tagcloud a:hover {
+						  background: ;
+						  border: 1px solid ;
+						}
+						#header-search-wrap .search-form label .close {
+						    border: 1px solid ;
+						    color: ;
+						}
+
+			
+		
+</style>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/html5.js?ver=3.7.3' id='html5-js'></script>
+<![endif]-->
+
+ 
+<meta name="generator" content="WordPress 6.0.2">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145165187-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-145165187-1');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
+<!-- End Google Tag Manager -->	   
+    <!-- Wordpress Stats Manager -->
+    <script type="text/javascript">
+          var _wsm = _wsm || [];
+           _wsm.push(['trackPageView']);
+           _wsm.push(['enableLinkTracking']);
+           _wsm.push(['enableHeartBeatTimer']);
+          (function() {
+            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
+            _wsm.push(['setUrlReferrer', ""]);
+            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
+            _wsm.push(['setSiteId', "1"]);
+            _wsm.push(['setPageId', "2086"]);
+            _wsm.push(['setWpUserId', "0"]);           
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
+          })();
+    </script>
+    <!-- End Wordpress Stats Manager Code -->
+      <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+					.navbar-brand a,
+			.site-description {
+				color: #000000;
+			}
+				</style>
+		      <link rel="canonical" href="https://ds.sumeun.org/posts/2086/"><meta name="robots" content="noindex,nofollow"></head>
+  <body class="post-template-default single single-post postid-2086 single-format-standard container boxed-layout metaslider-plugin group-blog">
+
+<div class="boxed-layout container site-wrapper">
+  <div class="row">
+  <!-- Start of header section -->
+  <header class="site-header" role="banner">
+         <!-- End Top Header -->
+    <!-- Start of Naviation -->
+    <div class="nav-wrapper">
+      <div class="container">
+          <nav id="primary-nav" class="navbar navbar-default">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                                        <div class="navbar-brand">
+                          <a href="https://ds.sumeun.org/"><span>숨은원리 데이터사이언스</span></a>
+                                                        <p class="site-description">R&amp;Python</p>
+                          </div>                </div>
+
+                 <div id="navbar-collapse" class="collapse navbar-collapse"><ul id="menu-menu-1" class="nav navbar-nav navbar-right"><li id="menu-item-655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-655"><a title="숨은 DS" href="https://ds.sumeun.org/">숨은 DS</a></li>
+<li id="menu-item-657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-657"><a title="도서소개" href="http://books.sumeun.org">도서소개</a></li>
+<li id="menu-item-658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-658"><a title="숨은수학" href="http://sumeun.org">숨은수학</a></li>
+<li class="menu-header-search"><a href="#" id="header-search-toggle"><i class="fa fa-search"></i></a></li></ul></div>            </nav>
+        </div>
+    </div>
+      <!-- End of Navigation -->
+    <div id="header-search-wrap" style="display:none">
+      <div class="search-box-wrap">
+	<div class="container">
+		<div class="row">
+			<p><a href="https://ds.sumeun.org/search/">검색</a></p>
+		</div>
+	</div>
+</div>    </div>
+
+  </header>
+  <!-- End of site header -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		<div class="inner-banner-wrap" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/01/cropped-abstract-abstract-oil-painting-acrylic-1546249.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner-banner-content">                            <h2>ggplot2 dual axis</h2>
+                    </div></div></div></div><!-- Breadcrumb -->
+
+<!-- End of breadcrumb sec -->
+
+<!-- Start of single page content -->
+<section class="sec-content blog-page-content sidebar-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-post-wrapper bgwhite">
+                    <div class="post-content-wrap post-pad">
+                           
+<!-- if the post has thumbnail -->
+<div class="image-post" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/12/ggplot2_dualAxis.png)">
+</div>
+
+                            <div class="metabar-wrap">
+                                <span class="post-cat"><a href="https://ds.sumeun.org/categories/28/">R</a></span>
+                                <span class="article-full-date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="https://ds.sumeun.org/archives/20191221/">12월 21, 2019</a></span>
+                                <span class="post-like-count"><i class="fa fa-comments" aria-hidden="true"></i><a href="https://ds.sumeun.org/posts/2086/#respond">0 Comments</a></span>
+                            </div>
+                            <div class="post-content">
+                                <h2><a href="#">ggplot2 dual axis</a></h2>
+                                <div class="post-desc">
+                                    <p><h1><code>ggplot2</code>의 이중축</h1>
+<p><code>ggplot2</code>의 <code>scale_y_continuous(sec.axis = sec_axis(~.))</code>을 활용하면, 다음과 같은 그림을 그릴 수 있습니다.</p>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"></p>
+<p>어떤 주식의 주가를 나타내고 있는 듯 한데, 거래량은 별다른 패턴이 없어 보이고, 가격은 우상향하여 두 달만에 2배 가까이 오르는 바람직한 그래프입니다.</p>
+<p>이제 위의 그래프를 <code>ggplot2</code>의 <code>sec.axis = sec_axis()</code>를 활용하여 그려봅시다.</p>
+<h2>데이터</h2>
+<p>데이터는 다음과 같습니다. 가격은 평균 1000, 800, 600으로 하향하고 있고, 거래량은 100에서 200으로 뛰었습니다.</p>
+<pre><code class="r">n = 90
+price &lt;- c(rnorm(n/3, 1000, 50),
+           rnorm(n/3,  800, 50),
+           rnorm(n/3,  600, 50))
+xdate &lt;- seq(from = as.Date('2020-01-01'), 
+             to = as.Date('2020-03-01'),
+             along.with = price)
+volume &lt;- c(rnorm(n/2, 100, 10),
+            rnorm(n/2, 200, 10))
+</code></pre>
+<pre><code class="r">head(price)
+</code></pre>
+<pre>## [1]  957.3960 1056.5378  963.9979 1004.5250 1073.5585  977.7241
+</pre>
+<pre><code class="r">head(xdate)
+</code></pre>
+<pre>## [1] "2020-01-01" "2020-01-01" "2020-01-02" "2020-01-03" "2020-01-03" "2020-01-04"
+</pre>
+<pre><code class="r">head(volume)
+</code></pre>
+<pre>## [1] 108.50670  95.80234 107.41140  85.94745  88.82841 112.11918
+</pre>
+<pre><code class="r">dat &lt;- data.frame(date=xdate, price=price, vol=volume)
+head(dat)
+</code></pre>
+<pre>##         date     price       vol
+## 1 2020-01-01  957.3960 108.50670
+## 2 2020-01-01 1056.5378  95.80234
+## 3 2020-01-02  963.9979 107.41140
+## 4 2020-01-03 1004.5250  85.94745
+## 5 2020-01-03 1073.5585  88.82841
+## 6 2020-01-04  977.7241 112.11918
+</pre>
+<p>그래프로 그려 보면 다음과 같습니다.</p>
+<pre><code class="r">library(ggplot2)
+ggplot(dat, aes(x=date, y=price, size=vol)) + 
+  geom_point() + 
+  geom_line(size=1)
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"></p>
+<h2>이중축을 위한 변환</h2>
+<p><code>ggplot2</code>의 <code>sec.axis=</code>는 기본적으로 동일한 변수에 대해 변환한 값을 표기하기 위한 함수입니다.</p>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/reference/sec_axis.html?fbclid=IwAR2TrKEDhcpuWa0ItN9QbQpmr_Q_zK5vtfWqDGpXQXNBxmBxIhIDrter0OI">ggplot2:Specify a secondary axis</a></li>
+</ul>
+<p>하지만 두 변수를 적절히 변환하여, 두 변수에 대해 각각의 축을 나타내는 데에 사용할 수도 있습니다.</p>
+<p>이때 변환은 직접 계산할 수도 있고, 다음과 같은 함수를 만들어 줄 수도 있습니다.</p>
+<pre><code class="r">genTransformation = function(dat) {
+  list(
+    volToPrice = function(x) {
+      diff(range(dat$price, na.rm=TRUE))*(x-min(dat$vol))/
+        diff(range(dat$vol, na.rm=TRUE)) + min(dat$price)
+    },
+    priceToVol = function(x) {
+      (x-min(dat$price)) * diff(range(dat$vol, na.rm=TRUE)) /
+        diff(range(dat$price, na.rm=TRUE)) + min(dat$vol)
+    })
+}
+</code></pre>
+<p>위의 함수를 실행하면 반환값으로 두 함수를 가지고 있는 리스트가 반환됩니다. <code>price</code>를 <code>vol</code>의 스케일로 변환하고, 그 반대로 변환하는 함수입니다.</p>
+<p>다음에 두 함수를 연달아 적용하면 항등 함수가 됨을 알 수 있습니다.</p>
+<pre><code class="r">tr &lt;- genTransformation(dat)
+#dat$price == tr[["volToPrice"]](tr[["priceToVol"]](dat$price))
+near(dat$price, tr[["volToPrice"]](tr[["priceToVol"]](dat$price)))
+</code></pre>
+<pre>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [17] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [33] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [49] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [65] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [81] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+</pre>
+<h2><code>scale_y_continuous(sec.axis = sec_axis(~.))</code></h2>
+<p>다음은 위에서 얻은 변환 함수와 <code>scale_y_continuous(sec.axis = sec_axis(~.))</code>를 활용하여 이중축을 만드는 과정을 보여줍니다. 편의를 위해 축의 색도 바꾸었습니다.</p>
+<pre><code class="r">require(tidyr)
+dat2 &lt;- gather(dat, "key", "value", price, vol)
+library(dplyr)
+
+dat31 &lt;- dat2 %&gt;% filter(key=='price')
+dat32 &lt;- dat2 %&gt;% filter(key=='vol') %&gt;% 
+  mutate(value=tr[["volToPrice"]](value))
+
+dat4 &lt;- bind_rows(dat31, dat32)
+
+# Default palette of ggplot2
+# https://stackoverflow.com/questions/8197559/emulate-ggplot2-default-color-palette
+gg_color_hue &lt;- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+cols = gg_color_hue(2)
+
+ggplot(dat4, aes(x=date, y=value, col=key)) + 
+  geom_point() + 
+  geom_line() + 
+  scale_y_continuous(sec.axis = sec_axis(~ tr[["priceToVol"]](.),
+                                         name='volume'),
+                     name = 'price') +
+  theme(axis.title.y.left = element_text(color=cols[1]),
+        axis.text.y.left = element_text(color=cols[1]),
+        axis.title.y.right = element_text(color=cols[2]),
+        axis.text.y.right = element_text(color=cols[2])) + 
+  guides(col='none')
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-6"></p>
+<ul>
+<li>참고: <a href="https://stackoverflow.com/questions/3099219/ggplot-with-2-y-axes-on-each-side-and-different-scales">StackOverflow 질문</a></li>
+</ul>
+</p>
+                                </div>
+
+                                    <span class="tags-links"><i class="fa fa-tags" aria-hidden="true"></i>Tags:                <a href="https://ds.sumeun.org/tags/ggplot2/" rel="tag">ggplot2</a>
+                            <a href="https://ds.sumeun.org/tags/scale_y_continuous/" rel="tag">scale_y_continuous</a>
+                            <a href="https://ds.sumeun.org/tags/sex-axis/" rel="tag">sex.axis</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%9D%B4%EC%A4%91%EC%B6%95/" rel="tag">이중축</a>
+            </span>
+                             </div>
+                    </div>
+                </div>
+
+                            <div class="bgwhite post-pad">
+                <nav class="navigation post-navigation" role="navigation">
+                    <h2 class="screen-reader-text">Post navigation</h2>
+                    <div class="nav-links">
+                                            <div class="nav-previous">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/12/kmeans_vs_GMM.png"></div>
+                                                        <div class="post-nav-content">
+                            <a href="https://ds.sumeun.org/posts/2095/" rel="prev"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Prev Post<br><h4>k-means와 GMM 비교</h4></a></div>
+                        </div>
+                    
+                                            <div class="nav-next">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/02/BigData2nd_ad01.png"></div>
+                                                        <div class="post-nav-content">
+                                <a href="https://ds.sumeun.org/posts/2069/" rel="next">Next Post&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i><br><h4>개정판 발간! R로 하는 빅데이터 분석: 데이터 전처리와 시각화</h4></a>
+                            </div>
+                        </div>
+                                        </div>
+                </nav>
+            </div>
+        
+                <!-- Start of related post -->
+                                <div class="bgwhite post-pad">
+                    <div id="related-posts">
+                        <h2>Related Posts</h2>
+                        <div class="related-posts">
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/2022-02-20-23-17-29.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220220/">2월 20 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2546/">[R스터디:RQuestions] 첫 번째 시간/alluvial plot</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2546/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/mountains-g458727e4c_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220208/">2월 08 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2511/">서울특별시 시간별 (초)미세먼지 03: 극단값 확인</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2511/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/clouds-g2eea9a1b2_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220206/">2월 06 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2507/">서울시 미세/초미세 먼지(2/N)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2507/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/mountains-g17ae98004_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220205/">2월 05 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2501/">서울시의 미세/초미세먼지(1/n)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2501/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/12/ggplot2_tips02.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20201201/">12월 01 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2250/">ggplot2 tips 2</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2250/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/02/BigData2nd_ad01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191204/">12월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2069/">개정판 발간! R로 하는 빅데이터 분석: 데이터 전처리와 시각화</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2069/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/07/ggplot2_tips01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190724/">7월 24 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1905/">ggplot2 tips</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1905/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/04/population-350x135.gif)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190404/">4월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1089/">gganimate 예: 한국의 인구 구조 변화</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1089/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_coord.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190312/">3월 12 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1005/">ggplot2: 좌표계</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1005/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_aes2.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190307/">3월 07 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/975/">ggplot2: Aesthetic mapping and scales</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/975/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_intro.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190306/">3월 06 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/970/">ggplot2: 들어가기</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/2086/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/970/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                    </div>
+                    </div>
+                </div>
+                        <!-- End of related post -->
+
+                <!-- Start of author bio -->
+                            <div class="bgwhite post-pad">
+                <div class="author-bio">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="author-image">
+                                <img alt="" src="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=96&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=192&amp;d=mm&amp;r=g 2x" class="avatar avatar-96 photo" height="96" width="96" loading="lazy">                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="author-desc">
+                                <span class="author-name"><a href="https://ds.sumeun.org/authors/1/">admin !!!</a></span>
+                                                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <!-- End of author bio -->
+
+                <!-- Start of comment box -->
+                <div class="bgwhite post-pad">
+                        <h2 class="comments-title">Comments on this post</h2>
+                        <span>0 Comments</span>
+                        </div>                          <!-- </div> bgwhite post-pad since comment form and comments are in different divs -->
+                         		<div class="bgwhite post-pad">
+		<p class="static-comments-note">기존 공개 댓글은 읽기 전용으로 보존되어 있습니다.</p><!-- #respond -->
+	 </div>
+<!-- #comments -->
+                        <!-- End comment wrap -->
+                <!-- End of comment box -->
+
+            </div>
+
+                            <div class="col-md-4 right-sidebar">
+                    <!-- place sidebar here -->
+                    <aside id="search-2" class="widget widget_search"><p><a href="https://ds.sumeun.org/search/">검색</a></p></aside>
+		<aside id="recent-posts-2" class="widget widget_recent_entries">
+		<h1 class="widget-title">최신 글</h1>
+		<ul>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2624/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어 2</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2621/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2603/">Relative Risk Regression</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2596/">[파이썬] R과 차이점 01</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2591/">[PYTHON] 파이썬(3.8) 표준 라이브러리의 패키지 목록(알파벳 순)</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h1 class="widget-title">최신 댓글</h1><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">지나가다</span> - <a href="https://ds.sumeun.org/posts/930/#comment-947635">Long to Wide form</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947464">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">magic</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947459">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947429">날짜와 시간 자료</a></li><li class="recentcomments"><span class="comment-author-link">Seongdeok</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947428">날짜와 시간 자료</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">보관함</h1>
+			<ul>
+					<li><a href="https://ds.sumeun.org/archives/202209/">2022년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202207/">2022년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202204/">2022년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202203/">2022년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202202/">2022년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202201/">2022년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202107/">2021년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202103/">2021년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202102/">2021년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202101/">2021년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202012/">2020년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202009/">2020년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202008/">2020년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202007/">2020년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202005/">2020년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202004/">2020년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202002/">2020년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202001/">2020년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201912/">2019년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201911/">2019년 11월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201910/">2019년 10월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201909/">2019년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201908/">2019년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201907/">2019년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201906/">2019년 6월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201905/">2019년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201904/">2019년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201903/">2019년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201902/">2019년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201901/">2019년 1월</a></li>
+			</ul>
+
+			</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">카테고리</h1>
+			<ul>
+					<li class="cat-item cat-item-144"><a href="https://ds.sumeun.org/categories/144/">Analysis</a>
+</li>
+	<li class="cat-item cat-item-143"><a href="https://ds.sumeun.org/categories/143/">BigData</a>
+</li>
+	<li class="cat-item cat-item-443"><a href="https://ds.sumeun.org/categories/443/">caret</a>
+</li>
+	<li class="cat-item cat-item-96"><a href="https://ds.sumeun.org/categories/96/">character</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="https://ds.sumeun.org/categories/31/">data preprocessing</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="https://ds.sumeun.org/categories/32/">descriptive statistics</a>
+</li>
+	<li class="cat-item cat-item-78"><a href="https://ds.sumeun.org/categories/78/">dplyr</a>
+</li>
+	<li class="cat-item cat-item-371"><a href="https://ds.sumeun.org/categories/371/">EDA</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="https://ds.sumeun.org/categories/178/">flow control</a>
+</li>
+	<li class="cat-item cat-item-187"><a href="https://ds.sumeun.org/categories/187/">ggplot2</a>
+</li>
+	<li class="cat-item cat-item-103"><a href="https://ds.sumeun.org/categories/103/">git</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="https://ds.sumeun.org/categories/95/">hangul</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://ds.sumeun.org/categories/120/">matrix</a>
+</li>
+	<li class="cat-item cat-item-390"><a href="https://ds.sumeun.org/categories/390/">ML</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="https://ds.sumeun.org/categories/77/">Packages</a>
+</li>
+	<li class="cat-item cat-item-264"><a href="https://ds.sumeun.org/categories/264/">Python</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://ds.sumeun.org/categories/28/">R</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="https://ds.sumeun.org/categories/80/">regular expressions</a>
+</li>
+	<li class="cat-item cat-item-159"><a href="https://ds.sumeun.org/categories/159/">RegularExpression</a>
+</li>
+	<li class="cat-item cat-item-357"><a href="https://ds.sumeun.org/categories/357/">RL</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="https://ds.sumeun.org/categories/82/">summary statistics</a>
+</li>
+	<li class="cat-item cat-item-166"><a href="https://ds.sumeun.org/categories/166/">Visualization</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="https://ds.sumeun.org/categories/172/">가로형</a>
+</li>
+	<li class="cat-item cat-item-358"><a href="https://ds.sumeun.org/categories/358/">강화학습</a>
+</li>
+	<li class="cat-item cat-item-210"><a href="https://ds.sumeun.org/categories/210/">객체</a>
+</li>
+	<li class="cat-item cat-item-483"><a href="https://ds.sumeun.org/categories/483/">기술적문제</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="https://ds.sumeun.org/categories/29/">기술통계</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="https://ds.sumeun.org/categories/104/">깃</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="https://ds.sumeun.org/categories/234/">날짜</a>
+</li>
+	<li class="cat-item cat-item-162"><a href="https://ds.sumeun.org/categories/162/">데이터</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="https://ds.sumeun.org/categories/174/">데이터 가공</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="https://ds.sumeun.org/categories/30/">데이터 전처리</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="https://ds.sumeun.org/categories/114/">데이터가공</a>
+</li>
+	<li class="cat-item cat-item-207"><a href="https://ds.sumeun.org/categories/207/">데이터테이블</a>
+</li>
+	<li class="cat-item cat-item-456"><a href="https://ds.sumeun.org/categories/456/">모형평가</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="https://ds.sumeun.org/categories/94/">문자열</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://ds.sumeun.org/categories/1/">미분류</a>
+</li>
+	<li class="cat-item cat-item-242"><a href="https://ds.sumeun.org/categories/242/">배열</a>
+</li>
+	<li class="cat-item cat-item-209"><a href="https://ds.sumeun.org/categories/209/">변수</a>
+</li>
+	<li class="cat-item cat-item-146"><a href="https://ds.sumeun.org/categories/146/">분석</a>
+</li>
+	<li class="cat-item cat-item-248"><a href="https://ds.sumeun.org/categories/248/">불러오기</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="https://ds.sumeun.org/categories/145/">빅데이터</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="https://ds.sumeun.org/categories/122/">선형대수</a>
+</li>
+	<li class="cat-item cat-item-173"><a href="https://ds.sumeun.org/categories/173/">세로형</a>
+</li>
+	<li class="cat-item cat-item-198"><a href="https://ds.sumeun.org/categories/198/">소개</a>
+</li>
+	<li class="cat-item cat-item-213"><a href="https://ds.sumeun.org/categories/213/">숫자</a>
+</li>
+	<li class="cat-item cat-item-165"><a href="https://ds.sumeun.org/categories/165/">시각화</a>
+</li>
+	<li class="cat-item cat-item-235"><a href="https://ds.sumeun.org/categories/235/">시간</a>
+</li>
+	<li class="cat-item cat-item-438"><a href="https://ds.sumeun.org/categories/438/">에러</a>
+</li>
+	<li class="cat-item cat-item-132"><a href="https://ds.sumeun.org/categories/132/">연산</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="https://ds.sumeun.org/categories/81/">요약통계</a>
+</li>
+	<li class="cat-item cat-item-319"><a href="https://ds.sumeun.org/categories/319/">이론</a>
+</li>
+	<li class="cat-item cat-item-320"><a href="https://ds.sumeun.org/categories/320/">자료분석</a>
+</li>
+	<li class="cat-item cat-item-195"><a href="https://ds.sumeun.org/categories/195/">자료형</a>
+</li>
+	<li class="cat-item cat-item-179"><a href="https://ds.sumeun.org/categories/179/">전처리</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="https://ds.sumeun.org/categories/79/">정규표현식</a>
+</li>
+	<li class="cat-item cat-item-481"><a href="https://ds.sumeun.org/categories/481/">주의사항</a>
+</li>
+	<li class="cat-item cat-item-265"><a href="https://ds.sumeun.org/categories/265/">파이썬</a>
+</li>
+	<li class="cat-item cat-item-76"><a href="https://ds.sumeun.org/categories/76/">패키지</a>
+</li>
+	<li class="cat-item cat-item-214"><a href="https://ds.sumeun.org/categories/214/">표기법</a>
+</li>
+	<li class="cat-item cat-item-93"><a href="https://ds.sumeun.org/categories/93/">한글</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="https://ds.sumeun.org/categories/133/">함수</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://ds.sumeun.org/categories/121/">행렬</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="https://ds.sumeun.org/categories/123/">행렬대수</a>
+</li>
+	<li class="cat-item cat-item-289"><a href="https://ds.sumeun.org/categories/289/">화일</a>
+</li>
+	<li class="cat-item cat-item-151"><a href="https://ds.sumeun.org/categories/151/">흐름제어문</a>
+</li>
+			</ul>
+
+			</aside><aside id="meta-2" class="widget widget_meta"><h1 class="widget-title">메타</h1>
+		<ul>
+			<li></li>			<li></li>
+			<li><a href="https://ds.sumeun.org/feed.xml">엔트리 피드</a></li>
+			<li><a href="https://ds.sumeun.org/comments-feed.xml">댓글 피드</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</aside>                </div>
+            
+        </div>
+    </div>
+</section>
+<!-- End of single page content -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+ <!-- Start of footer section -->
+        <section class="footer-sec">
+            <div class="container">
+                <div class="row">
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>2026 10월</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="일요일">일</th>
+		<th scope="col" title="월요일">월</th>
+		<th scope="col" title="화요일">화</th>
+		<th scope="col" title="수요일">수</th>
+		<th scope="col" title="목요일">목</th>
+		<th scope="col" title="금요일">금</th>
+		<th scope="col" title="토요일">토</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td id="today">23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="이전과 다음 달" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://ds.sumeun.org/archives/202209/">&laquo; 9월</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav></div></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="media_image-3" class="widget widget_media_image"><img width="300" height="200" src="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg" class="image wp-image-863  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg 300w, https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS.jpg 640w" sizes="(max-width: 300px) 100vw, 300px"></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="tag_cloud-3" class="widget widget_tag_cloud"><h1 class="widget-title">태그</h1><div class="tagcloud"><a href="https://ds.sumeun.org/tags/add/" class="tag-cloud-link tag-link-108 tag-link-position-1" style="font-size: 8pt;" aria-label="add (2 아이템)">add</a>
+<a href="https://ds.sumeun.org/tags/aggregate/" class="tag-cloud-link tag-link-55 tag-link-position-2" style="font-size: 10.333333333333pt;" aria-label="aggregate (3 아이템)">aggregate</a>
+<a href="https://ds.sumeun.org/tags/by/" class="tag-cloud-link tag-link-54 tag-link-position-3" style="font-size: 10.333333333333pt;" aria-label="by (3 아이템)">by</a>
+<a href="https://ds.sumeun.org/tags/cv/" class="tag-cloud-link tag-link-389 tag-link-position-4" style="font-size: 10.333333333333pt;" aria-label="CV (3 아이템)">CV</a>
+<a href="https://ds.sumeun.org/tags/data-table/" class="tag-cloud-link tag-link-183 tag-link-position-5" style="font-size: 18.888888888889pt;" aria-label="data.table (10 아이템)">data.table</a>
+<a href="https://ds.sumeun.org/tags/data-preprocessing/" class="tag-cloud-link tag-link-147 tag-link-position-6" style="font-size: 21.027777777778pt;" aria-label="data preprocessing (13 아이템)">data preprocessing</a>
+<a href="https://ds.sumeun.org/tags/dplyr/" class="tag-cloud-link tag-link-184 tag-link-position-7" style="font-size: 15.194444444444pt;" aria-label="dplyr (6 아이템)">dplyr</a>
+<a href="https://ds.sumeun.org/tags/eda/" class="tag-cloud-link tag-link-168 tag-link-position-8" style="font-size: 16.166666666667pt;" aria-label="EDA (7 아이템)">EDA</a>
+<a href="https://ds.sumeun.org/tags/filter/" class="tag-cloud-link tag-link-74 tag-link-position-9" style="font-size: 10.333333333333pt;" aria-label="filter (3 아이템)">filter</a>
+<a href="https://ds.sumeun.org/tags/for/" class="tag-cloud-link tag-link-39 tag-link-position-10" style="font-size: 10.333333333333pt;" aria-label="for (3 아이템)">for</a>
+<a href="https://ds.sumeun.org/tags/ggplot2/" class="tag-cloud-link tag-link-188 tag-link-position-11" style="font-size: 21.027777777778pt;" aria-label="ggplot2 (13 아이템)">ggplot2</a>
+<a href="https://ds.sumeun.org/tags/lm/" class="tag-cloud-link tag-link-314 tag-link-position-12" style="font-size: 10.333333333333pt;" aria-label="lm (3 아이템)">lm</a>
+<a href="https://ds.sumeun.org/tags/log/" class="tag-cloud-link tag-link-340 tag-link-position-13" style="font-size: 12.277777777778pt;" aria-label="log (4 아이템)">log</a>
+<a href="https://ds.sumeun.org/tags/melt/" class="tag-cloud-link tag-link-176 tag-link-position-14" style="font-size: 10.333333333333pt;" aria-label="melt (3 아이템)">melt</a>
+<a href="https://ds.sumeun.org/tags/mutate/" class="tag-cloud-link tag-link-83 tag-link-position-15" style="font-size: 10.333333333333pt;" aria-label="mutate (3 아이템)">mutate</a>
+<a href="https://ds.sumeun.org/tags/palette/" class="tag-cloud-link tag-link-283 tag-link-position-16" style="font-size: 10.333333333333pt;" aria-label="palette (3 아이템)">palette</a>
+<a href="https://ds.sumeun.org/tags/slice/" class="tag-cloud-link tag-link-73 tag-link-position-17" style="font-size: 10.333333333333pt;" aria-label="slice (3 아이템)">slice</a>
+<a href="https://ds.sumeun.org/tags/%EA%B2%BD%EB%A1%9C%EB%B6%84%EC%84%9D/" class="tag-cloud-link tag-link-345 tag-link-position-18" style="font-size: 10.333333333333pt;" aria-label="경로분석 (3 아이템)">경로분석</a>
+<a href="https://ds.sumeun.org/tags/%EA%B3%84%EB%9F%89%EA%B2%BD%EC%A0%9C%ED%95%99/" class="tag-cloud-link tag-link-334 tag-link-position-19" style="font-size: 13.833333333333pt;" aria-label="계량경제학 (5 아이템)">계량경제학</a>
+<a href="https://ds.sumeun.org/tags/%EB%82%B4%EC%83%9D%EC%84%B1/" class="tag-cloud-link tag-link-333 tag-link-position-20" style="font-size: 12.277777777778pt;" aria-label="내생성 (4 아이템)">내생성</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-149 tag-link-position-21" style="font-size: 8pt;" aria-label="데이터전처리 (2 아이템)">데이터전처리</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%85%8C%EC%9D%B4%EB%B8%94/" class="tag-cloud-link tag-link-182 tag-link-position-22" style="font-size: 18.111111111111pt;" aria-label="데이터테이블 (9 아이템)">데이터테이블</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84/" class="tag-cloud-link tag-link-25 tag-link-position-23" style="font-size: 13.833333333333pt;" aria-label="데이터프레임 (5 아이템)">데이터프레임</a>
+<a href="https://ds.sumeun.org/tags/%EB%9E%9C%EB%8D%A4%ED%8F%AC%EB%A0%88%EC%8A%A4%ED%8A%B8/" class="tag-cloud-link tag-link-368 tag-link-position-24" style="font-size: 17.138888888889pt;" aria-label="랜덤포레스트 (8 아이템)">랜덤포레스트</a>
+<a href="https://ds.sumeun.org/tags/%EB%A1%9C%EA%B7%B8/" class="tag-cloud-link tag-link-434 tag-link-position-25" style="font-size: 8pt;" aria-label="로그 (2 아이템)">로그</a>
+<a href="https://ds.sumeun.org/tags/%EB%AA%A8%ED%98%95%EC%9D%B4%ED%95%B4/" class="tag-cloud-link tag-link-375 tag-link-position-26" style="font-size: 12.277777777778pt;" aria-label="모형이해 (4 아이템)">모형이해</a>
+<a href="https://ds.sumeun.org/tags/%EB%AC%B8%EC%9E%90%EC%97%B4/" class="tag-cloud-link tag-link-20 tag-link-position-27" style="font-size: 19.666666666667pt;" aria-label="문자열 (11 아이템)">문자열</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%94%EC%A3%BC%ED%98%95/" class="tag-cloud-link tag-link-288 tag-link-position-28" style="font-size: 12.277777777778pt;" aria-label="범주형 (4 아이템)">범주형</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%A1%ED%84%B0/" class="tag-cloud-link tag-link-19 tag-link-position-29" style="font-size: 10.333333333333pt;" aria-label="벡터 (3 아이템)">벡터</a>
+<a href="https://ds.sumeun.org/tags/%EB%B3%80%EC%88%98%EC%84%A0%ED%83%9D/" class="tag-cloud-link tag-link-367 tag-link-position-30" style="font-size: 8pt;" aria-label="변수선택 (2 아이템)">변수선택</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-321 tag-link-position-31" style="font-size: 22pt;" aria-label="선형모형 (15 아이템)">선형모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-322 tag-link-position-32" style="font-size: 13.833333333333pt;" aria-label="선형회귀 (5 아이템)">선형회귀</a>
+<a href="https://ds.sumeun.org/tags/%EC%8B%9C%EA%B0%81%ED%99%94/" class="tag-cloud-link tag-link-150 tag-link-position-33" style="font-size: 15.194444444444pt;" aria-label="시각화 (6 아이템)">시각화</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%88%EC%B8%A1%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-338 tag-link-position-34" style="font-size: 18.111111111111pt;" aria-label="예측모형 (9 아이템)">예측모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%A4%EC%B0%A8%EC%83%81%EA%B4%80/" class="tag-cloud-link tag-link-335 tag-link-position-35" style="font-size: 13.833333333333pt;" aria-label="오차상관 (5 아이템)">오차상관</a>
+<a href="https://ds.sumeun.org/tags/%EC%9B%90%EC%9D%B8%EA%B2%B0%EA%B3%BC/" class="tag-cloud-link tag-link-336 tag-link-position-36" style="font-size: 13.833333333333pt;" aria-label="원인결과 (5 아이템)">원인결과</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%B5%EC%8B%A0%EA%B2%BD%EB%A7%9D/" class="tag-cloud-link tag-link-369 tag-link-position-37" style="font-size: 12.277777777778pt;" aria-label="인공신경망 (4 아이템)">인공신경망</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%BC%EA%B4%80%EA%B3%84/" class="tag-cloud-link tag-link-337 tag-link-position-38" style="font-size: 13.833333333333pt;" aria-label="인과관계 (5 아이템)">인과관계</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EC%BD%94%EB%94%A9/" class="tag-cloud-link tag-link-22 tag-link-position-39" style="font-size: 17.138888888889pt;" aria-label="인코딩 (8 아이템)">인코딩</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-181 tag-link-position-40" style="font-size: 18.111111111111pt;" aria-label="전처리 (9 아이템)">전처리</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D/" class="tag-cloud-link tag-link-59 tag-link-position-41" style="font-size: 12.277777777778pt;" aria-label="정규표현식 (4 아이템)">정규표현식</a>
+<a href="https://ds.sumeun.org/tags/%ED%8C%94%EB%A0%88%ED%8A%B8/" class="tag-cloud-link tag-link-282 tag-link-position-42" style="font-size: 10.333333333333pt;" aria-label="팔레트 (3 아이템)">팔레트</a>
+<a href="https://ds.sumeun.org/tags/%ED%94%84%EB%A6%B0%ED%8A%B8/" class="tag-cloud-link tag-link-436 tag-link-position-43" style="font-size: 8pt;" aria-label="프린트 (2 아이템)">프린트</a>
+<a href="https://ds.sumeun.org/tags/%ED%95%A8%EC%88%98/" class="tag-cloud-link tag-link-318 tag-link-position-44" style="font-size: 10.333333333333pt;" aria-label="함수 (3 아이템)">함수</a>
+<a href="https://ds.sumeun.org/tags/%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-408 tag-link-position-45" style="font-size: 13.833333333333pt;" aria-label="회귀 (5 아이템)">회귀</a></div>
+</aside>                        </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- End of footer section -->
+
+        <!-- Start of bottom footer section -->
+        <section class="bot-footer">
+            <div class="container">
+            <p>Made with   <span>  <i class="fa fa-heart"></i>  </span>By <a href="https://codethemes.co/" target="_blank">Code Themes</a></p>
+            </div>
+        </section>
+        <div><!-- boxed layout or full-width layout end -->
+    </div>
+    <script type="text/javascript">
+        jQuery(function(){
+        var arrLiveStats=[];
+        var WSM_PREFIX="wsm";
+		
+        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
+                var wsmFnSiteLiveStats=function(){
+                           jQuery.ajax({
+                               type: "POST",
+                               url: wsm_ajaxObject.ajax_url,
+                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
+                           }).done(function( strResponse ) {
+                                if(strResponse!="No"){
+                                    arrResponse=JSON.parse(strResponse);
+                                    jQuery.each(arrResponse, function(key,value){
+                                    
+                                        $element= document.getElementById(key);
+                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
+                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
+                                        $class="";
+                                        
+                                        if(diff>=0){
+                                            diff="+"+diff;
+                                        }else{
+                                            $class="wmcRedBack";
+                                        }
+
+                                        $element.setAttribute("data-value",value);
+                                        $element.innerHTML=diff;
+                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
+                                        
+                                        if(key=="SiteUserOnline")
+                                        {
+                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
+                                            if(jQuery("#wsmSiteUserOnline").length)
+                                            {
+                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
+                                            }
+                                        }
+                                    });
+                                    setTimeout(function() {
+                                        jQuery.each(arrResponse, function(key,value){
+                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
+                                        });
+                                    }, 1500);
+                                }
+                           });
+                       }
+                       if(arrLiveStats.length>0){
+                          setInterval(wsmFnSiteLiveStats, 10000);
+                       }});
+        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/app.js" id="purplous-lite-app-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/fitvids.min.js" id="jquery-fitvids-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/jquery.validate.min.js" id="jquery-validate-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/main.js" id="purplous-lite-main-js"></script>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=default&amp;ver=1.3.13" id="mathjax-js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: ggplot2: Aesthetic mapping and scales	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=975" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/975/</link>
+	<description>R</description>
+	<lastBuildDate>Sat, 27 Jun 2020 06:46:20 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/975/#comment-606</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sat, 27 Jun 2020 06:46:20 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/975/#comment-606</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=975#comment-592&amp;quot;&amp;gt;YS&amp;lt;/a&amp;gt;의 응답.
+
+%&amp;gt;% 는 library(magrittr)나 library(dplyr)를 먼저 실행해야 합니다.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/975/#comment-592"&gt;YS&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;%&gt;% 는 library(magrittr)나 library(dplyr)를 먼저 실행해야 합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: YS		</title>
+		<link>https://ds.sumeun.org/posts/975/#comment-592</link>
+
+		<dc:creator>YS</dc:creator>
+		<pubDate>Thu, 14 May 2020 02:31:04 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/975/#comment-592</guid>
+
+					<description>mpg2 % filter(manufacturer %in% c(&amp;quot;audi&amp;quot;, &amp;quot;dodge&amp;quot;, &amp;quot;ford&amp;quot;, &amp;quot;jeep&amp;quot;))
+Error in mpg %&amp;#062;% filter(manufacturer %in% c(&amp;quot;audi&amp;quot;, &amp;quot;dodge&amp;quot;, &amp;quot;ford&amp;quot;, &amp;quot;jeep&amp;quot;)) : 
+  함수 &amp;quot;%&amp;#062;%&amp;quot;를 찾을 수 없습니다
+
+위와 같이 에러가 납니다.</description>
+			<ns3:encoded>&lt;p&gt;mpg2 % filter(manufacturer %in% c(&amp;#8220;audi&amp;#8221;, &amp;#8220;dodge&amp;#8221;, &amp;#8220;ford&amp;#8221;, &amp;#8220;jeep&amp;#8221;))&lt;br&gt;
+Error in mpg %&amp;gt;% filter(manufacturer %in% c(&amp;#8220;audi&amp;#8221;, &amp;#8220;dodge&amp;#8221;, &amp;#8220;ford&amp;#8221;, &amp;#8220;jeep&amp;#8221;)) :&lt;br&gt;
+  함수 &amp;#8220;%&amp;gt;%&amp;#8221;를 찾을 수 없습니다&lt;/p&gt;
+&lt;p&gt;위와 같이 에러가 납니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

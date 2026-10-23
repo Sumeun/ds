@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <title>고정효과(fixed effect)와 임의효과(random effect) &#8211; 숨은원리 데이터사이언스</title>
+<style>
+#wpadminbar #wp-admin-bar-wsm_free_top_button .ab-icon:before {
+	content: "\f239";
+	color: #FF9800;
+	top: 3px;
+}
+</style>
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="preconnect" href="//www.google-analytics.com">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 피드" href="https://ds.sumeun.org/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 댓글 피드" href="https://ds.sumeun.org/comments-feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 고정효과(fixed effect)와 임의효과(random effect) 댓글 피드" href="https://ds.sumeun.org/posts/1923/feed.xml">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/ds.sumeun.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="https://ds.sumeun.org/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="metaslider-blocks-editor-css-css" href="https://ds.sumeun.org/wp-content/plugins/ml-slider/admin/assets/dist/css/editor-block.css" type="text/css" media="all" property="stylesheet">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="wsm-style-css" href="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-style-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-purplous-theme-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-theme.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-css-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-lite-style.css" type="text/css" media="all">
+<style id="purplous-lite-css-inline-css" type="text/css">
+
+						.site-header .nav-wrapper .navbar .navbar-brand a {
+							color: # !important;
+						}
+						.slick-next:hover, .slick-prev:hover {
+						  background:  !important;
+						}
+						.post-content-wrap .slick-next {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev:hover, .post-content-wrap .slick-next:hover {
+						  background:  !important;
+						}
+
+						.nav-links .page-numbers {
+						  color: ;
+						  border: 1px solid ;
+						}
+						.nav-links .page-numbers:hover {
+						  background: ;
+						}
+
+						.nav-links .page-numbers.current {
+						  background: ;
+						}
+						a {
+						  color: ;
+						}
+
+						a:hover, a:focus {
+						  color: ;
+						}
+
+						a:visited {
+						  color: ;
+						}
+						.btn-default, .comment-respond .comment-form .btn-default {
+						  background: ;
+						  border: 2px solid  !important;
+						}
+						.btn-default:hover, .comment-respond .comment-form .btn-default:hover, .btn-default:focus, .comment-respond .comment-form .btn-default:focus {
+						  background: ;
+						}
+						.search-form label .search-field:focus {
+						  border: 1px solid ;
+						}
+						.search-form .search-submit {
+						  background: ;
+						}
+						blockquote {
+						  border-left: 5px solid ;
+						}
+
+						.continue-read a:hover i {
+						  color:  !important;
+						}
+						section.footer-sec .widget .widget-title:after {
+						  background-color: ;
+						}
+						.sec-title span {
+						  background: ;
+						}
+						.post-cat a {
+						  background: ;
+						}
+						span.post-love:hover i, span.post-comment:hover i {
+						  color: ;
+						}
+						.navbar-default .navbar-nav > li > a:hover {
+						  color:  !important;
+						}
+						.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+						  background:  !important;
+						  border-bottom: 1px solid  !important;
+						}
+
+						.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+						  color: ;
+						}
+						section.post-large-slider .slide-details-box h2 a:hover, section.post-large-slider .slide-details-box h2 a:focus {
+						  color: ;
+						}
+						.post-large-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox .post-content h2 a:hover {
+						  color: ;
+						}
+						.post-large-slider .slick-next {
+						  color: ;
+						}
+						.post-large-slider .slick-prev {
+						  color: ;
+						}
+						.post-med-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.postbox.post-small .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .postbox .continue-read a:hover i {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content h2.article-title a:hover {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content .btn-default {
+						  background: ;
+						}
+						.postbox .post-footer .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.post-date {
+						  background: ;
+						}
+						.postbox .continue-read a:hover i {
+						  color:  !important;
+						}
+						.blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.blog-post-wrapper .post-content-wrap .post-content h2 a:hover, .blog-post-wrapper .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content h2 a:hover, .related-posts .related-item .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.related-posts .related-item .post-content-wrap .post-date {
+						  background: ;
+						}
+						.related-posts .slick-prev {
+						  background: ;
+						}
+						.related-posts .slick-next {
+						  background: ;
+						}
+						.related-posts .related-item:hover .slick-next:before, .related-posts .related-item:hover .slick-prev:before {
+						  color: ;
+						}
+
+						.content-list .post-content .metabar-wrap .article-full-date i:hover, .content-list .post-content .metabar-wrap .article-full-date i:focus, .content-list .post-content .metabar-wrap .post-like-count i:hover, .content-list .post-content .metabar-wrap .post-like-count i:focus, .content-list .post-content .metabar-wrap post-like-count i:hover, .content-list .post-content .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.content-list .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.widget ul li a:hover {
+						  color: ;
+						}
+						.widget ul li a:focus {
+						  color: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn {
+						  background: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn:before {
+						  border-color: transparent transparent  transparent;
+						}
+						.calendar_wrap table caption {
+						  background: ;
+						}
+						.jetpack_subscription_widget #subscribe-submit input {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.widget_mc4wp_form_widget .mc4wp-form-fields input[type='submit'] {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.tagcloud a:hover {
+						  background: ;
+						  border: 1px solid ;
+						}
+						#header-search-wrap .search-form label .close {
+						    border: 1px solid ;
+						    color: ;
+						}
+
+			
+		
+</style>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/html5.js?ver=3.7.3' id='html5-js'></script>
+<![endif]-->
+
+ 
+<meta name="generator" content="WordPress 6.0.2">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145165187-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-145165187-1');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
+<!-- End Google Tag Manager -->	   
+    <!-- Wordpress Stats Manager -->
+    <script type="text/javascript">
+          var _wsm = _wsm || [];
+           _wsm.push(['trackPageView']);
+           _wsm.push(['enableLinkTracking']);
+           _wsm.push(['enableHeartBeatTimer']);
+          (function() {
+            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
+            _wsm.push(['setUrlReferrer', ""]);
+            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
+            _wsm.push(['setSiteId', "1"]);
+            _wsm.push(['setPageId', "1923"]);
+            _wsm.push(['setWpUserId', "0"]);           
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
+          })();
+    </script>
+    <!-- End Wordpress Stats Manager Code -->
+      <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+					.navbar-brand a,
+			.site-description {
+				color: #000000;
+			}
+				</style>
+		      <link rel="canonical" href="https://ds.sumeun.org/posts/1923/"><meta name="robots" content="noindex,nofollow"></head>
+  <body class="post-template-default single single-post postid-1923 single-format-standard container boxed-layout metaslider-plugin group-blog">
+
+<div class="boxed-layout container site-wrapper">
+  <div class="row">
+  <!-- Start of header section -->
+  <header class="site-header" role="banner">
+         <!-- End Top Header -->
+    <!-- Start of Naviation -->
+    <div class="nav-wrapper">
+      <div class="container">
+          <nav id="primary-nav" class="navbar navbar-default">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                                        <div class="navbar-brand">
+                          <a href="https://ds.sumeun.org/"><span>숨은원리 데이터사이언스</span></a>
+                                                        <p class="site-description">R&amp;Python</p>
+                          </div>                </div>
+
+                 <div id="navbar-collapse" class="collapse navbar-collapse"><ul id="menu-menu-1" class="nav navbar-nav navbar-right"><li id="menu-item-655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-655"><a title="숨은 DS" href="https://ds.sumeun.org/">숨은 DS</a></li>
+<li id="menu-item-657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-657"><a title="도서소개" href="http://books.sumeun.org">도서소개</a></li>
+<li id="menu-item-658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-658"><a title="숨은수학" href="http://sumeun.org">숨은수학</a></li>
+<li class="menu-header-search"><a href="#" id="header-search-toggle"><i class="fa fa-search"></i></a></li></ul></div>            </nav>
+        </div>
+    </div>
+      <!-- End of Navigation -->
+    <div id="header-search-wrap" style="display:none">
+      <div class="search-box-wrap">
+	<div class="container">
+		<div class="row">
+			<p><a href="https://ds.sumeun.org/search/">검색</a></p>
+		</div>
+	</div>
+</div>    </div>
+
+  </header>
+  <!-- End of site header -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		<div class="inner-banner-wrap" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/01/cropped-abstract-abstract-art-abstract-background-1629236-e1548728734117.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner-banner-content">                            <h2>고정효과(fixed effect)와 임의효과(random effect)</h2>
+                    </div></div></div></div><!-- Breadcrumb -->
+
+<!-- End of breadcrumb sec -->
+
+<!-- Start of single page content -->
+<section class="sec-content blog-page-content sidebar-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-post-wrapper bgwhite">
+                    <div class="post-content-wrap post-pad">
+                           
+<!-- if the post has thumbnail -->
+<div class="image-post" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/08/term_random_fixed_effects.png)">
+</div>
+
+                            <div class="metabar-wrap">
+                                <span class="post-cat"><a href="https://ds.sumeun.org/categories/146/">분석</a></span>
+                                <span class="article-full-date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="https://ds.sumeun.org/archives/20190805/">8월 05, 2019</a></span>
+                                <span class="post-like-count"><i class="fa fa-comments" aria-hidden="true"></i><a href="https://ds.sumeun.org/posts/1923/#comments">3 Comments</a></span>
+                            </div>
+                            <div class="post-content">
+                                <h2><a href="#">고정효과(fixed effect)와 임의효과(random effect)</a></h2>
+                                <div class="post-desc">
+                                    <p><h2>다른 분야, 다른 시기, 다른 용어</h2>
+<p><strong>용어</strong>란 분야, 시기마다 다르게 사용되기 마련이다. 따라서 같은 용어가 다른 분야에서도 <strong>당연히</strong> 같은 의미를 가진다고 생각하는 것은 슬기롭지 못하다. 옛말로 <strong>어리다</strong>. (‘슬기롭지 못하고 둔하다’란 뜻을 가진 ‘어리석다’란 단어가 생기기 이전에는 <strong>‘어리다’</strong>가 ‘어리석다’의 의미를 지니고 있었다.<sup>[1]</sup> )</p>
+<p><sup>[1]<sup>:</sup></sup> <a href="https://www.korean.go.kr/nkview/nknews/200503/80_1.html">https://www.korean.go.kr/nkview/nknews/200503/80_1.html</a></p>
+<h2>통계학에서의 임의 효과</h2>
+<p>통계학에서 <strong>임의 효과(random effect)</strong>는 sampling of sampling의 맥락에서 쓰인다.</p>
+<p>예를 들어 보자. 어떤 한 집단(모집단의 크기가 무한하다고 하자)의 키 평균(모평균)을 구하기 위해 사람의 키를 임의로 표집(sampling)하여 키 평균을 추정할 수 있다.</p>
+<p>하지만 키를 측정하는 도구가 매우 조잡해서 측정된 키의 표준오차가 \(10\) cm 라고 가정해보자. 이때 측정에 따른 오차가 서로 독립이라면, 측정의 정확성을 높이는 것은 여러번 측정하는 것이다. </p>
+<ul>
+<li>\(Y_{ij}\) : \(i\) 번째 사람의 \(j\) 번째 키 측정 결과 </li>
+<li>
+<p>\(e_{ij}\) : \(i\) 번째 사람의 \(j\) 번째 키 측정에서 오차</p>
+</li>
+<li>
+<p>\(\mu\) : 모평균(키)</p>
+</li>
+<li>
+<p>\(\mu_i\) : \(i\) 번째 사람의 실제 키</p>
+</li>
+<li>
+<p>\(Y_{ij} = \mu_i + e_{ij} = \mu + u_i + e_{ij}\) ( \(\mu\) : 전체 평균, \(u_i = \mu_i &#8211; \mu\) : \(i\) 번째 사람 실제 키와 전체 평균의 차이)</p>
+</li>
+</ul>
+<p>데이터가 어떻게 생성되는 살펴보자. 먼저 \(n\) 명의 키 측정 자료를 활용한다면,</p>
+<pre><code class="r">sNum = 4
+set.seed(sNum)
+muAll = 175; sigmaAll = 15
+n = 10
+mu = rnorm(n, muAll, sigmaAll) # n 명의 표본 추출
+
+t.test(mu)
+</code></pre>
+<pre>## 
+##  One Sample t-test
+## 
+## data:  mu
+## t = 36.936, df = 9, p-value = 3.874e-11
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  172.2595 194.7364
+## sample estimates:
+## mean of x 
+##  183.4979
+</pre>
+<p>모평균은 183(95% 신뢰구간 172.9-194)으로 추정되었다. 만약 여러 번 측정할 수 있다면,</p>
+<pre><code class="r">sNum = 5
+set.seed(sNum)
+muAll = 175; sigmaAll = 15
+n = 10;
+ns = sample(5:10,n,replace=TRUE)
+mu = rnorm(n, muAll, sigmaAll) # n 명 표본 추출
+# 키 반복 측정(횟수, ns)
+y &lt;- g &lt;- mus &lt;-  vector(&quot;list&quot;, n)
+for (i in 1:length(mus)) {
+  mus[[i]] &lt;- rep(mu[i], each=ns[i])
+  y[[i]] &lt;- rnorm(ns[i], mu[i], 10) # ns[i] 번 반복 측정
+  g[[i]] &lt;- rep(i, each=ns[i]) 
+}
+y &lt;- unlist(y)
+g &lt;- factor(unlist(g))
+mus &lt;- unlist(mus)
+dat &lt;- data.frame(mus, g, y)
+head(dat)
+</code></pre>
+<pre>##        mus g        y
+## 1 165.9564 1 164.5665
+## 2 165.9564 1 159.9832
+## 3 165.9564 1 144.1167
+## 4 165.9564 1 168.3646
+## 5 165.9564 1 163.3628
+## 6 165.9564 1 174.9615
+</pre>
+<pre><code class="r"># This is the title image.
+#ggplot(dat, aes(x=g, y=y)) + 
+#   geom_hline(yintercept=175, linetype=&#39;dotted&#39;) + 
+#   geom_boxplot() + 
+#   geom_point(alpha=0.2)
+</code></pre>
+<p>데이터는 위와 같은 구조를 가지게 된다.</p>
+<p>이때 이런 구조를 고려하지 않고 모평균을 추정한다면, 다음과 같다. 평균 \(\mu\) 가 \(175\) 와 다른지 검정한다면, 95% 신뢰구간으로 보아 영가설( \(\mu = 175\) )는 기각된다. </p>
+<pre><code class="r">t.test(dat$y, mu=175)
+</code></pre>
+<pre>## 
+##  One Sample t-test
+## 
+## data:  dat$y
+## t = -2.8967, df = 76, p-value = 0.004924
+## alternative hypothesis: true mean is not equal to 175
+## 95 percent confidence interval:
+##  166.9416 173.5081
+## sample estimates:
+## mean of x 
+##  170.2248
+</pre>
+<p>만약 Random-effect 모형을 사용한다면 다음과 같다. 우리는 전체 평균( \(\mu\) )이 \(175\) 와 다른지 확인하려면 두 번째 방법으로 손쉽게 검정할 수 있다. 결과는 기각할 수 없다. </p>
+<pre><code class="r">#library(lme4)
+library(lmerTest)
+(lmerMod &lt;- lmer(y ~ 1|g, data=dat))
+</code></pre>
+<pre>## Linear mixed model fit by REML [&#39;lmerModLmerTest&#39;]
+## Formula: y ~ 1 | g
+##    Data: dat
+## REML criterion at convergence: 588.7467
+## Random effects:
+##  Groups   Name        Std.Dev.
+##  g        (Intercept) 10.896  
+##  Residual              9.865  
+## Number of obs: 77, groups:  g, 10
+## Fixed Effects:
+## (Intercept)  
+##       169.7
+</pre>
+<pre><code class="r">summary(lmerMod)
+</code></pre>
+<pre>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: y ~ 1 | g
+##    Data: dat
+## 
+## REML criterion at convergence: 588.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.28259 -0.47224  0.04513  0.70982  2.27324 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  g        (Intercept) 118.72   10.896  
+##  Residual              97.32    9.865  
+## Number of obs: 77, groups:  g, 10
+## 
+## Fixed effects:
+##             Estimate Std. Error      df t value Pr(&gt;|t|)    
+## (Intercept)  169.679      3.635   9.093   46.67 3.85e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+</pre>
+<pre><code class="r">(lmerMod2 &lt;- lmer(I(y-175) ~ 1|g, data=dat))
+</code></pre>
+<pre>## Linear mixed model fit by REML [&#39;lmerModLmerTest&#39;]
+## Formula: I(y - 175) ~ 1 | g
+##    Data: dat
+## REML criterion at convergence: 588.7467
+## Random effects:
+##  Groups   Name        Std.Dev.
+##  g        (Intercept) 10.896  
+##  Residual              9.865  
+## Number of obs: 77, groups:  g, 10
+## Fixed Effects:
+## (Intercept)  
+##      -5.321
+</pre>
+<pre><code class="r">summary(lmerMod2)
+</code></pre>
+<pre>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: I(y - 175) ~ 1 | g
+##    Data: dat
+## 
+## REML criterion at convergence: 588.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.28259 -0.47224  0.04513  0.70982  2.27324 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  g        (Intercept) 118.72   10.896  
+##  Residual              97.32    9.865  
+## Number of obs: 77, groups:  g, 10
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value Pr(&gt;|t|)
+## (Intercept)   -5.321      3.635  9.093  -1.464    0.177
+</pre>
+<p>마지막 방법은 가중치를 활용하여 WLS를 실시하는 것이다. 같은 피험자의 키를 4번 측정한 경우와 1번만 측정한 경우, 4번 측정한 피험자의 키에 대한 가중치를 \(&frac14;\) 로 낮춰 주는 것이다. (이에 비해 위의 <code>t.test</code>는 모든 가중치를 1로 주는 경우이다.) 앞의 Mixed effect 모형과 약간 다르지만 비슷한 결과를 보여준다.</p>
+<pre><code class="r">library(dplyr)
+newdat &lt;- dat %&gt;% group_by(g) %&gt;% summarise(y = mean(y), n=n())
+
+lmMod &lt;- lm(y ~ 1, weights=n, data=newdat)
+summary(lmMod)
+</code></pre>
+<pre>## 
+## Call:
+## lm(formula = y ~ 1, data = newdat, weights = n)
+## 
+## Weighted Residuals:
+##    Min     1Q Median     3Q    Max 
+## -35.53 -27.70   1.19  12.24  70.87 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  170.225      3.679   46.27 5.14e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 32.28 on 9 degrees of freedom
+</pre>
+<pre><code class="r">#summary(lmMod)
+confint(lmMod)
+</code></pre>
+<pre>##                2.5 %   97.5 %
+## (Intercept) 161.9033 178.5464
+</pre>
+<pre><code class="r">lmMod2 &lt;- lm(I(y-175) ~ 1, weights=n, data=newdat)
+summary(lmMod2)
+</code></pre>
+<pre>## 
+## Call:
+## lm(formula = I(y - 175) ~ 1, data = newdat, weights = n)
+## 
+## Weighted Residuals:
+##    Min     1Q Median     3Q    Max 
+## -35.53 -27.70   1.19  12.24  70.87 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)   -4.775      3.679  -1.298    0.227
+## 
+## Residual standard error: 32.28 on 9 degrees of freedom
+</pre>
+<pre><code class="r">#summary(lmMod)
+confint(lmMod2)
+</code></pre>
+<pre>##                2.5 %   97.5 %
+## (Intercept) -13.0967 3.546356
+</pre>
+<h2>계량경제학에서의 고정효과와 임의효과</h2>
+<p>&lt;최근 패널자료 연구의 동향&gt;<sup>[2]</sup> 에서는 임의효과와 고정효과를 다음과 같이 설명한다.</p>
+<p>문: 임의효과 (random effects)와 고정효과 (fixed effects)란?</p>
+<p>답: 오차항이 \(v_{it} = u_i +ε_{it}\) 일 때, 이 중 개체별 효과( \(u_i\) )가 어떠한 것인지 지칭하는 용어이다. \(u_i\) 가 독립변수들과 상관( \(i\) 에 걸친 상관)되어 있으면 이 개체별 효과를 <strong>고정효과</strong>라 한다. 독립변수들과 상관되어 있지 않은 개체별 효과를 <strong>임의효과</strong>라 한다. \(u_i\) 를 두고 “고정효과”이거나 “임의효과”라고 하는 것은 적절하지만, 모형이 고정효과라거나 임의효과라고 하는 것은 타당하지 않다. 하지만 \(u_i\) 가 임의효과(고정효과)로 간주되는 모형이라는 뜻에서 “임의효과 모형(고정효과 모형)”이라고 하는 것은 적절하다.</p>
+<p><sup>[2]<sup>:</sup></sup> <a href="https://www.kli.re.kr/klips/downloadCnfrncSjIemFile.do?iemNo=480">https://www.kli.re.kr/klips/downloadCnfrncSjIemFile.do?iemNo=480</a></p>
+<p>다음 노트의 정의는 좀 더 흥미롭다.<sup>[3]</sup> 특히 random effect와 fixed effect를 모두 <strong>random</strong> variable이라고 설명하고 있다.</p>
+<p><sup>[3]<sup>:</sup></sup> <a href="https://www.schmidheiny.name/teaching/panel2up.pdf">https://www.schmidheiny.name/teaching/panel2up.pdf</a></p>
+<p>In the random effects model, the individual-specific effct is a <strong>random</strong> variable that is uncorrelated with the explanatory variables.</p>
+<p>In the fixed effects model, the individual-specific effect is a <strong>random</strong> variable that is allowed to be correlated with the explanatory variables.</p>
+<p>여기서 <strong>the individual-specific effect</strong>란 위에서 개체별 효과라고 칭한 다음 식의 \(u_i\) 에 해당한다. </p>
+<p>\[Y_{ij} = \beta_0 + x_{ij} \beta_1 + u_i + e_{ij}\]</p>
+<p>이 모형에서 설명변수의 갯수를 늘리면 다음과 표기할 수 있다. </p>
+<p>\[Y_{ij} = \beta_0 + x_{1ij} \beta_1 + x_{2ij} \beta_2 + \cdots + u_i + e_{ij}\]</p>
+<p>이때 <strong>개체별 효과</strong>에 대해 좀 더 생각해보자. 어떤 개체별 효과가 고정 효과인지 아닌지는 개체별 효과가 독립변수와 상관이 있는지 아닌지에 의해 결정된다. 그런데 <strong>독립변수란 모형에 따라 달라지게 마련이다.</strong> 따라서 <strong>개체별 효과</strong>가 고정효과인지 아닌지는 개체별 효과 자체의 성질이라기 보다는 모형에 의해 결정되는 것이라고 볼 수 있다!</p>
+<p>어쨋든 (전통적인?) 통계학과 계량통계학(또는 경제통계학)에서 이렇게 다른 의미로 용어를 사용하고 있음에도 교육자들은 이를 무시하고 있다. 솔직히 이건 교육자의 잘못이라고 생각한다. 자기 분야에서 쓰이는 의미만을 가르치는 것은 학생들의 이해를 저해하고, 오해를 증진시키고, 학문간의 협력을 어렵게 하고, 학문의 발전을 더디게 한다. 자세히 설명할 시간이 없더라도 다른 분야(솔직히 계량 경제학과 전통적인 통계학이 그렇게 먼 분야도 아니다!)에서는 어떻게 쓰이는지 언급이라도 해야 하지 않겠는가?</p>
+<p>그리고 계량경제학에서 고정효과와 임의효과를 저렇게 설명하는 것도 솔직히 조금 맘에 와 닿지 않는다. <a href="https://ds.sumeun.org/posts/1867/">내생성 포스팅</a>에서 언급했지만, 추정값의 의미가 무엇인지, 그리고 그것이 정확한 방법인지는 어떤 모형을 사용했는지에 따라 달라진다. 임의효과 모형은 개체별 효과와 오차항이 독립이라는 가정이 들어가 있기 때문에 가정이 성립하는 상황에서만 효과 추정량에 편이가 없다. 반면 고정효과 모형은 그런 가정이 없기 때문에 그런 가정이 없는 경우에도 추정량에 편이가 없다. </p>
+<p>따라서 고정 효과란 고정 효과 모형을 써야 편향이 없이 추정값을 구할 수 있는 효과이고, 임의 효과란 개체별 효과와 오차항이 독립이어서 임의 효과 모형을 써도 편향 없이 추정값을 구할 효과라고 설명하는게 낫지 않을까? </p>
+<h3>예시 : 인과관계 추정(계량경제학)에서 고정효과와 임의 효과 구분이 중요한 이유</h3>
+<p>다음은 사람들의 키와 체중의 관계를 보여준다. </p>
+<p>\[ \textrm{weight}_{ij} = \beta_0 + \beta_{1} \textrm{gender}_i + \beta_2 \textrm{height}_{ij} + u_{i} + e_{ij} \]</p>
+<p>체중은 평균적으로 키가 1 증가할 때 \(\beta_2\) 만큼 증가한다. (여기서는 키가 변할 수 있다고 가정했다. 아니면, 키가 성장하고 있는 청소년 데이터라고 생각해도 무방하다.) </p>
+<p>이때 \(\textrm{height}\) 와 \(\textrm{gender}\) 에 상관관계가 있다. (보통 남자의 키가 여자보다 크다.) 하지만 \(\textrm{height}_i\) 와 \(u_i\) (개체별 효과)에 상관이 없다면 임의 효과 모형으로 \(\beta_2\) 를 추정해도 \(\beta_2\) 의 추정량은 비편향(unbiased)이다. </p>
+<p>하지만 위의 모형에서 \(\textrm{gender}_i\) 를 제거한다면, 모형은 다음과 같이 변한다.</p>
+<p>\[ \textrm{weight}_{ij} = \beta_0 + \beta_2 \textrm{height}_{ij} + (\beta_{1} \textrm{gender}_i + u_{i}) + e_{ij} = \beta_0 + \beta_2 \textrm{height}_{ij} + u_i&#8217; + e_{ij} \]</p>
+<p>새로운 개체별 효과 \(u_i&#8217;\) 는 \(u_i&#8217; = \beta_{1} \textrm{gender}_i + u_{i}\) 이므로, 새로운 개체별 효과 \(u_i&#8217;\) 와 \(\textrm{height}_{ij}\) 는 상관이 있다. </p>
+<p>따라서 이 간단한(reduced) 모형에서 임의 효과 모형으로 \(\beta_2\) 를 추정하면, 추정량은 편향이 생긴다. 이런 경우에 계량경제학은 FE(fixed effects) 모형을 쓰라고 가르킨다. 다음의 시뮬레이션은 각각의 모형에서 \(\beta_2\) 의 분포를 보여준다.</p>
+<ul>
+<li>RE(Random effects) full 모형( \(\textrm{weight}_{ij} = \beta_0 + \beta_{1} \textrm{gender}_i + \beta_2 \textrm{height}_{ij} + u_{i} + e_{ij}\ \ (u_i \sim \mathcal{N}(0, \sigma_u^2))\) )</li>
+<li>RE(Random effects) reduced 모형( \(\beta_0 + \beta_2 \textrm{height}_{ij} + u_i&#8217; + e_{ij}\ \ (u_i&#8217; \sim \mathcal{N}(0, \sigma_u^2))\) )</li>
+<li>FE(Fixed effects) 모형( \(\beta_0 + \beta_2 \textrm{height}_{ij} + u_i&#8217; + e_{ij}\) )</li>
+</ul>
+<pre><code class="r"># SIMULATION
+sNum = 11
+set.seed(sNum)
+
+# set nexp here ex) nexp=5000
+
+res &lt;- matrix(NA, nexp, 3)
+res2 &lt;- matrix(NA, nexp, 3)
+colnames(res) &lt;- c(&quot;random_full&quot;, &quot;random_reduced&quot;, &quot;fixed&quot;)
+colnames(res2) &lt;- c(&quot;random_full&quot;, &quot;random_reduced&quot;, &quot;fixed&quot;)
+
+for (iexp in 1:nexp) {
+
+  n =50;
+  ns = sample(3:5, n, replace = TRUE) # length(ns)
+  gender = sample(0:1, n, replace = TRUE) # length(gender)
+  height = rnorm(n, 160, 10) + gender*10 # length(height)
+  u = rnorm(n, 0, 5)  # u_i
+  # length(weight)
+
+  us &lt;- weights &lt;- heights &lt;- genders &lt;- g &lt;-  vector(&quot;list&quot;, n)
+
+  for (i in 1:n) {
+    heights[[i]] &lt;- rnorm(ns[[i]], height[i], 5)
+    weights[[i]] &lt;- rnorm(ns[[i]], -20 + 0.8*heights[[i]] + gender[i]*10+ u[i], 5)  # e_ij
+
+    g[[i]] &lt;- rep(i, each=ns[i]) 
+    genders[[i]] &lt;- rep(gender[i], each=ns[i])
+    us[[i]] &lt;- rep(u[i], each=ns[i])
+  }
+
+  heights &lt;- unlist(heights)
+  g &lt;- factor(unlist(g))
+  genders &lt;- factor(unlist(genders))
+  weights &lt;- unlist(weights)
+  us &lt;- unlist(us)
+
+  dat &lt;- data.frame(weights, heights, genders, g, us)
+
+  library(nlme)
+  lmeMod &lt;- lme(weights ~ genders + heights, random=~1|g, data= dat)
+  lmeMod2 &lt;- lme(weights ~ heights, random = ~1|g, data= dat)
+  lmeMod3 &lt;- lme(weights ~ genders, random = ~1|g, data= dat)
+
+  contrasts(dat$g) &lt;- contr.treatment(nlevels(g))
+  lmMod &lt;- lm(weights ~ heights + g, data= dat)
+  lmMod2 &lt;- lm(weights ~ genders + g, data= dat)
+
+  res[iexp, ] = c(coef(lmeMod)[1,&quot;heights&quot;],
+                  coef(lmeMod2)[1,&quot;heights&quot;],
+                  coef(lmMod)[&quot;heights&quot;])
+
+  res2[iexp, ] = c(coef(lmeMod)[1,&quot;genders1&quot;],
+                   coef(lmeMod3)[1,&quot;genders1&quot;],
+                   coef(lmMod2)[&quot;genders1&quot;])
+}
+</code></pre>
+<pre><code class="r">#dfRes &lt;- as.data.frame(res)
+apply(res, 2, function(x) { paste0(round(mean(x),02),&quot;(&quot;, round(sd(x),02),&quot;)&quot;) })
+</code></pre>
+<pre>##    random_full random_reduced          fixed 
+##    &quot;0.8(0.06)&quot;   &quot;0.88(0.06)&quot;    &quot;0.8(0.08)&quot;
+</pre>
+<pre><code class="r">library(ggplot2)
+#library(tidyr)
+dfRes &lt;- data.frame(value=c(res), cond = rep(colnames(res), each=nrow(res)))
+ggplot(dfRes, aes(x=value, col=cond, fill=cond)) + 
+  geom_density(alpha=0.2) + 
+  geom_vline(xintercept=0.8, linetype=&#39;dotted&#39;) +
+  scale_x_continuous(name=&#39;estimated coefficient of `height`&#39;) 
+</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABPlBMVEUAAAAAADoAAGYAOmYAOpAAZmYAZrYAujgTtGAzMzM6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZrY6kLY6kNtNTU1NTY5NbqtNjshhnP9mAABmADpmAGZmOgBmOpBmZgBmZmZmkJBmtttmtv9uTY5ubqtuq6tuq+SOTU2OTY6ObquOjk2OyP+QOgCQOjqQOmaQkDqQtpCQ2/+q09Krbk2rxcKr5P+yiYG2ZgC2Zjq2kDq2tma2z82225C2/7a2//+34N+84ce+z7PC583GhGLIjk3Ijm7Ijo7IyP/I///L3MDM8dfP2+/SydvV4fXaforbkDrbtmbb25Db/7bb///f1ujf6//kq27kq47k/8jk///r6+vu1NLz2df4dm3+5OL/tmb/yI7/25D/29v/5Kv//7b//8j//9v//+T///8t7E42AAAACXBIWXMAAAsSAAALEgHS3X78AAAZxklEQVR4nO3dDX8bx3EG8JOiEqLyUroh44K22zRsqtSR3JaxarZ1rIiVk0ixK0YmrVZ2KQo1JeP7f4Hu3eGA3dvXmds93O09z8+WIAJDcPTX3BxJECiWyCRTbPsDQLYTwE80gJ9oAD/RuOG/scd13bZrip7uJ0ZNT85asoQfU01PzloAv+Wanpy1AH7LNT05a8kSHjvenyzhx1TTk7MWwG+5pidnLYDfck1PzlqyhMeO9ydL+DHV9OSsBfBbrunJWQvgt1zTk7OWLOGx4/3JEn5MNT05awH8lmt6ctYC+C3X9OSsJcsHYmTZVORg4rdc05OzFsBvuaYnZy2A33JNT85asoTH5/H+ZAc/m80G+7GZanpy1pIf/KNHs6F+bKaanpy15AYv3IV8+vuJVtOTs5bM4Cv3RwVDHvByEjcdv6aG/xPgvckTnnGwB7ycxE1Hr6ndAR+QLOELxvkd4OUkbjp2zcpdTDzgfQE8435i1vTkrCVXeLI84OUkbjp2TQNfAN6bLOEx8f5kC0+VB7ycxE1HrmncAR+QLOGLR3R5wMtJ3HTkGnXiAe8M4On3E7WmJ2ctgKffT9Sanpy1ZAlf73iaPODlJG46ck1r4gHvSkbwa/cGniQPeDmJm45bA3hKsoQvAO9NlvCYeH/ygd+4r+Ep8oCXk7jpqDWAJyVL+ALw3mQJj4n3B/B9fGyOmp6cteQNT5AHvJzETUetMe14wFuTJTxn4ufzebqPzVHTk7OWzOGD5efzL74gywOe2XTMGsmdBf/1F3R5wDObjlkjwxdk+PkXgJeTuOmYNZ0mXhznAS8ncdMxawBPS+7wYfIreKo84JlNR6yR3eUdHwQv3AGvJHHTEWsUeHniA+RL9xqeKA94ZtMRawBPDOBrd8ArSdx0xBrrjge8OVnCkya+dge8ksRNR6xhw6/cAa8kcdMRa+zwHnnAm5K46Yg19h3vhm/cV/A0ecAzm45Xo7gTJn7tDngliZuOV+OCd8kD3pzETcerYcJv3AGvJHHT8WpU+ALw3mQJHzrxkjvglSRuOlqN6g74gJjgv//44N2X1aXETUer4cHL7oAXeXGv/K9M4qaj1bTgWzveJg/4Vv7w62rid3d3+/5ouJn9yZmZuWr+tSHzfj/yrcUE//m95eu71aXE/9qj1bgP9ZaJVwa+mXjSyGc38U+mAK+6A35Z7fjX+e94wGvJ7ayeBE+Rzw1+k8RNR6thwLfcAa8kcdPRajzwJnnAu5K46Vg1LXdtxxvg2+6AV5K46Vg1bfiAiQe889rETceq8cLr8oB3Xpu46Vg1dHjNHfBKEjcdq8a74wGvJUt478Tr7oBXkrjpWDWAp2eS8AZ3wCtJ3HSsGv+OV+Wd8AR5wDObjlTTdjdMPODbmSK8yR3wShI3HakmBF6WB/wyU3jDjpfgje6AV5K46Ug1xIn3wYfLA57ZdJwazR3wAQE84A1J3HScGh3euePN7oBXkrjpODXEiQd8lcnAN/IWd8ArSdx0nBrAc5IlvGnHA15NlvCYeH/GD6+7Az4gU4O3uQNeSeKmo9QY4B07PgQ+WB7wzKaj1MSfeMCPAd7gboav5QG/CuABb0jipmPUmOCNOx7wSrKEt0+81R3wShI3HaMmHL6UB3wTwAPekMRNx6gJ3/EC3u4OeCWJm45QY3K3Tzzg1wG8AT5UHvDMpiPUAJ6ZLOG77njAJ266e43RHRMfkCnBP5oBfp1JwTvcVfhAecAzm+5eY4a37HjAS8kSHhPvD+ABb0jiprvXkODnv7kN+Cbjhje723Y84KVkCY+J9wfwgDckcdOdawDPTpbw2PH+ZAnffeLD5AHPbLprjcXdAj//DeA3ATzgDUncdNcaG7x5xwNezpjhbe72iXfIA3488byUcCvz34ncNr2OsDG5v7jwdCa+HPjwiQ8a+XwnPnHTHWus8MYdD3glWcJj4v0BPOANSdx0xxoGvF0e8HISN92txuru2PGAb5IlPCben8nA1+7h8CHygGc23anG7g74gGQJb9rxgFeTJTwm3p/84B8/jgMfIA94ZtOdaszwjx+fnj4W9oD3JDN4wS5SGOgBryYv+Mc1/FPD1ANeTVbwNXsFf9q2B7ya0cIbB16BV+xX7nZ5wMtJ3HSXGsfAnxanpxt6wBuTJfzTUymPAW9KRvBrd8AHJB/4jbsKX8mv3QnwfnnAM5vuUuOCL07b8oBvJ0v4p4D3Jht4yb0NL+QB304u8LI74AMyVnjXwLd3POANyRK+PfGnjwHfTibwijvgAzIN+NMNvE3eAO+VBzyz6Q41M4e7tuNP558AvpWRwjsHXp94wGuZCPyDTwCvJgv4lns0eJ884JlN82vc8O0dP3/wYCMP+CpZwrcnHvB6coBvu7vhLfKAl5O4aX4N4LsmA3jN3bjjfcd6wMtJ3DS/xg1vmnjAqwE84A1J3DS7xr3iAR+Q8cPr7vF2vEce8Mym2TUe+KcG94084MuMHt7gDviATAi+kQd8mVHCe4707R3fAd4tD3hm09waH3y8iQd8kqa5NZ4jPeADMkF4szzg5SRumlszc7vbdrxz5AEvJ3HT3BofvGXiAS9lAvBr90Ye8EvAA96YxE1za2Zu99aOB7wpWcJj4v3JH15yd53dWeCd8oBnNs2s8a14O7xj5AEvJ3HTzBrfwKs7HvDGmOG/++XL6vfETTNrvPCYeH+M8N9//O4Y4G3uDvhaHvAW+Bf/8KGA393d7fmDCUzzYsKPn4Zk/qmcT2gvLZzvqwub4L/75f98OOqJt+94+sS7Rj63iX9xcHBwt7pEAyE3zavxrvioh/phwL+9fxTPvIr55O7NkCfeO/CAD0j28Kp7LT9s+MWd4ubD5VlR7C8X7xwWO0tx+Qcf9APfhARCb5pXM/O5Kzt+dPDX7x0vz3YWP3ooLpS/vv9Q/Lq4A/gA+FFP/GLvXPx6JQb95EhcfvvR8dl+eRnwgAe8H77tbpUfDHx5qL+69bw+1Ffw5QH/EPAreIe7vOPHB785uTta1vDi8o0fAz4APurEO+Rz+wLOJiQQetO8mo7wpTzgAQ94U0gg9KZ5NTOfu3vHA77K+OD9A4+JD8hI4Z3uHnizPODlUEAYTbNqSPAm94HDX7aTGP76cD8b+M2OHyP8/6pJDb+svx+UBbxn4oU84NVDffXlohHAu90BT4O/Kif++v2HGcGb3QG/VHb8jn4tBYTRNKtm5nXf7Pgo8Hb5LOCNoYAwmmbVBMD7Jv7BJyOEX9zZv1LPwc66fONmM/HlMV490AN+SPA6cwz4t/eLKrfOAT9M+MWdG8dX+yc7y5Od60PhJH75SbyJb4cCwmiaVRNhxz94MD74cr7Fof7k5zv1JfFLp0flFA37Z4flxN8c/KE+wN0/8TR4q/wW4Bc/PF6eCKidfzuOtOONITTAaZpTM234tx/9y955BR5p4pflw/vE2mi9K0IDnKY5NTO/+xre6m5Y8qOA/+n9/eXZra/EwXk/2o4vH825Uz/Cc/TwzY63w+sjP3j4yJFP7k72R/DpXJyJB/xm4v/ps+rhvICfGPzyqrj11XvH6rWEBjhNM2pC3EcO3/P3440hNMBpmlETBD/qHd9TNvBno/g8PtrEPxsq/KydxPDX7cM84LcE/59qksOP40u2FHiH+4PbX7bkXfA2+SzgjV8HIjTAaZpRMwtwb3Y84EPgr8fxtfogeEw8Ad4YQgOcphk1swB3wJPgxcj/4qPhfx4fDu9yJ8Jb5LcJb/zW3OJO/Ridq/aDdRzwb+8fVc/AkAN84YfXTuuzgG/eSIEvv1Z/NPyv1ceaeG3khw5/9ZObv71T3Di+KsSJWPWtubf3i1vnV+/cufkfzalZ/SgdwU+e+KvBP/RquvA7y/87L03LR+BU34w/E8T7QuxsZz3p9YM1aPDVaX3rpH548EEn9YHwqvzg4ferB0YeVbDVw2/EL4u/En+s3tIB3hRCA5ym6TVBAx+248cHL6RPanhp4g3wJwT4+rN4beQJDXCapteEwYdMfPtYPwJ4sd5/vl8xSzu+DV9dRZr48it3V62fpiE0wGmaXHM5XfjYGdcPVADeksUdcbi+Yfg2mx++en7koZ/VB8IXAe55wdOjntW33AcHH+ZeT7wfXpF3w5vl83gghimEBjhNk2umAD9vB/ATgf8vNYAPXvHVjve5Az5D+KeABzzgAa/By/KAzwA+dMePGd7zM9Kmq5W3ZQkfNPGtYz3ghwt/+W1seEneA2+U7xM+5IEY4jafrZ8mpfrejbhNdWv9qVMAPxb4gAdiXMlPk7L6xrx4o/GpU9zww8rlLOhVhJ8+LbTXEjbl9sXFxbPhvbawDT7ggRjl9+LXT5PSfON+aX7qlBFNfPDAlxPvH/ixTXzAAzGaS83EV78s9v7d9NQpE4ZXz+588Cb5nuG9D8QQl67XT5NSL/UTcVpwbXrqFMCPBD52soQvguE38uOG7/BAjJzgwyc+F3h6AD84eHw/Xq25/DYF/Fp+MPA9JUt4wo4HvDGEBjhNk2ow8VEzGnjhvl14gzzgmU1TaggDL+BD3AFvD6EBTtOUGgp8EQavnNYDXg6hAU7TlJoEE6+MPODlEBrgNE2p2T68Lg94ZtOUGsDHzVjgKSf1p0WYew2/kge8HEIDnKYJNZSBP30KeG8AD3hDCA1wmg6vIR3pAR+QLOGx4/3JEh4T78+k4eXP5wLgNXnAM5sOr0kJX8sDXg6hAU7TwTWle4IdD3hbCA1wmg6uIcJj4v3JEj7UXV7yIfBtecAzmw6uAXz0jAc+3P20ALw3WcITJ76SB7wcQgOcpkNrqEf6TwHvDeABbwihAU7ToTVUeOKOr+QBL4fQAKfpwBqiO33iAd8OoQFO04E1w4FvyQOe2XRgTUL4zZIHvBxCA5ymA2vI8OE7HvDmEBrgNB1Yg4lPkBHAV+5p4YU84OUQGuA0HVaTFH498oCXQ2iA03RQTe1O+hYNYccD3hhCA5ymg2oY8PSJ//IZ4OUQGuA0HVQzKHhVHvDMpoNq6Cse8AHJD37+gLHjAa+G0ACn6ZAwjvSY+IAA/sv1l+vJ8oBnNh2S1PDS92kAvw6hAU7TIWGc25F2POBNITTAaTogl68Y8Jh4fwAPeEMIDXCa9ufy2+Twys/MAr4OoQFO0/7Q4cuHVpN2/Ar+IlAe8BGa9ocHz5l4wMshNMBp2h/Ap8qw4cXncr3Bh255SR7wzKa9YcKzdjzgpRAa4DTtS/nFG0x8mowDnvgDk4D3xwT/5lcHP3tSXSI0wGnal37ga/lgeEk+N/gX95Yv7laXCA1wmvaFAV/9hDRtxzfw9JHPDV7k9b3lcnd3t9cPRcvlqyahryYc8lrC5lcXvgh/heHeXl44aczwbz58Wf1O+JfL+dfuTv19Oc7E8w71mPjlm398Ul8gNMBp2h0OfP1cGEz4QPl84b/7+yerS4QGOE27w4dn7vjJw39+cHAwgJM7THzKDPfz+NVjrl4xnugM8P4AfiUfDr+RBzyzaWc6wBN3/BqeOvKAZzbtysqdBr96gjvuxAO+CaEBTtOubAU+TB7wXZt2pHEv4clPYkuFL+UBL4fQAKdpR1jwzVOZUnc84NshNMBp2pFO8Jh4fwAPeEMIDXCatmft3jM8TR7wzKbt6QbP3/GAr0NogNO0NRt3Cvz6aeox8f4AHvCGEBrgNG2NAk8+0ieHb+QBz2zamo7w5B0v5C8oz4wB+G5N2yK59zPxgG8lAiKnRoGnu3eCD5IHfLemLZHdAZ8o+cBLrzlG3/EPbgNeTndETk1nePrEA15Nd0ROzXbhCfKAZzZtjuIO+ETJBl5+WdFOOz5IHvCdmjZHhWcMfMeJDx95wDObNgfwfSQXeOUFpAHvz/DgVXcWfMcdH7zkAc9s2pgI8IyJXz99OeDLdEVk1LTcAZ8omcAr7oAPyNDhZ08Z8Iwdr8CHygOe2bQpMeC7TnyIPOA7NG0KC151B3xAhgavndMPFb6UBzyzaUOiwHfe8YEjD3hm03r0c/rtTDzgOyByarYH/ylVHvD8pvXw4OdtRMB7M2z42SkLnrPj2/BeecDzm9YTBz7GxIeMPOCZTWsxfL22N/j26V3AyAOe2bQWw3fmAJ8mOcC33Xk7XoP3yQOe3bSWSPBxJh7wPERGjelbsoBPkwzgNfdY8F55wDObbsX4GAwOfKQd75MHPLfpVqLBx5p4wNMROTXGh1n2B8+Qj/B30JOzFsA74d3ygGc2rcb8MMv+djzgN2EjMmra7qHwujt34snHesAzm1YyTHinPOCZTSuxPKDeB29wjwrvkv+aIQ/4diLCM3c84NfhIjJqLEd6THyiuOH7y+YFhIkvJMx5FWHfqwurcb3W8HhfYHgoE68N/DYmnjryXzNO78Yx8TxETo3tSN/rjgd8Ex4io8Y68D54k3vkibfLA57Z9CYDgSfKA57Z9CbWI70H3ujeIzxdHvBy7APPgmfveMCvwkFk1Ojuw5p4mzzgmU03AXz/GQK8wX1g8BZ5wDObXsU18G54s3uHHU8beQFPlgf8Os6BZ8HzJx7wdciItKbrOAd+IPBm+RKeKg/4Ju6BB3yiZAnfYceTjvWAZzZdxuQeCm9x7zLxpJEHPLPpb/zuvcNT5AHPbPqbbvA2937hifKAr+J1Z8F32fGAL0NCpDdtdu8O32niCfI1PE0e8GVGBa/LA57ZtNk9FN7q3hE+fOQBz2s6xN0Ob3fvtuMBvxwtfKKJ1+RX8CR5wNvctw8fLN/AU+QBD/j6z1vK8OBbrz5kg3e4d93xwVse8JymwwaeBd914kNHfg1PkJ88fKD7duADRx7wjKY7wrvcE8Kr8oCnNx3qboF3unff8YHyG/hw+YnD29zjwHef+LCDvQQfLA/4MPfBwcvygKc2HT7wZni3exT4EHkZPlQe8GHuRniPe4wd75C3wAfKAz4hfJSJDxh5wBPhCe5bhPfLq/Bh8lOGp7ib4H3uyeEb+RZ8kPyE4QlndkZ4r3ukHe+UfwZ4KjzNnQUfaeK98m34EHnAh7kPFb463Ovwfvmpwl8SB16H97vHg/fIa/ABMz9ZeKI7Cz7WjvfJGx5qD3hzDdl9yxPvlr8w0PvkJwnvOM4Hwwe4R4V3yV+Yht4jP0V4u7t94NvwIe49whvkPSd4E4S//PYV3Z0FH3HHO+Uv6nM80shPDr4cdxu8w337Ey/kbfQX5nM8p/zE4OujfHf4IPfY8NaZr+Fp8tOCXy13M7z9xE6DD3OPDm+b+YvmgiZvp58S/PqkzgjvdmfBx93xdvk1PEF+OvDSubwJ3uOuwAe6x5/4Ut5Av4EPP9xPBV75FM4A72FX4OdbhDcOvQQv5J8FDf004FufuWvwvnFX4EPZE8EbzvEulD+F0U8BXvuCzSsyuwQfPO8pdvxK/rYLPow+e/jLS/0Lda/I7A38nMCebOI1+TZ8bf9MpW/hZw5v/ursK0k9jL0in9PYE8K36A3wZvuJwBtmXYUPZaeTkxB5NdL5vRnecNCX7LOFt6o38BR1JmKqHd/k9grfDm+3HzL89x8f/HV9iQrvUq/gA9Tn6sE96fTyayp6J7xmX9MPGf713eXn96pL4fCXl6azOSUzr7rp0D5Q+M3Ye+2liPYuBwz/3/9a2i93d3fb18yRzklvGhQT/O9r+GW/rx8fsabo6X5i1PTLvYlj4pejhR9TTb/cm8Ta8aymUTMseP5ZPbFp1AwLfpPETaeqwY73J0v4MdX05KwF8Fuu6clZC+C3XNOTs5Ys4bHj/ckSfkw1PTlrAfyWa3py1gL4Ldf05KwlS3jseH+yhB9TTU/OWgC/5ZqenLUAfss1PTlryRIeO96fLOHHVNOTsxbAb7mmJ2ctgN9yTU/OWrKEx473xw0fObu4n8EE8CO4nxTpFR4ZTgA/0QB+ogH8RAP4iaYf+OZHNMTv777M4H6Wyxf35PsbYfqBb34oS/x11X9jie9H/J70fpafH9yT72+E6Qe++THMP/w67SQ295Ma/s0f63e/+fHS0aUf+OYHr8V4JP2LWv+A94uDxB41/O8B78564p+k/Ytq7ufF3fK/lMHEB0Xa8a/72PHl/aQ963qBHR+S6uz3zYcvezmrF/fz5lcHP3uS8H4q+LofnNUjowrgJxrATzSAn2gAP9EMDP76b84Xe+ftN60vv71/ZK57e784Ev//3apWfR/ye6huKW7wo4fKjRZKYflRiBtknYHBt9Vbb7LClzcy1Bre6eoPV/vG29dvK38VN8g6Q4C/KoqdchKLffHLred7z//yg+Kn94v95Zm4onzTeXUL8ccffFDBL+4UNx+W1+6viq8Pi5ufif9/u3deXSfkqrcv3jlcvYflsr59ecvVLC/E3eys3kFVcPOfj6q3NQVZZwDw5XydHF0JvvdLscXe8x8eL8R/e8/3zps3lbcQR9/FnRL++r3j5dmO+KO4UF/VTPxi76v6urK2Lqnfw7I6upeFmzkX97G6UtywLLw+PNq8LfcMAF6MnJhFMak7yxrveUW9qKb3xnE9veIWZ2K+T0r42kX8Syn/vVRXbeCfr47Vf67f6d7524+O5dvL8NWVq3tv/qVIBXlnCPA79e+C+UiB//PN1UzXtzDD18U6/M7qzV741Q0B33vE4VWctJ2VLvsq/M7yqpr4+hblsfqwOdRf3XpeH+qrq9RD/VV5nlCXSI76ob6+cnXD1aEe8D2mPnU7KcQp1fVhibaC/+qw+IvDI/Gm9cndjR+rJ3dHTfEavnVyVzmW72G5XN2+DS+f3P3tkVKQdYYAP5SU/wwmE8CvIj7PKzL/1F0J4CcawE80gJ9oAD/RAH6i+X/+0gDFfDOYKAAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-7"></p>
+<p>위의 시뮬레이션 결과를 보면 독립변수와 개체별 효과에 상관이 있을 때, RE 모형을 쓰면 키의 고정효과를 과대 추정하게 됨을 확인할 수 있다. </p>
+<pre><code class="r">#dfRes2 &lt;- as.data.frame(res2)
+apply(res2, 2, function(x) { paste0(round(mean(x),02),&quot;(&quot;, round(sd(x),02),&quot;)&quot;) })
+</code></pre>
+<pre>##    random_full random_reduced          fixed 
+##      &quot;10(1.7)&quot;     &quot;18(2.83)&quot;    &quot;17.83(14)&quot;
+</pre>
+<pre><code class="r">library(ggplot2)
+#library(tidyr)
+dfRes2 &lt;- data.frame(value=c(res2), cond = rep(colnames(res2), each=nrow(res2)))
+ggplot(dfRes2, aes(x=value, col=cond, fill=cond)) + 
+  geom_density(alpha=0.2) + 
+  geom_vline(xintercept=10, linetype=&#39;dotted&#39;) +
+  scale_x_continuous(name=&#39;estimated coefficient of `gender`&#39;) 
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-8"></p>
+<p>하지만 FE를 쓴다고 언제나 비편향적인 것은 아니다. 위의 결과를 보면 <code>gender</code> 계수의 경우는 FE를 써도 추정량은 편향이 있다. 이는 물론 <code>gender</code>와 오차항 <code>e_{ij}</code>의 상관(내생성)에 의한 것이다. (위의 그래프를 보면 위의 상황에서 RE가 아니라 반드시 FE를 써야 한다는 주장에 고개를 약간 갸우뚱할 수도 있을 것이다. RE이 비해 FE가 저렇게나 분산이 큰데?)</p>
+<p>위의 그래프에서 각 모형은 다음과 같다. </p>
+<ul>
+<li>RE(Random effects) full 모형( \(\textrm{weight}_{ij} = \beta_0 + \beta_{1} \textrm{gender}_i + \beta_2 \textrm{height}_{ij} + u_{i} + e_{ij}\ \ (u_i \sim \mathcal{N}(0, \sigma_u^2))\) )</li>
+<li>RE(Random effects) reduced 모형( \(\beta_0 + \beta_2 \textrm{gender}_{i} + u_i&#8217; + e_{ij}\ \ (u_i&#8217; \sim \mathcal{N}(0, \sigma_u^2))\) )</li>
+<li>FE(Fixed effects) 모형( \(\beta_0 + \beta_2 \textrm{gender}_{i} + u_i&#8217; + e_{ij}\) )</li>
+</ul>
+<h2>다시 통계학의 고정 효과와 임의 효과</h2>
+<p>사실 수식으로 고정효과와 임의효과를 써보면 이 둘의 차이가 모호하다. 다음의 수식에서 \(\vec{\beta}\) 는 고정 효과, \(\vec{u}\) 는 임의 효과를 나타낸다.</p>
+<p>\[\vec{y} = \mathbb{X} \vec{\beta} + \mathbb{Z} \vec{u} + \vec{\epsilon}\]</p>
+<p>그런데 다음처럼 행렬 \(\mathbb{X}\) 와 \(\mathbb{Z}\) 를 합치고, 행벡터 \(\vec{\beta}\) 와 \(\vec{u}\) 를 합쳐서 쓸 수도 있다.</p>
+<p><img src="https://ds.sumeun.org/wp-content/uploads/2019/08/term_fixed_and_random_01.png" alt=""></p>
+<p>구체적인 예로 다음과 같은 경우를 들 수 있다. </p>
+<p><img src="https://ds.sumeun.org/wp-content/uploads/2019/08/term_fixed_and_random_02.png" alt=""></p>
+<p>그렇다면 고정효과와 임의효과의 차이는 무엇인가?</p>
+<p>이 둘의 차이는 고정 효과에 대해서는 특별한 가정이 들어가지 않지만 임의 효과 \(\vec{u} = (u_1, u_2, \cdots, u_g)^T\) 에 대해서는 분포 가정 \(u_i \sim \mathcal{N}(0, \sigma_u^2)\) 을 하고, \(u_i\) 를 각각 추정하지 않고, 대신 단 하나의 모수 \(\sigma_u^2\) 를 추정한다는 차이가 있다.</p>
+<p>만약 \(u_i\) 를 계량 경제학에서 말하는 고정효과 모형으로 추정한다면 위의 모형에서 &ldquo;분포 가정 \(u_i \sim \mathcal{N}(0, \sigma_u^2)\) &quot;를 제거해 주기만 하면 된다.</p>
+<p>따라서 고정효과와 임의효과의 차이는 효과(여기서는 \(\vec{\beta}\) 또는 \(\vec{u}\) 로 나타나는 계수)를 어떤 모형 또는 어떤 가정을 통해 추정하느냐의 차이만 있을 뿐이다.</p>
+<p>계량 경제학에서 고정효과와 임의효과의 구분이 필요한 이유는 내생성에서 살펴본 것처럼 인과 관계 추정을 위해서는 정확한 모형을 사용해야 하기 때문이다. </p>
+<p>개체별 효과가 설명변수와 상관이 있음에도 불구하고, 개체별 효과가 설명변수와 독립이라는 가정을 가지고 있는 임의 효과 모형을 쓴다면 설명변수의 <strong>인과 관계</strong> 계수 추정량이 편향(bias)을 가지게 된다. </p>
+<p>하지만 인과관계를 추정하지 않는다면 임의효과 모형도 괜찮다. 예측 모형으로는 개체별 효과가 설명변수와 상관이 있어도 큰 문제가 없다. </p>
+<p>오히려 더 중요한 문제는 과연 임의 효과가 가정한 것처럼 정규분포를 따른다고 할 수 있는지가 될 것이다. 하지만 몇몇 연구들은 임의 효과가 정말 정규분포를 따르지 않는다고 해도 큰 문제가 없다고 보고하였다(참고자료 3). </p>
+<p>실험 자료를 분석하는 경우에 개체별 효과가 정말 정규분포와 유사하다면 random effects model을 쓰지 않을 이유가 없어 보인다. 실험 조건을 fixed effect로 두고, group을 random effects로 사용한다면, 평균적으로 fixed effect와 random effects에 상관이 없다. (물론 group의 갯수가 작을 경우에는 우연히 생길 수도 있으므로 fixed effects model를 사용해야 할 것이다.) 그리고 다른 통제 변수의 경우는 그 변수의 계수를 <strong>인과 관계로 해석</strong>하지 않는 이상 괜찮을 것 같다. </p>
+<h2>어쨋든 정리</h2>
+<p><strong>어쩃든 정리</strong>를 해보자면, 전통적인(?) 통계학에서 fixed effect와 random effect의 차이는 계수의 분포에 대한 가정이 있으냐 없느냐의 차이이다. 그리고 추정을 할 때 fixed effect는 모수를 명시적으로 추정하고, random effect의 경우는 분포에 대한 모수(예. 분산)을 추정한다는 차이가 있다.</p>
+<p>계량 경제학에서 임의 효과는 임의효과 모형(RE model)으로 추정해도 인과관계를 비편향적으로 추정할 수 있는 효과이고, 고정 효과는 임의효과 모형으로 추정하면 편향이 생기기 때문에 고정효과 모형을 사용하여 추정해야 인과관계 계수를 비편향적으로 추정할 수 있는 효과이다. (계수를 비편향적으로 추정한다. = 계수 추정량이 비편향적이다.) 다시 말해 임의 효과는 설명변수와 독립인 경우이고, 고정 효과는 설명변수와 독립이 아닌 경우이다. </p>
+<p>결국 베이지안의 관점에서 볼 때, 임의효과는 사전 분포가 주어진 것으고, 고정효과는 사전분포가 uniform한 경우로 생각할 수 있지 않을까? </p>
+<p>다음의 글은 계량생물학(biometrics) 또는 생물통계학(biostatistics) 관점을 다루고 있다. (솔직히 자세히 읽어보진 않았지만, 집단들이 모집단 전체를 나타내느냐 그렇지 않느냐의 구분은 중요해 보인다.)</p>
+<ul>
+<li>
+<p><a href="https://rlbarter.github.io/Practical-Statistics/2017/03/03/fixed-mixed-and-random-effects/">https://rlbarter.github.io/Practical-Statistics/2017/03/03/fixed-mixed-and-random-effects/</a></p>
+</li>
+<li>
+<p><a href="https://www.stats.ox.ac.uk/%7Esnijders/FixedRandomEffects.pdf">https://www.stats.ox.ac.uk/~snijders/FixedRandomEffects.pdf</a></p>
+</li>
+</ul>
+<h2>참고 자료</h2>
+<ul>
+<li>
+<p><a href="https://stats.stackexchange.com/questions/4700/what-is-the-difference-between-fixed-effect-random-effect-and-mixed-effect-mode/188559#188559">https://stats.stackexchange.com/questions/4700/what-is-the-difference-between-fixed-effect-random-effect-and-mixed-effect-mode/188559#188559</a></p>
+</li>
+<li>
+<p><a href="http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_intromod_a0000000337.htm">http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_intromod_a0000000337.htm</a></p>
+</li>
+<li>
+<p><a href="https://arxiv.org/pdf/1201.1980.pdf">McCulloch and Neuhaus(2011). Misspecifying the Shape of a Random Effects Distribution</a></p>
+</li>
+<li>
+<p><a href="https://stats.stackexchange.com/questions/25308/distribution-of-random-effects">STACKEXCHANGE: Distribution of random effects</a></p>
+</li>
+<li>
+<p><a href="https://statmodeling.stat.columbia.edu/2005/01/25/why_i_dont_use/">https://statmodeling.stat.columbia.edu/2005/01/25/why_i_dont_use/</a></p>
+</li>
+</ul>
+<hr>
+<h3>부록: JAGS를 활용한 베이지안 분석과 <code>lme</code> 또는 <code>lm</code>을 활용한 임의효과/고정효과 모형의 비교</h3>
+<h4>Data generation</h4>
+<pre><code class="r">  n =50;
+  ns = sample(3:5, n, replace = TRUE) # length(ns)
+  gender = sample(0:1, n, replace = TRUE) # length(gender)
+  height = rnorm(n, 160, 10) + gender*10 # length(height)
+  u = rnorm(n, 0, 5)  # u_i
+  # length(weight)
+
+  us &lt;- weights &lt;- heights &lt;- genders &lt;- g &lt;-  vector(&quot;list&quot;, n)
+
+  for (i in 1:n) {
+    heights[[i]] &lt;- rnorm(ns[[i]], height[i], 5)
+    weights[[i]] &lt;- rnorm(ns[[i]], -20 + 0.8*heights[[i]] + gender[i]*10+ u[i], 5)  # e_ij
+
+    g[[i]] &lt;- rep(i, each=ns[i]) 
+    genders[[i]] &lt;- rep(gender[i], each=ns[i])
+    us[[i]] &lt;- rep(u[i], each=ns[i])
+  }
+
+  heights &lt;- unlist(heights)
+  g &lt;- factor(unlist(g))
+  genders &lt;- factor(unlist(genders))
+  weights &lt;- unlist(weights)
+  us &lt;- unlist(us)
+
+  dat &lt;- data.frame(weights, heights, genders, g, us)
+
+  library(nlme)
+  lmeMod &lt;- lme(weights ~ genders + heights, random=~1|g, data= dat)
+  lmeMod2 &lt;- lme(weights ~ heights, random = ~1|g, data= dat)
+  lmeMod3 &lt;- lme(weights ~ genders, random = ~1|g, data= dat)
+</code></pre>
+<h4>임의 효과 모형</h4>
+<ul>
+<li>JAGS</li>
+</ul>
+<pre><code class="r">model &lt;- &#39;
+
+model {
+    # model
+    for (i in 1:N) {
+        #predW[i] &lt;- beta0 + beta1*genders[i] + beta2*heights[i] + groupmean[g[i]]
+        predW[i] &lt;- beta0 + beta2*heights[i] + groupmean[g[i]]
+        weights[i] ~ dnorm(predW[i], tauE)
+    }
+
+    # priors
+    for (igroup in 1:G) {
+        groupmean[igroup] ~ dnorm(0, tauG)
+    }
+
+    tauE &lt;- pow(sigmaE, -2)
+    tauG &lt;- pow(sigmaG, -2)
+
+    #beta0 ~ dnorm(0, 0.01)
+    #beta1 ~ dnorm(0, 0.01)
+    #beta2 ~ dnorm(0, 0.01)
+    beta0 ~ dunif(-100,100)
+    #beta1 ~ dunif(-100,100)
+    beta2 ~ dunif(-1000,1000)
+    sigmaE ~ dunif(0,1000)
+    sigmaG ~ dunif(0,1000)
+}
+&#39;
+cat(model, file=&quot;currentModel.j&quot;)
+
+require(rjags)
+myj &lt;- jags.model(&#39;currentModel.j&#39;,
+                  data = list(&#39;weights&#39; = weights-mean(weights), 
+                              &#39;heights&#39; = heights-mean(heights),
+                              &#39;genders&#39;= genders,
+                              &#39;N&#39; = length(weights),
+                              &#39;G&#39; = nlevels(g),
+                              &#39;g&#39; = as.numeric(as.character(g))),
+                  n.chains = 3)
+
+# set n.iter here ex. n.iter =5000
+update(myj, n.iter = n.iter)
+n.thin=1
+mcmcsamp &lt;- 
+  coda.samples(myj, 
+               c(&#39;beta0&#39;, &#39;beta1&#39;, &#39;beta2&#39;, &#39;sigmaE&#39;, &#39;sigmaG&#39;), 
+               n.iter*n.thin, thin=n.thin)
+</code></pre>
+<pre><code class="r">summary(mcmcsamp)
+</code></pre>
+<pre>## 
+## Iterations = 6001:11000
+## Thinning interval = 1 
+## Number of chains = 3 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##            Mean      SD  Naive SE Time-series SE
+## beta0  0.001029 0.91480 0.0074693       0.029572
+## beta2  0.827124 0.05655 0.0004618       0.001270
+## sigmaE 4.826100 0.28072 0.0022921       0.003521
+## sigmaG 5.927431 0.73537 0.0060043       0.010025
+## 
+## 2. Quantiles for each variable:
+## 
+##           2.5%     25%       50%    75%  97.5%
+## beta0  -1.7909 -0.5963 0.0000117 0.5947 1.8332
+## beta2   0.7162  0.7896 0.8265548 0.8653 0.9395
+## sigmaE  4.3096  4.6331 4.8124548 5.0065 5.4091
+## sigmaG  4.6327  5.4101 5.8738156 6.3918 7.5322
+</pre>
+<pre><code class="r">plot(mcmcsamp)
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-12"></p>
+<pre><code class="r">print(mean(weights))
+</code></pre>
+<pre>## [1] 119.3505
+</pre>
+<ul>
+<li><code>lme</code></li>
+</ul>
+<pre><code class="r">lmeMod &lt;- lme(weights ~ genders + heights, random=~1|g, data= dat)
+lmeMod2 &lt;- lme(weights ~ heights, random=~1|g, data= dat)
+#summary(lmeMod)
+intervals(lmeMod2)
+</code></pre>
+<pre>## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                   lower        est.      upper
+## (Intercept) -37.4291885 -19.2095342 -0.9898798
+## heights       0.7230944   0.8318989  0.9407034
+## attr(,&quot;label&quot;)
+## [1] &quot;Fixed effects:&quot;
+## 
+##  Random Effects:
+##   Level: g 
+##                    lower     est.    upper
+## sd((Intercept)) 4.559427 5.777233 7.320309
+## 
+##  Within-group standard error:
+##    lower     est.    upper 
+## 4.272828 4.783595 5.355418
+</pre>
+<h4>고정효과 모형</h4>
+<ul>
+<li>JAGS</li>
+</ul>
+<pre><code class="r">model &lt;- &#39;
+
+model {
+    # model
+    for (i in 1:N) {
+        #predW[i] &lt;- beta0 + beta1*genders[i] + beta2*heights[i] + groupmean[g[i]]
+        predW[i] &lt;- beta0 + beta2*heights[i] + groupmean[g[i]]
+        weights[i] ~ dnorm(predW[i], tauE)
+    }
+
+    # priors
+    groupmean[1] ~ dnorm(0, 100000)I(-0.005,0.005) # dummy coding
+    for (igroup in 2:G) {
+        #groupmean[igroup] ~ dnorm(0, tauG)
+        groupmean[igroup] ~ dunif(-100,100)
+    }
+
+    tauE &lt;- pow(sigmaE, -2)
+    tauG &lt;- pow(sigmaG, -2)
+
+    #beta0 ~ dnorm(0, 0.01)
+    #beta1 ~ dnorm(0, 0.01)
+    #beta2 ~ dnorm(0, 0.01)
+    beta0 ~ dunif(-100,100)
+    #beta1 ~ dunif(-100,100)
+    beta2 ~ dunif(-1000,1000)
+    sigmaE ~ dunif(0,1000)
+    sigmaG ~ dunif(0,1000)
+}
+&#39;
+cat(model, file=&quot;currentModel.j&quot;)
+
+require(rjags)
+myj &lt;- jags.model(&#39;currentModel.j&#39;,
+                  data = list(&#39;weights&#39; = weights-mean(weights), 
+                              &#39;heights&#39; = heights-mean(heights),
+                              &#39;genders&#39;= genders,
+                              &#39;N&#39; = length(weights),
+                              &#39;G&#39; = nlevels(g),
+                              &#39;g&#39; = as.numeric(as.character(g))),
+                  n.chains = 3)
+
+update(myj, n.iter = n.iter)
+
+n.thin=1
+mcmcsamp &lt;- 
+  coda.samples(myj, 
+               c(&#39;beta0&#39;, &#39;beta2&#39;, &#39;sigmaE&#39;, &#39;sigmaG&#39;), 
+               n.iter*n.thin, thin=n.thin)
+</code></pre>
+<pre><code class="r">summary(mcmcsamp)
+</code></pre>
+<pre>## 
+## Iterations = 6001:11000
+## Thinning interval = 1 
+## Number of chains = 3 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##            Mean        SD  Naive SE Time-series SE
+## beta0   -1.0553   2.14677 0.0175283       0.192093
+## beta2    0.7781   0.07624 0.0006225       0.002680
+## sigmaE   4.8235   0.27971 0.0022838       0.003784
+## sigmaG 495.8028 287.72874 2.3492953       2.376685
+## 
+## 2. Quantiles for each variable:
+## 
+##           2.5%     25%      50%      75%    97.5%
+## beta0  -5.0352  -2.561  -1.0240   0.4047   3.2214
+## beta2   0.6291   0.726   0.7777   0.8303   0.9281
+## sigmaE  4.3193   4.631   4.8078   5.0003   5.4234
+## sigmaG 23.9875 245.228 492.5443 744.7671 973.1308
+</pre>
+<pre><code class="r">plot(mcmcsamp)
+</code></pre>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-16"></p>
+<pre><code class="r">print(mean(weights))
+</code></pre>
+<pre>## [1] 119.3505
+</pre>
+<ul>
+<li><code>lm</code></li>
+</ul>
+<pre><code class="r">lmMod &lt;- lm(weights ~ heights + g, data= dat)
+confint(lmMod, &quot;heights&quot;)
+</code></pre>
+<pre>##             2.5 %    97.5 %
+## heights 0.6290757 0.9264142
+</pre>
+</p>
+                                </div>
+
+                                    <span class="tags-links"><i class="fa fa-tags" aria-hidden="true"></i>Tags:                <a href="https://ds.sumeun.org/tags/%EA%B3%84%EB%9F%89%EA%B2%BD%EC%A0%9C%ED%95%99/" rel="tag">계량경제학</a>
+                            <a href="https://ds.sumeun.org/tags/%EA%B3%84%EB%9F%89%EC%83%9D%EB%AC%BC%ED%95%99/" rel="tag">계량생물학</a>
+                            <a href="https://ds.sumeun.org/tags/%EA%B3%A0%EC%A0%95%ED%9A%A8%EA%B3%BC/" rel="tag">고정효과</a>
+                            <a href="https://ds.sumeun.org/tags/%EB%B0%98%EB%B3%B5%EC%B8%A1%EC%A0%95/" rel="tag">반복측정</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%EB%AA%A8%ED%98%95/" rel="tag">선형모형</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%9E%84%EC%9D%98%ED%9A%A8%EA%B3%BC/" rel="tag">임의효과</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%A2%85%EB%8B%A8%EB%A9%B4/" rel="tag">종단면</a>
+                            <a href="https://ds.sumeun.org/tags/%ED%8C%A8%EB%84%90/" rel="tag">패널</a>
+                            <a href="https://ds.sumeun.org/tags/%ED%98%BC%ED%95%A9%ED%9A%A8%EA%B3%BC/" rel="tag">혼합효과</a>
+            </span>
+                             </div>
+                    </div>
+                </div>
+
+                            <div class="bgwhite post-pad">
+                <nav class="navigation post-navigation" role="navigation">
+                    <h2 class="screen-reader-text">Post navigation</h2>
+                    <div class="nav-links">
+                                            <div class="nav-previous">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/08/variableSelection01.png"></div>
+                                                        <div class="post-nav-content">
+                            <a href="https://ds.sumeun.org/posts/1936/" rel="prev"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Prev Post<br><h4>변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</h4></a></div>
+                        </div>
+                    
+                                            <div class="nav-next">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/07/ES.png"></div>
+                                                        <div class="post-nav-content">
+                                <a href="https://ds.sumeun.org/posts/1911/" rel="next">Next Post&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i><br><h4>Evolution Strategies as a Scalable Alternative to Reinforcement Learning</h4></a>
+                            </div>
+                        </div>
+                                        </div>
+                </nav>
+            </div>
+        
+                <!-- Start of related post -->
+                                <div class="bgwhite post-pad">
+                    <div id="related-posts">
+                        <h2>Related Posts</h2>
+                        <div class="related-posts">
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/09/logisticRegression.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20200927/">9월 27 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2237/">로지스틱 회귀(Logistic Regression)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2237/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/04/quantileLoss.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20200412/">4월 12 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2173/">분위수 손실(Quantile loss)에 대한 직관적 이해</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2173/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/01/interpolation_extrapolation.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20200120/">1월 20 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2123/">회귀: 내삽과 외삽</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2123/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/01/keras_multihead_mean_sd.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20200102/">1월 02 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2110/">ANN: 평균과 표준편차 출력 모형</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2110/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/12/kmeans_vs_GMM.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191223/">12월 23 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2095/">k-means와 GMM 비교</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2095/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/02/BigData2nd_ad01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191204/">12월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2069/">개정판 발간! R로 하는 빅데이터 분석: 데이터 전처리와 시각화</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2069/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/10/manual_regression.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191027/">10월 27 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2036/">Manual Regression</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2036/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/10/visreg.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191021/">10월 21 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2031/">visualization of regression models</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2031/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/10/correlation_and_distance.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191017/">10월 17 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2022/">두 변수의 상관계수와 유클리드 거리</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2022/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/09/featureEngineering_bayesian.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190919/">9월 19 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1989/">피처 엔지니어링 3: 베이지안</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1989/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/09/featureEngineering_lm_rf.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190916/">9월 16 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1979/">피처 엔지니어링 2</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1979/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/09/unnamed-chunk-9-5.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190909/">9월 09 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1961/">BLACK BOX 모형 살펴보기: 모형의 예측, 잔차 02</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1961/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/09/vs_condvis.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190901/">9월 01 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1954/">Black Box 모형을 살펴보기: 모형의 예측, 과적합, 잔차 01</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1954/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/08/variableSelection02_tidy.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190825/">8월 25 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1942/">모형의 예측을 활용한 EDA와 피처 엔지니어링</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1942/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/08/variableSelection01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190814/">8월 14 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1936/">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1936/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/07/lm_08_bayesian_CausalModel_stan.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190713/">7월 13 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1891/">내생성: 베이지안 분석 2, Stan</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1891/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/07/Simpson_Dia02.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190704/">7월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1886/">인과관계 추정에서 모형 설정의 중요성</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1886/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/etc_hothand01.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190630/">6월 30 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1875/">핫 핸드 논쟁 1</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1875/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/lm08_bayesian_CausalModel.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190627/">6월 27 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1867/">내생성: 베이지안 분석</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1867/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/lm_07_pathAnalysis_CausalModel.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190624/">6월 24 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1857/">경로 분석</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1857/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/lm_05_logy.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190620/">6월 20 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1844/">선형 회귀의 가정, 우회방법, 유의사항</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1844/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/lm_04_endogeneity.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190616/">6월 16 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1832/">내생성(Endogeneity)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1832/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/06/rbind.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190603/">6월 03 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1784/">공식에서 cbind</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1784/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/02/Sumeun_BigDataAnalysis_1447x645-350x135.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190210/">2월 10 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/891/">BigData Analysis with R</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/1923/#comments"><i class="fa fa-comments" aria-hidden="true"></i>3</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/891/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                    </div>
+                    </div>
+                </div>
+                        <!-- End of related post -->
+
+                <!-- Start of author bio -->
+                            <div class="bgwhite post-pad">
+                <div class="author-bio">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="author-image">
+                                <img alt="" src="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=96&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=192&amp;d=mm&amp;r=g 2x" class="avatar avatar-96 photo" height="96" width="96" loading="lazy">                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="author-desc">
+                                <span class="author-name"><a href="https://ds.sumeun.org/authors/1/">admin !!!</a></span>
+                                                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <!-- End of author bio -->
+
+                <!-- Start of comment box -->
+                <div class="bgwhite post-pad">
+                        <h2 class="comments-title">Comments on this post</h2>
+                        <span>3 Comments</span>
+                                                  <!-- </div> bgwhite post-pad since comment form and comments are in different divs -->
+                         	
+		
+
+			        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-973"><p><strong>EconStat</strong> <time>2021-01-17 20:49:52</time></p><div class="comment-content"><p>위에 예시중에 계량 모형 FE추정에서</p>
+<p>FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )</p>
+<p>이부분의 편향이 크게 나온 것이 u&#8217;i가 height 를 포함하는 오차인데 그것이 </p>
+<p>개체별 특성을 나타내지 못하기 때문인 것 같네요 </p>
+<p>즉, u&#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</p>
+</div></li><li id="comment-974"><p><strong>EconStat</strong> <time>2021-01-17 20:57:29</time></p><div class="comment-content"><p>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</p>
+</div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
+</div></li></ol></li></ol></section>
+        </li><!-- #comment-## -->
+        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-973"><p><strong>EconStat</strong> <time>2021-01-17 20:49:52</time></p><div class="comment-content"><p>위에 예시중에 계량 모형 FE추정에서</p>
+<p>FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )</p>
+<p>이부분의 편향이 크게 나온 것이 u&#8217;i가 height 를 포함하는 오차인데 그것이 </p>
+<p>개체별 특성을 나타내지 못하기 때문인 것 같네요 </p>
+<p>즉, u&#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</p>
+</div></li><li id="comment-974"><p><strong>EconStat</strong> <time>2021-01-17 20:57:29</time></p><div class="comment-content"><p>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</p>
+</div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
+</div></li></ol></li></ol></section>
+        <ol class="children">
+        <section class="static-public-comments"><h2>공개 댓글 (읽기 전용)</h2><ol class="static-comment-list"><li id="comment-973"><p><strong>EconStat</strong> <time>2021-01-17 20:49:52</time></p><div class="comment-content"><p>위에 예시중에 계량 모형 FE추정에서</p>
+<p>FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )</p>
+<p>이부분의 편향이 크게 나온 것이 u&#8217;i가 height 를 포함하는 오차인데 그것이 </p>
+<p>개체별 특성을 나타내지 못하기 때문인 것 같네요 </p>
+<p>즉, u&#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</p>
+</div></li><li id="comment-974"><p><strong>EconStat</strong> <time>2021-01-17 20:57:29</time></p><div class="comment-content"><p>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</p>
+</div><ol class="static-comment-list"><li id="comment-977"><p><strong>admin</strong> <time>2021-01-22 14:36:06</time></p><div class="comment-content"><p>네 맞습니다. 내생성 문제입니다.</p>
+</div></li></ol></li></ol></section>
+        </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+<!-- .comment-list -->
+
+		</div>	<div class="bgwhite post-pad">
+		<p class="static-comments-note">기존 공개 댓글은 읽기 전용으로 보존되어 있습니다.</p><!-- #respond -->
+	 </div>
+<!-- #comments -->
+                        <!-- End comment wrap -->
+                <!-- End of comment box -->
+
+            </div>
+
+                            <div class="col-md-4 right-sidebar">
+                    <!-- place sidebar here -->
+                    <aside id="search-2" class="widget widget_search"><p><a href="https://ds.sumeun.org/search/">검색</a></p></aside>
+		<aside id="recent-posts-2" class="widget widget_recent_entries">
+		<h1 class="widget-title">최신 글</h1>
+		<ul>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2624/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어 2</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2621/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2603/">Relative Risk Regression</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2596/">[파이썬] R과 차이점 01</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2591/">[PYTHON] 파이썬(3.8) 표준 라이브러리의 패키지 목록(알파벳 순)</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h1 class="widget-title">최신 댓글</h1><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">지나가다</span> - <a href="https://ds.sumeun.org/posts/930/#comment-947635">Long to Wide form</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947464">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">magic</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947459">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947429">날짜와 시간 자료</a></li><li class="recentcomments"><span class="comment-author-link">Seongdeok</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947428">날짜와 시간 자료</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">보관함</h1>
+			<ul>
+					<li><a href="https://ds.sumeun.org/archives/202209/">2022년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202207/">2022년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202204/">2022년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202203/">2022년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202202/">2022년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202201/">2022년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202107/">2021년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202103/">2021년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202102/">2021년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202101/">2021년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202012/">2020년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202009/">2020년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202008/">2020년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202007/">2020년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202005/">2020년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202004/">2020년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202002/">2020년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202001/">2020년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201912/">2019년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201911/">2019년 11월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201910/">2019년 10월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201909/">2019년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201908/">2019년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201907/">2019년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201906/">2019년 6월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201905/">2019년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201904/">2019년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201903/">2019년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201902/">2019년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201901/">2019년 1월</a></li>
+			</ul>
+
+			</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">카테고리</h1>
+			<ul>
+					<li class="cat-item cat-item-144"><a href="https://ds.sumeun.org/categories/144/">Analysis</a>
+</li>
+	<li class="cat-item cat-item-143"><a href="https://ds.sumeun.org/categories/143/">BigData</a>
+</li>
+	<li class="cat-item cat-item-443"><a href="https://ds.sumeun.org/categories/443/">caret</a>
+</li>
+	<li class="cat-item cat-item-96"><a href="https://ds.sumeun.org/categories/96/">character</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="https://ds.sumeun.org/categories/31/">data preprocessing</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="https://ds.sumeun.org/categories/32/">descriptive statistics</a>
+</li>
+	<li class="cat-item cat-item-78"><a href="https://ds.sumeun.org/categories/78/">dplyr</a>
+</li>
+	<li class="cat-item cat-item-371"><a href="https://ds.sumeun.org/categories/371/">EDA</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="https://ds.sumeun.org/categories/178/">flow control</a>
+</li>
+	<li class="cat-item cat-item-187"><a href="https://ds.sumeun.org/categories/187/">ggplot2</a>
+</li>
+	<li class="cat-item cat-item-103"><a href="https://ds.sumeun.org/categories/103/">git</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="https://ds.sumeun.org/categories/95/">hangul</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://ds.sumeun.org/categories/120/">matrix</a>
+</li>
+	<li class="cat-item cat-item-390"><a href="https://ds.sumeun.org/categories/390/">ML</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="https://ds.sumeun.org/categories/77/">Packages</a>
+</li>
+	<li class="cat-item cat-item-264"><a href="https://ds.sumeun.org/categories/264/">Python</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://ds.sumeun.org/categories/28/">R</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="https://ds.sumeun.org/categories/80/">regular expressions</a>
+</li>
+	<li class="cat-item cat-item-159"><a href="https://ds.sumeun.org/categories/159/">RegularExpression</a>
+</li>
+	<li class="cat-item cat-item-357"><a href="https://ds.sumeun.org/categories/357/">RL</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="https://ds.sumeun.org/categories/82/">summary statistics</a>
+</li>
+	<li class="cat-item cat-item-166"><a href="https://ds.sumeun.org/categories/166/">Visualization</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="https://ds.sumeun.org/categories/172/">가로형</a>
+</li>
+	<li class="cat-item cat-item-358"><a href="https://ds.sumeun.org/categories/358/">강화학습</a>
+</li>
+	<li class="cat-item cat-item-210"><a href="https://ds.sumeun.org/categories/210/">객체</a>
+</li>
+	<li class="cat-item cat-item-483"><a href="https://ds.sumeun.org/categories/483/">기술적문제</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="https://ds.sumeun.org/categories/29/">기술통계</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="https://ds.sumeun.org/categories/104/">깃</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="https://ds.sumeun.org/categories/234/">날짜</a>
+</li>
+	<li class="cat-item cat-item-162"><a href="https://ds.sumeun.org/categories/162/">데이터</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="https://ds.sumeun.org/categories/174/">데이터 가공</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="https://ds.sumeun.org/categories/30/">데이터 전처리</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="https://ds.sumeun.org/categories/114/">데이터가공</a>
+</li>
+	<li class="cat-item cat-item-207"><a href="https://ds.sumeun.org/categories/207/">데이터테이블</a>
+</li>
+	<li class="cat-item cat-item-456"><a href="https://ds.sumeun.org/categories/456/">모형평가</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="https://ds.sumeun.org/categories/94/">문자열</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://ds.sumeun.org/categories/1/">미분류</a>
+</li>
+	<li class="cat-item cat-item-242"><a href="https://ds.sumeun.org/categories/242/">배열</a>
+</li>
+	<li class="cat-item cat-item-209"><a href="https://ds.sumeun.org/categories/209/">변수</a>
+</li>
+	<li class="cat-item cat-item-146"><a href="https://ds.sumeun.org/categories/146/">분석</a>
+</li>
+	<li class="cat-item cat-item-248"><a href="https://ds.sumeun.org/categories/248/">불러오기</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="https://ds.sumeun.org/categories/145/">빅데이터</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="https://ds.sumeun.org/categories/122/">선형대수</a>
+</li>
+	<li class="cat-item cat-item-173"><a href="https://ds.sumeun.org/categories/173/">세로형</a>
+</li>
+	<li class="cat-item cat-item-198"><a href="https://ds.sumeun.org/categories/198/">소개</a>
+</li>
+	<li class="cat-item cat-item-213"><a href="https://ds.sumeun.org/categories/213/">숫자</a>
+</li>
+	<li class="cat-item cat-item-165"><a href="https://ds.sumeun.org/categories/165/">시각화</a>
+</li>
+	<li class="cat-item cat-item-235"><a href="https://ds.sumeun.org/categories/235/">시간</a>
+</li>
+	<li class="cat-item cat-item-438"><a href="https://ds.sumeun.org/categories/438/">에러</a>
+</li>
+	<li class="cat-item cat-item-132"><a href="https://ds.sumeun.org/categories/132/">연산</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="https://ds.sumeun.org/categories/81/">요약통계</a>
+</li>
+	<li class="cat-item cat-item-319"><a href="https://ds.sumeun.org/categories/319/">이론</a>
+</li>
+	<li class="cat-item cat-item-320"><a href="https://ds.sumeun.org/categories/320/">자료분석</a>
+</li>
+	<li class="cat-item cat-item-195"><a href="https://ds.sumeun.org/categories/195/">자료형</a>
+</li>
+	<li class="cat-item cat-item-179"><a href="https://ds.sumeun.org/categories/179/">전처리</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="https://ds.sumeun.org/categories/79/">정규표현식</a>
+</li>
+	<li class="cat-item cat-item-481"><a href="https://ds.sumeun.org/categories/481/">주의사항</a>
+</li>
+	<li class="cat-item cat-item-265"><a href="https://ds.sumeun.org/categories/265/">파이썬</a>
+</li>
+	<li class="cat-item cat-item-76"><a href="https://ds.sumeun.org/categories/76/">패키지</a>
+</li>
+	<li class="cat-item cat-item-214"><a href="https://ds.sumeun.org/categories/214/">표기법</a>
+</li>
+	<li class="cat-item cat-item-93"><a href="https://ds.sumeun.org/categories/93/">한글</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="https://ds.sumeun.org/categories/133/">함수</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://ds.sumeun.org/categories/121/">행렬</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="https://ds.sumeun.org/categories/123/">행렬대수</a>
+</li>
+	<li class="cat-item cat-item-289"><a href="https://ds.sumeun.org/categories/289/">화일</a>
+</li>
+	<li class="cat-item cat-item-151"><a href="https://ds.sumeun.org/categories/151/">흐름제어문</a>
+</li>
+			</ul>
+
+			</aside><aside id="meta-2" class="widget widget_meta"><h1 class="widget-title">메타</h1>
+		<ul>
+			<li></li>			<li></li>
+			<li><a href="https://ds.sumeun.org/feed.xml">엔트리 피드</a></li>
+			<li><a href="https://ds.sumeun.org/comments-feed.xml">댓글 피드</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</aside>                </div>
+            
+        </div>
+    </div>
+</section>
+<!-- End of single page content -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+ <!-- Start of footer section -->
+        <section class="footer-sec">
+            <div class="container">
+                <div class="row">
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>2026 10월</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="일요일">일</th>
+		<th scope="col" title="월요일">월</th>
+		<th scope="col" title="화요일">화</th>
+		<th scope="col" title="수요일">수</th>
+		<th scope="col" title="목요일">목</th>
+		<th scope="col" title="금요일">금</th>
+		<th scope="col" title="토요일">토</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td id="today">23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="이전과 다음 달" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://ds.sumeun.org/archives/202209/">&laquo; 9월</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav></div></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="media_image-3" class="widget widget_media_image"><img width="300" height="200" src="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg" class="image wp-image-863  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg 300w, https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS.jpg 640w" sizes="(max-width: 300px) 100vw, 300px"></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="tag_cloud-3" class="widget widget_tag_cloud"><h1 class="widget-title">태그</h1><div class="tagcloud"><a href="https://ds.sumeun.org/tags/add/" class="tag-cloud-link tag-link-108 tag-link-position-1" style="font-size: 8pt;" aria-label="add (2 아이템)">add</a>
+<a href="https://ds.sumeun.org/tags/aggregate/" class="tag-cloud-link tag-link-55 tag-link-position-2" style="font-size: 10.333333333333pt;" aria-label="aggregate (3 아이템)">aggregate</a>
+<a href="https://ds.sumeun.org/tags/by/" class="tag-cloud-link tag-link-54 tag-link-position-3" style="font-size: 10.333333333333pt;" aria-label="by (3 아이템)">by</a>
+<a href="https://ds.sumeun.org/tags/cv/" class="tag-cloud-link tag-link-389 tag-link-position-4" style="font-size: 10.333333333333pt;" aria-label="CV (3 아이템)">CV</a>
+<a href="https://ds.sumeun.org/tags/data-table/" class="tag-cloud-link tag-link-183 tag-link-position-5" style="font-size: 18.888888888889pt;" aria-label="data.table (10 아이템)">data.table</a>
+<a href="https://ds.sumeun.org/tags/data-preprocessing/" class="tag-cloud-link tag-link-147 tag-link-position-6" style="font-size: 21.027777777778pt;" aria-label="data preprocessing (13 아이템)">data preprocessing</a>
+<a href="https://ds.sumeun.org/tags/dplyr/" class="tag-cloud-link tag-link-184 tag-link-position-7" style="font-size: 15.194444444444pt;" aria-label="dplyr (6 아이템)">dplyr</a>
+<a href="https://ds.sumeun.org/tags/eda/" class="tag-cloud-link tag-link-168 tag-link-position-8" style="font-size: 16.166666666667pt;" aria-label="EDA (7 아이템)">EDA</a>
+<a href="https://ds.sumeun.org/tags/filter/" class="tag-cloud-link tag-link-74 tag-link-position-9" style="font-size: 10.333333333333pt;" aria-label="filter (3 아이템)">filter</a>
+<a href="https://ds.sumeun.org/tags/for/" class="tag-cloud-link tag-link-39 tag-link-position-10" style="font-size: 10.333333333333pt;" aria-label="for (3 아이템)">for</a>
+<a href="https://ds.sumeun.org/tags/ggplot2/" class="tag-cloud-link tag-link-188 tag-link-position-11" style="font-size: 21.027777777778pt;" aria-label="ggplot2 (13 아이템)">ggplot2</a>
+<a href="https://ds.sumeun.org/tags/lm/" class="tag-cloud-link tag-link-314 tag-link-position-12" style="font-size: 10.333333333333pt;" aria-label="lm (3 아이템)">lm</a>
+<a href="https://ds.sumeun.org/tags/log/" class="tag-cloud-link tag-link-340 tag-link-position-13" style="font-size: 12.277777777778pt;" aria-label="log (4 아이템)">log</a>
+<a href="https://ds.sumeun.org/tags/melt/" class="tag-cloud-link tag-link-176 tag-link-position-14" style="font-size: 10.333333333333pt;" aria-label="melt (3 아이템)">melt</a>
+<a href="https://ds.sumeun.org/tags/mutate/" class="tag-cloud-link tag-link-83 tag-link-position-15" style="font-size: 10.333333333333pt;" aria-label="mutate (3 아이템)">mutate</a>
+<a href="https://ds.sumeun.org/tags/palette/" class="tag-cloud-link tag-link-283 tag-link-position-16" style="font-size: 10.333333333333pt;" aria-label="palette (3 아이템)">palette</a>
+<a href="https://ds.sumeun.org/tags/slice/" class="tag-cloud-link tag-link-73 tag-link-position-17" style="font-size: 10.333333333333pt;" aria-label="slice (3 아이템)">slice</a>
+<a href="https://ds.sumeun.org/tags/%EA%B2%BD%EB%A1%9C%EB%B6%84%EC%84%9D/" class="tag-cloud-link tag-link-345 tag-link-position-18" style="font-size: 10.333333333333pt;" aria-label="경로분석 (3 아이템)">경로분석</a>
+<a href="https://ds.sumeun.org/tags/%EA%B3%84%EB%9F%89%EA%B2%BD%EC%A0%9C%ED%95%99/" class="tag-cloud-link tag-link-334 tag-link-position-19" style="font-size: 13.833333333333pt;" aria-label="계량경제학 (5 아이템)">계량경제학</a>
+<a href="https://ds.sumeun.org/tags/%EB%82%B4%EC%83%9D%EC%84%B1/" class="tag-cloud-link tag-link-333 tag-link-position-20" style="font-size: 12.277777777778pt;" aria-label="내생성 (4 아이템)">내생성</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-149 tag-link-position-21" style="font-size: 8pt;" aria-label="데이터전처리 (2 아이템)">데이터전처리</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%85%8C%EC%9D%B4%EB%B8%94/" class="tag-cloud-link tag-link-182 tag-link-position-22" style="font-size: 18.111111111111pt;" aria-label="데이터테이블 (9 아이템)">데이터테이블</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84/" class="tag-cloud-link tag-link-25 tag-link-position-23" style="font-size: 13.833333333333pt;" aria-label="데이터프레임 (5 아이템)">데이터프레임</a>
+<a href="https://ds.sumeun.org/tags/%EB%9E%9C%EB%8D%A4%ED%8F%AC%EB%A0%88%EC%8A%A4%ED%8A%B8/" class="tag-cloud-link tag-link-368 tag-link-position-24" style="font-size: 17.138888888889pt;" aria-label="랜덤포레스트 (8 아이템)">랜덤포레스트</a>
+<a href="https://ds.sumeun.org/tags/%EB%A1%9C%EA%B7%B8/" class="tag-cloud-link tag-link-434 tag-link-position-25" style="font-size: 8pt;" aria-label="로그 (2 아이템)">로그</a>
+<a href="https://ds.sumeun.org/tags/%EB%AA%A8%ED%98%95%EC%9D%B4%ED%95%B4/" class="tag-cloud-link tag-link-375 tag-link-position-26" style="font-size: 12.277777777778pt;" aria-label="모형이해 (4 아이템)">모형이해</a>
+<a href="https://ds.sumeun.org/tags/%EB%AC%B8%EC%9E%90%EC%97%B4/" class="tag-cloud-link tag-link-20 tag-link-position-27" style="font-size: 19.666666666667pt;" aria-label="문자열 (11 아이템)">문자열</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%94%EC%A3%BC%ED%98%95/" class="tag-cloud-link tag-link-288 tag-link-position-28" style="font-size: 12.277777777778pt;" aria-label="범주형 (4 아이템)">범주형</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%A1%ED%84%B0/" class="tag-cloud-link tag-link-19 tag-link-position-29" style="font-size: 10.333333333333pt;" aria-label="벡터 (3 아이템)">벡터</a>
+<a href="https://ds.sumeun.org/tags/%EB%B3%80%EC%88%98%EC%84%A0%ED%83%9D/" class="tag-cloud-link tag-link-367 tag-link-position-30" style="font-size: 8pt;" aria-label="변수선택 (2 아이템)">변수선택</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-321 tag-link-position-31" style="font-size: 22pt;" aria-label="선형모형 (15 아이템)">선형모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-322 tag-link-position-32" style="font-size: 13.833333333333pt;" aria-label="선형회귀 (5 아이템)">선형회귀</a>
+<a href="https://ds.sumeun.org/tags/%EC%8B%9C%EA%B0%81%ED%99%94/" class="tag-cloud-link tag-link-150 tag-link-position-33" style="font-size: 15.194444444444pt;" aria-label="시각화 (6 아이템)">시각화</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%88%EC%B8%A1%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-338 tag-link-position-34" style="font-size: 18.111111111111pt;" aria-label="예측모형 (9 아이템)">예측모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%A4%EC%B0%A8%EC%83%81%EA%B4%80/" class="tag-cloud-link tag-link-335 tag-link-position-35" style="font-size: 13.833333333333pt;" aria-label="오차상관 (5 아이템)">오차상관</a>
+<a href="https://ds.sumeun.org/tags/%EC%9B%90%EC%9D%B8%EA%B2%B0%EA%B3%BC/" class="tag-cloud-link tag-link-336 tag-link-position-36" style="font-size: 13.833333333333pt;" aria-label="원인결과 (5 아이템)">원인결과</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%B5%EC%8B%A0%EA%B2%BD%EB%A7%9D/" class="tag-cloud-link tag-link-369 tag-link-position-37" style="font-size: 12.277777777778pt;" aria-label="인공신경망 (4 아이템)">인공신경망</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%BC%EA%B4%80%EA%B3%84/" class="tag-cloud-link tag-link-337 tag-link-position-38" style="font-size: 13.833333333333pt;" aria-label="인과관계 (5 아이템)">인과관계</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EC%BD%94%EB%94%A9/" class="tag-cloud-link tag-link-22 tag-link-position-39" style="font-size: 17.138888888889pt;" aria-label="인코딩 (8 아이템)">인코딩</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-181 tag-link-position-40" style="font-size: 18.111111111111pt;" aria-label="전처리 (9 아이템)">전처리</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D/" class="tag-cloud-link tag-link-59 tag-link-position-41" style="font-size: 12.277777777778pt;" aria-label="정규표현식 (4 아이템)">정규표현식</a>
+<a href="https://ds.sumeun.org/tags/%ED%8C%94%EB%A0%88%ED%8A%B8/" class="tag-cloud-link tag-link-282 tag-link-position-42" style="font-size: 10.333333333333pt;" aria-label="팔레트 (3 아이템)">팔레트</a>
+<a href="https://ds.sumeun.org/tags/%ED%94%84%EB%A6%B0%ED%8A%B8/" class="tag-cloud-link tag-link-436 tag-link-position-43" style="font-size: 8pt;" aria-label="프린트 (2 아이템)">프린트</a>
+<a href="https://ds.sumeun.org/tags/%ED%95%A8%EC%88%98/" class="tag-cloud-link tag-link-318 tag-link-position-44" style="font-size: 10.333333333333pt;" aria-label="함수 (3 아이템)">함수</a>
+<a href="https://ds.sumeun.org/tags/%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-408 tag-link-position-45" style="font-size: 13.833333333333pt;" aria-label="회귀 (5 아이템)">회귀</a></div>
+</aside>                        </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- End of footer section -->
+
+        <!-- Start of bottom footer section -->
+        <section class="bot-footer">
+            <div class="container">
+            <p>Made with   <span>  <i class="fa fa-heart"></i>  </span>By <a href="https://codethemes.co/" target="_blank">Code Themes</a></p>
+            </div>
+        </section>
+        <div><!-- boxed layout or full-width layout end -->
+    </div>
+    <script type="text/javascript">
+        jQuery(function(){
+        var arrLiveStats=[];
+        var WSM_PREFIX="wsm";
+		
+        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
+                var wsmFnSiteLiveStats=function(){
+                           jQuery.ajax({
+                               type: "POST",
+                               url: wsm_ajaxObject.ajax_url,
+                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
+                           }).done(function( strResponse ) {
+                                if(strResponse!="No"){
+                                    arrResponse=JSON.parse(strResponse);
+                                    jQuery.each(arrResponse, function(key,value){
+                                    
+                                        $element= document.getElementById(key);
+                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
+                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
+                                        $class="";
+                                        
+                                        if(diff>=0){
+                                            diff="+"+diff;
+                                        }else{
+                                            $class="wmcRedBack";
+                                        }
+
+                                        $element.setAttribute("data-value",value);
+                                        $element.innerHTML=diff;
+                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
+                                        
+                                        if(key=="SiteUserOnline")
+                                        {
+                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
+                                            if(jQuery("#wsmSiteUserOnline").length)
+                                            {
+                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
+                                            }
+                                        }
+                                    });
+                                    setTimeout(function() {
+                                        jQuery.each(arrResponse, function(key,value){
+                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
+                                        });
+                                    }, 1500);
+                                }
+                           });
+                       }
+                       if(arrLiveStats.length>0){
+                          setInterval(wsmFnSiteLiveStats, 10000);
+                       }});
+        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/app.js" id="purplous-lite-app-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/fitvids.min.js" id="jquery-fitvids-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/jquery.validate.min.js" id="jquery-validate-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/main.js" id="purplous-lite-main-js"></script>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=default&amp;ver=1.3.13" id="mathjax-js"></script>
+  </body>
+</html>

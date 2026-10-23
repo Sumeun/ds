@@ -1,0 +1,72 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 고정효과(fixed effect)와 임의효과(random effect)	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1923" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1923/</link>
+	<description>R</description>
+	<lastBuildDate>Fri, 22 Jan 2021 05:36:06 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/1923/#comment-977</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Fri, 22 Jan 2021 05:36:06 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1923/#comment-977</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1923#comment-974&amp;quot;&amp;gt;EconStat&amp;lt;/a&amp;gt;의 응답.
+
+네 맞습니다. 내생성 문제입니다.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1923/#comment-974"&gt;EconStat&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;네 맞습니다. 내생성 문제입니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: EconStat		</title>
+		<link>https://ds.sumeun.org/posts/1923/#comment-974</link>
+
+		<dc:creator>EconStat</dc:creator>
+		<pubDate>Sun, 17 Jan 2021 11:57:29 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1923/#comment-974</guid>
+
+					<description>더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요</description>
+			<ns3:encoded>&lt;p&gt;더 나아가서 heightij 가 오차(ui가 아니라 uij식으로)로 들어가면  gender와 내생성을 일으켜 FE추정으로 편향이 생길수밖에 없군요&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: EconStat		</title>
+		<link>https://ds.sumeun.org/posts/1923/#comment-973</link>
+
+		<dc:creator>EconStat</dc:creator>
+		<pubDate>Sun, 17 Jan 2021 11:49:52 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1923/#comment-973</guid>
+
+					<description>위에 예시중에 계량 모형 FE추정에서
+
+FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )
+
+이부분의 편향이 크게 나온 것이 u&amp;#039;i가 height 를 포함하는 오차인데 그것이 
+
+개체별 특성을 나타내지 못하기 때문인 것 같네요 
+
+즉, u&amp;#039;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.</description>
+			<ns3:encoded>&lt;p&gt;위에 예시중에 계량 모형 FE추정에서&lt;/p&gt;
+&lt;p&gt;FE(Fixed effects) 모형( β0+β2genderi+u′i+eij )&lt;/p&gt;
+&lt;p&gt;이부분의 편향이 크게 나온 것이 u&amp;#8217;i가 height 를 포함하는 오차인데 그것이 &lt;/p&gt;
+&lt;p&gt;개체별 특성을 나타내지 못하기 때문인 것 같네요 &lt;/p&gt;
+&lt;p&gt;즉, u&amp;#8217;i  는 i만의 개별오차인데 height는 ij 로 보통 패널 데이터에서 j는 시간 t일탠데 이러면 개별오차가 되질 않아서 그런 것 같습니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

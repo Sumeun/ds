@@ -1,0 +1,54 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 다차원 배열	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1149" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1149/</link>
+	<description>R</description>
+	<lastBuildDate>Sun, 20 Sep 2020 11:05:28 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/1149/#comment-633</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sun, 20 Sep 2020 11:05:28 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1149/#comment-633</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1149#comment-631&amp;quot;&amp;gt;Dae Ho Kim&amp;lt;/a&amp;gt;의 응답.
+
+좋은 의견 감사합니다. 하지만 xtab은 빈도표를 만드는 용도라서 글에서 설명한 내용과 다소 차이가 있는 듯 합니다.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1149/#comment-631"&gt;Dae Ho Kim&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;좋은 의견 감사합니다. 하지만 xtab은 빈도표를 만드는 용도라서 글에서 설명한 내용과 다소 차이가 있는 듯 합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: Dae Ho Kim		</title>
+		<link>https://ds.sumeun.org/posts/1149/#comment-631</link>
+
+		<dc:creator>Dae Ho Kim</dc:creator>
+		<pubDate>Tue, 15 Sep 2020 17:51:03 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1149/#comment-631</guid>
+
+					<description>좋은 자료 감사합니다.
+
+그런데
+데이터 프레임을 행렬/배열로 변환하는데 오류가 있습니다.....
+
+df를 배열과 행렬로 변환할 때 xtabs() 함수르 하는 것이 좋을 것 같습니다.</description>
+			<ns3:encoded>&lt;p&gt;좋은 자료 감사합니다.&lt;/p&gt;
+&lt;p&gt;그런데&lt;br&gt;
+데이터 프레임을 행렬/배열로 변환하는데 오류가 있습니다&amp;#8230;..&lt;/p&gt;
+&lt;p&gt;df를 배열과 행렬로 변환할 때 xtabs() 함수르 하는 것이 좋을 것 같습니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

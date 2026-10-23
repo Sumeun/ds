@@ -1,0 +1,49 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 날짜와 시간 자료	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1111" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1111/</link>
+	<description>R</description>
+	<lastBuildDate>Sat, 02 Apr 2022 17:17:33 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/1111/#comment-947429</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sat, 02 Apr 2022 17:17:33 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947429</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1111#comment-947428&amp;quot;&amp;gt;Seongdeok&amp;lt;/a&amp;gt;의 응답.
+
+네. DST가 적용된 시간입니다. https://data.iana.org/time-zones/tz-link.html 의 자료를 쓴다고 하는데요. DST는 각 정부가 정하는 거라, 과거 정보는 정확하지만 미래에는 어떻게 될지 불확실하다고 합니다.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1111/#comment-947428"&gt;Seongdeok&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;네. DST가 적용된 시간입니다. &lt;a href="https://data.iana.org/time-zones/tz-link.html" rel="nofollow ugc"&gt;https://data.iana.org/time-zones/tz-link.html&lt;/a&gt; 의 자료를 쓴다고 하는데요. DST는 각 정부가 정하는 거라, 과거 정보는 정확하지만 미래에는 어떻게 될지 불확실하다고 합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: Seongdeok		</title>
+		<link>https://ds.sumeun.org/posts/1111/#comment-947428</link>
+
+		<dc:creator>Seongdeok</dc:creator>
+		<pubDate>Wed, 23 Mar 2022 01:06:27 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947428</guid>
+
+					<description>혹시 as.POSIXct 함수에서 timezone을 지정하게 되면 
+
+Daylight Saving Time 을 조정한 시간을 주게 되는 상황인가요?</description>
+			<ns3:encoded>&lt;p&gt;혹시 as.POSIXct 함수에서 timezone을 지정하게 되면 &lt;/p&gt;
+&lt;p&gt;Daylight Saving Time 을 조정한 시간을 주게 되는 상황인가요?&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

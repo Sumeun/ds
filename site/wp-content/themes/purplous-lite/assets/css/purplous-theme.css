@@ -1,0 +1,327 @@
+/*!
+Theme Name:
+Theme URI:
+Author: Codethemes
+Author URI:
+Description:
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others. */
+
+
+
+
+/* .container {
+    padding-left: 0px ;
+    padding-right: 0px ;
+} */
+
+
+/* Buttons */
+.btn-default {
+    color: #fff;
+    background: #ddbe86;
+    border-radius: 30px;
+    padding: 10px 26px;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+/* ................Header................... */
+
+
+
+/* Navigation */
+
+
+
+
+
+
+/* Page content */
+
+/* .page-content .col-md-8{
+    padding-left: 0;
+} */
+
+
+
+
+
+/* post-footer */
+
+
+
+/* Post small style */
+
+
+
+
+
+
+/* ..............Sidebar................. */
+/* About me */
+
+
+
+
+
+
+
+/* recent post */
+.widget ul.recent-post {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.widget ul.recent-post li {
+    padding: 20px 0 0 0;
+    float: left;
+    width: 100%;
+}
+.recent-post .recent-post-thumb img {
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+}
+.recent-post .item-details h3.recent-post-title {
+    font-size: 15px;
+    margin: 5px 0 0 0;
+}
+.recent-post .item-details {
+    position: relative;
+    margin-left: 90px;
+    top: 0px;
+}
+.recent-post .recent-post-thumb {
+    width: auto;
+    position: relative !important;
+    display: block;
+    float: left;
+    overflow: hidden;
+}
+.recent-post .item-details h3.recent-post-title a {
+    text-decoration: none;
+    color: #0a0a0a;
+}
+.recent-post .item-details span.recent-post-date a {
+    font-size: 12px;
+    color: #787171;
+}
+
+/* category */
+.widget ul.categories-wrap {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.widget .categories-wrap li {
+    padding: 17px 0 0 0;
+}
+.widget .categories-wrap .cat-item span.cat-name a {
+    color: #787171;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.widget .categories-wrap span.cat-count {
+    position: relative;
+    margin-right: 10px;
+    float: right;
+}
+.widget .categories-wrap .cat-count a {
+    color: #787171;
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+    text-decoration: none;
+}
+
+/* instagram */
+
+.instagram ul.instagram-wrap {
+    padding: 20px 0 0 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+}
+.instagram ul.instagram-wrap li {
+    display: inline-block;
+    margin-bottom: 11px;
+    width: 32.6%;
+}
+.instagram ul.instagram-wrap .instagram-image {
+    display: block;
+    margin-right: 11px;
+}
+.instagram ul.instagram-wrap .instagram-image img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+.instagram ul.instagram-wrap li:nth-child(8){
+    margin-bottom: 0;
+}
+.instagram ul.instagram-wrap li:nth-child(9){
+    margin-bottom: 0;
+}
+
+/* Subscribe */
+.subscribe-content-wrap p {
+    display: block;
+    padding: 20px 0;
+    margin: 0;
+}
+.subscribe-content-wrap .input-group input[type="text"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 15px;
+    line-height: 40px;
+    outline: none;
+}
+.subscribe-content-wrap .btn-subscribe {
+    width: 100%;
+    background: #ddbe86;
+    outline: none;
+    border-radius: 0;
+    border: 1px solid #ddbe86;
+    color: #fff;
+    line-height: 26px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+
+/* Top article section */
+
+
+
+/* Footer */
+
+
+.social-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 47px;
+}
+.social-nav li {
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    line-height: 28px;
+    text-align: center;
+    transition: background 0.3s linear;
+    -moz-transition: background 0.3s linear;
+    -webkit-transition: background 0.3s linear;
+    -o-transition: background 0.3s linear;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+.social-nav li a {
+    text-decoration: none;
+    color: #787171;
+    margin: 0;
+}
+.social-nav li a span{
+    font-size: 14px;
+}
+
+/* Footer recent post */
+section.footer-sec .widget ul.recent-post li:first-child {
+    padding-top: 0;
+}
+/* recent tweets */
+.widget ul.recent-tweets {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.recent-tweets li span {
+    font-size: 23px;
+    color: #000;
+    float: left;
+}
+.widget .recent-tweets p {
+    position: relative;
+    margin-left: 35px;
+}
+
+/* Bottom footer */
+section.bot-footer {
+    position: relative;
+    text-align: center;
+    background: #0a0a0a;
+    color: #fff;
+    padding: 20px 0;
+}
+.bot-footer p {
+    margin: 0;
+}
+.postbox .post-thumb img{
+    transform: scale(1,1);
+    transition: all 0.7s ease 0s;
+}
+.postbox .post-thumb:hover img{
+    transform: scale(1.2,1.2);
+}
+.postbox .post-thumb:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to left, rgba(210, 130, 19,0.7) , rgba(173, 110, 142, 0.7));
+    transform: translateY(-100%);
+    transition: all 0.30s ease 0s;
+}
+.postbox:hover .post-thumb:after{
+    transform: translateY(0);
+}
+
+/* .sd-social-icon .sd-content ul li[class*=share-] a {
+    background: transparent !important;
+    border: 1px solid #787171 !important;
+}
+.sd-social-icon .sd-content ul li[class*=share-].share-twitter a.sd-button {
+    color: #787171!important;
+    &:hover{
+        background: #00acee !important;
+        color: #fff !important;
+        border-color: #00acee !important;
+    }
+}
+.sd-social-icon .sd-content ul li[class*=share-].share-facebook a.sd-button {
+    color: #787171!important;
+    &:hover{
+        background: #3b5998 !important;
+        color: #fff !important;
+        border-color: #3b5998 !important;
+    }
+}
+.sd-social-icon .sd-content ul li[class*=share-].share-linkedin a.sd-button {
+
+    color: #787171!important;
+    &:hover{
+        background: #0077b5 !important;
+        color: #fff !important;
+        border-color: #0077b5 !important;
+    }
+}
+.sd-social-icon .sd-content ul li[class*=share-].share-google-plus-1 a.sd-button {
+    color: #787171!important;
+    &:hover{
+        background: #dd4b39 !important;
+        color: #fff !important;
+        border-color: #dd4b39 !important;
+    }
+} */

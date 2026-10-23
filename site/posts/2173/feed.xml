@@ -1,0 +1,31 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 분위수 손실(Quantile loss)에 대한 직관적 이해	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=2173" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/2173/</link>
+	<description>R</description>
+	<lastBuildDate>Sun, 05 Jul 2020 00:23:35 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/2173/#comment-608</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sun, 05 Jul 2020 00:23:35 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/2173/#comment-608</guid>
+
+					<description>구현했다.
+https://github.com/maxmarketit/Auto-PyTorch/blob/develop/examples/quantiles/Quantiles.ipynb</description>
+			<ns3:encoded>&lt;p&gt;구현했다.&lt;br&gt;
+&lt;a href="https://github.com/maxmarketit/Auto-PyTorch/blob/develop/examples/quantiles/Quantiles.ipynb" rel="nofollow ugc"&gt;https://github.com/maxmarketit/Auto-PyTorch/blob/develop/examples/quantiles/Quantiles.ipynb&lt;/a&gt;&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

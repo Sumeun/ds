@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <title>ggplot2: 들어가기 &#8211; 숨은원리 데이터사이언스</title>
+<style>
+#wpadminbar #wp-admin-bar-wsm_free_top_button .ab-icon:before {
+	content: "\f239";
+	color: #FF9800;
+	top: 3px;
+}
+</style>
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="preconnect" href="//www.google-analytics.com">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 피드" href="https://ds.sumeun.org/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » 댓글 피드" href="https://ds.sumeun.org/comments-feed.xml">
+<link rel="alternate" type="application/rss+xml" title="숨은원리 데이터사이언스 » ggplot2: 들어가기 댓글 피드" href="https://ds.sumeun.org/posts/970/feed.xml">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/ds.sumeun.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="https://ds.sumeun.org/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="metaslider-blocks-editor-css-css" href="https://ds.sumeun.org/wp-content/plugins/ml-slider/admin/assets/dist/css/editor-block.css" type="text/css" media="all" property="stylesheet">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="wsm-style-css" href="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-style-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-purplous-theme-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-theme.css" type="text/css" media="all">
+<link rel="stylesheet" id="purplous-lite-css-css" href="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/css/purplous-lite-style.css" type="text/css" media="all">
+<style id="purplous-lite-css-inline-css" type="text/css">
+
+						.site-header .nav-wrapper .navbar .navbar-brand a {
+							color: # !important;
+						}
+						.slick-next:hover, .slick-prev:hover {
+						  background:  !important;
+						}
+						.post-content-wrap .slick-next {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev {
+						  color: ;
+						}
+						.post-content-wrap .slick-prev:hover, .post-content-wrap .slick-next:hover {
+						  background:  !important;
+						}
+
+						.nav-links .page-numbers {
+						  color: ;
+						  border: 1px solid ;
+						}
+						.nav-links .page-numbers:hover {
+						  background: ;
+						}
+
+						.nav-links .page-numbers.current {
+						  background: ;
+						}
+						a {
+						  color: ;
+						}
+
+						a:hover, a:focus {
+						  color: ;
+						}
+
+						a:visited {
+						  color: ;
+						}
+						.btn-default, .comment-respond .comment-form .btn-default {
+						  background: ;
+						  border: 2px solid  !important;
+						}
+						.btn-default:hover, .comment-respond .comment-form .btn-default:hover, .btn-default:focus, .comment-respond .comment-form .btn-default:focus {
+						  background: ;
+						}
+						.search-form label .search-field:focus {
+						  border: 1px solid ;
+						}
+						.search-form .search-submit {
+						  background: ;
+						}
+						blockquote {
+						  border-left: 5px solid ;
+						}
+
+						.continue-read a:hover i {
+						  color:  !important;
+						}
+						section.footer-sec .widget .widget-title:after {
+						  background-color: ;
+						}
+						.sec-title span {
+						  background: ;
+						}
+						.post-cat a {
+						  background: ;
+						}
+						span.post-love:hover i, span.post-comment:hover i {
+						  color: ;
+						}
+						.navbar-default .navbar-nav > li > a:hover {
+						  color:  !important;
+						}
+						.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+						  background:  !important;
+						  border-bottom: 1px solid  !important;
+						}
+
+						.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+						  color: ;
+						}
+						section.post-large-slider .slide-details-box h2 a:hover, section.post-large-slider .slide-details-box h2 a:focus {
+						  color: ;
+						}
+						.post-large-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox .post-content h2 a:hover {
+						  color: ;
+						}
+						.post-large-slider .slick-next {
+						  color: ;
+						}
+						.post-large-slider .slick-prev {
+						  color: ;
+						}
+						.post-med-style .postbox .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.postbox.post-small .post-thumb .post-date {
+						  background: ;
+						}
+						.postbox.post-small .postbox .continue-read a:hover i {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content h2.article-title a:hover {
+						  color: ;
+						}
+						.top-article-item .top-article-content-wrap .top-article-content .btn-default {
+						  background: ;
+						}
+						.postbox .post-footer .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.post-date {
+						  background: ;
+						}
+						.postbox .continue-read a:hover i {
+						  color:  !important;
+						}
+						.blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .article-full-date i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap .post-like-count i:focus, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:hover, .blog-post-wrapper .post-content-wrap .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.blog-post-wrapper .post-content-wrap .post-content h2 a:hover, .blog-post-wrapper .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content h2 a:hover, .related-posts .related-item .post-content-wrap .post-content h2 a:focus {
+						  color: ;
+						}
+						.related-posts .related-item .post-content-wrap .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.related-posts .related-item .post-content-wrap .post-date {
+						  background: ;
+						}
+						.related-posts .slick-prev {
+						  background: ;
+						}
+						.related-posts .slick-next {
+						  background: ;
+						}
+						.related-posts .related-item:hover .slick-next:before, .related-posts .related-item:hover .slick-prev:before {
+						  color: ;
+						}
+
+						.content-list .post-content .metabar-wrap .article-full-date i:hover, .content-list .post-content .metabar-wrap .article-full-date i:focus, .content-list .post-content .metabar-wrap .post-like-count i:hover, .content-list .post-content .metabar-wrap .post-like-count i:focus, .content-list .post-content .metabar-wrap post-like-count i:hover, .content-list .post-content .metabar-wrap post-like-count i:focus {
+						  color: ;
+						}
+						.content-list .post-content .continue-read i {
+						  background: ;
+						  border: 2px solid ;
+						}
+						.widget ul li a:hover {
+						  color: ;
+						}
+						.widget ul li a:focus {
+						  color: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn {
+						  background: ;
+						}
+						.about-me .about-me-wrap .about-me-footer .about-me-btn-wrap .btn:before {
+						  border-color: transparent transparent  transparent;
+						}
+						.calendar_wrap table caption {
+						  background: ;
+						}
+						.jetpack_subscription_widget #subscribe-submit input {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.widget_mc4wp_form_widget .mc4wp-form-fields input[type='submit'] {
+						  background: ;
+						  border: 1px solid ;
+						}
+						.tagcloud a:hover {
+						  background: ;
+						  border: 1px solid ;
+						}
+						#header-search-wrap .search-form label .close {
+						    border: 1px solid ;
+						    color: ;
+						}
+
+			
+		
+</style>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/html5.js?ver=3.7.3' id='html5-js'></script>
+<![endif]-->
+
+ 
+<meta name="generator" content="WordPress 6.0.2">
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145165187-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-145165187-1');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W8DKCWB');</script>
+<!-- End Google Tag Manager -->	   
+    <!-- Wordpress Stats Manager -->
+    <script type="text/javascript">
+          var _wsm = _wsm || [];
+           _wsm.push(['trackPageView']);
+           _wsm.push(['enableLinkTracking']);
+           _wsm.push(['enableHeartBeatTimer']);
+          (function() {
+            var u="https://ds.sumeun.org/wp-content/plugins/wp-stats-manager/";
+            _wsm.push(['setUrlReferrer', ""]);
+            _wsm.push(['setTrackerUrl',"https://ds.sumeun.org/?wmcAction=wmcTrack"]);
+            _wsm.push(['setSiteId', "1"]);
+            _wsm.push(['setPageId', "970"]);
+            _wsm.push(['setWpUserId', "0"]);           
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/wsm_new.js'; s.parentNode.insertBefore(g,s);
+          })();
+    </script>
+    <!-- End Wordpress Stats Manager Code -->
+      <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+					.navbar-brand a,
+			.site-description {
+				color: #000000;
+			}
+				</style>
+		      <link rel="canonical" href="https://ds.sumeun.org/posts/970/"><meta name="robots" content="noindex,nofollow"></head>
+  <body class="post-template-default single single-post postid-970 single-format-standard container boxed-layout metaslider-plugin group-blog">
+
+<div class="boxed-layout container site-wrapper">
+  <div class="row">
+  <!-- Start of header section -->
+  <header class="site-header" role="banner">
+         <!-- End Top Header -->
+    <!-- Start of Naviation -->
+    <div class="nav-wrapper">
+      <div class="container">
+          <nav id="primary-nav" class="navbar navbar-default">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                                        <div class="navbar-brand">
+                          <a href="https://ds.sumeun.org/"><span>숨은원리 데이터사이언스</span></a>
+                                                        <p class="site-description">R&amp;Python</p>
+                          </div>                </div>
+
+                 <div id="navbar-collapse" class="collapse navbar-collapse"><ul id="menu-menu-1" class="nav navbar-nav navbar-right"><li id="menu-item-655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-655"><a title="숨은 DS" href="https://ds.sumeun.org/">숨은 DS</a></li>
+<li id="menu-item-657" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-657"><a title="도서소개" href="http://books.sumeun.org">도서소개</a></li>
+<li id="menu-item-658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-658"><a title="숨은수학" href="http://sumeun.org">숨은수학</a></li>
+<li class="menu-header-search"><a href="#" id="header-search-toggle"><i class="fa fa-search"></i></a></li></ul></div>            </nav>
+        </div>
+    </div>
+      <!-- End of Navigation -->
+    <div id="header-search-wrap" style="display:none">
+      <div class="search-box-wrap">
+	<div class="container">
+		<div class="row">
+			<p><a href="https://ds.sumeun.org/search/">검색</a></p>
+		</div>
+	</div>
+</div>    </div>
+
+  </header>
+  <!-- End of site header -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		<div class="inner-banner-wrap" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/01/cropped-abstract-abstract-art-abstract-background-1629236-e1548728734117.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="inner-banner-content">                            <h2>ggplot2: 들어가기</h2>
+                    </div></div></div></div><!-- Breadcrumb -->
+
+<!-- End of breadcrumb sec -->
+
+<!-- Start of single page content -->
+<section class="sec-content blog-page-content sidebar-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-post-wrapper bgwhite">
+                    <div class="post-content-wrap post-pad">
+                           
+<!-- if the post has thumbnail -->
+<div class="image-post" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_intro.png)">
+</div>
+
+                            <div class="metabar-wrap">
+                                <span class="post-cat"><a href="https://ds.sumeun.org/categories/165/">시각화</a></span>
+                                <span class="article-full-date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="https://ds.sumeun.org/archives/20190306/">3월 06, 2019</a></span>
+                                <span class="post-like-count"><i class="fa fa-comments" aria-hidden="true"></i><a href="https://ds.sumeun.org/posts/970/#respond">0 Comments</a></span>
+                            </div>
+                            <div class="post-content">
+                                <h2><a href="#">ggplot2: 들어가기</a></h2>
+                                <div class="post-desc">
+                                    <p><h1>ggplot2: 들어가기</h1>
+<ul>
+<li><code>package:ggplot2</code>의 <code>gg</code>는 <strong>G</strong>rammar of <strong>G</strong>raphics의 약자이다. <code>ggplot2</code>는 Wilkinson 등(2005의 The grammar of Graphics라는 책의 내용을 바탕으로 Wickham이 만든 패키지이다. Wickham은 ggplot2를 소개하기 위해 책 <a href="https://books.google.co.kr/books?id=XgFkDAAAQBAJ&amp;printsec=frontcover&amp;dq=ggplot2&amp;hl=ko&amp;sa=X&amp;ved=0ahUKEwi9kpGx1M7fAhVLEHAKHQjkDvYQ6AEILjAB#v=onepage&amp;q=ggplot2&amp;f=false">ggplot2</a>를 쓰기도 했다.</li>
+<li>시각화의 원리라고 할 수 있는 Grammar of Graphics는 자료 시각화의 핵심을 다음의 기본 3 요소로 정리하였다.
+<ul>
+<li>data : 무엇을 시각화할 것인가?</li>
+<li>geom : 무엇으로 시각화할 것인가? 예) 점, 선, 막대 등</li>
+<li>aesthetics : 어떤 시각적 특성(visual attributes)를 사용할 것인가?
+<ul>
+<li>위치(<code>x</code>, <code>y</code>), 크기(<code>size</code>), 모양(<code>shape</code>), 색깔(<code>col</code>), 농도(<code>alpha</code>) 등</li>
+<li>예를 들어 체중(data)을 점(geom)으로 시각화한다고 해보자. 체중은 위치로 나타낼 수도 있고, 크기로 나타낼 수도 있고, 농도로 나타낼 수도 있다. 여기서 체중과 같은 연속적 자료를 나타내기 적합한 시각적 특성이 있고, 그렇지 않은 시각적 특성이 있음을 유의하자. 예를 들어 체중을 모양으로 나타내기는 힘들 것이다.</li>
+<li>아래의 표는 측정 척도의 종류와 변환 가능한 시각적 특성을 나타낸다. 측정 척도의 종류에 맞는 시각적 특성을 선택하지 않을 경우 자료에 담기지 않은 정보를 시각화하게 될 우려가 있다.(<a href="http://livingqlikview.com/the-9-worst-data-visualizations-ever-created">참고</a>)</li>
+<li>중요한 정보는 정확하게 인식할 수 있는 시각적 특성을 활용할 필요가 있다. 시각적 특성 인식의 정확성은 다음과 같다. 위치 &gt; 길이 &gt; 각도 &gt; 면적 &gt; 부피 &gt; 색깔 &gt; 밝기. <a href="https://hci.stanford.edu/courses/cs448b/f09/lectures/CS448B-20091005-Perception.pdf">참고</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>측정 척도</th>
+<th>특징</th>
+<th>가능한 연산</th>
+<th>예</th>
+<th>변환 가능한 시각적 특성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>명목(Nominal)</td>
+<td></td>
+<td><code>==</code>, <code>!=</code></td>
+<td>사람이름, 나라이름</td>
+<td>색깔, 모양</td>
+</tr>
+<tr>
+<td>서열(Ordianl)</td>
+<td></td>
+<td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code></td>
+<td>(상,중,하)</td>
+<td></td>
+</tr>
+<tr>
+<td>간격(Interval)</td>
+<td>임의적인 0</td>
+<td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>+</code>, <code>-</code></td>
+<td>날짜, 위치, 온도</td>
+<td>위치, 크기, 농도</td>
+</tr>
+<tr>
+<td>비율(Ratio)</td>
+<td></td>
+<td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></td>
+<td>체중, 절대온도</td>
+<td>위치, 크기, 농도</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>여기서는 시각화 원리의 기본 3요소에 부수적 요인을 포함하여 다음의 7요소로 하였다.
+<ul>
+<li><strong>데이터(Data)</strong></li>
+<li><strong>기하학적 대상(Geoms)</strong></li>
+<li><strong>시각적 맵핑(Aesthetic mapping)</strong></li>
+<li>보조선(Auxillary lines)</li>
+<li>좌표계(Coordinate System)</li>
+<li>범례(Legends)</li>
+<li>제목, 부제목, 설명, 테마(Title, subtitle, caption and themes)</li>
+</ul>
+</li>
+</ul>
+<h3>시리즈 목차</h3>
+<ul>
+<li>들어가기 &amp; 시각적 맵핑 기본 소개</li>
+<li>기하학적 대상(Geoms)</li>
+<li>보조선(Auxillary lines)</li>
+<li>좌표계(Coordinate System)</li>
+<li>범례(Legends)</li>
+<li>제목, 부제목, 설명, 테마(Title, subtitle, caption and themes)</li>
+<li>총정리</li>
+</ul>
+<h2>시각적 맵핑(Aesthetic mapping)</h2>
+<ul>
+<li>여기서는 <code>ggplot2</code> 패키지의 데이터 <code>mpg</code>를 활용한다. 이 데이터는 미국에서 1999년에서 2008년까지 38종의 대중적인 자동차에 대해 연비 데이터를 가지고 있다. <code>cty</code> 컬럼은 city miles per gallon(도심에서 1 갤런 당 주행거리(마일))을 나타내고, <code>hwy</code> 컬럼은 highway miles per gallon(고속도록에서 1 갤런 당 주행거리(마일))을 나타낸다.</li>
+</ul>
+<pre><code class="r">data(mpg, package='ggplot2')
+</code></pre>
+<ul>
+<li>예를 들어 <code>mpg</code>의 <code>displ</code>(engine displacement=배기량)을 x-위치로, <code>hwy</code>을 y-위치로 변환해서 점(point)으로 시각화하고자 한다면 다음과 같이 쓸 수 있다.</li>
+</ul>
+<pre><code class="r">ggplot(mpg, aes(x=displ, y=hwy)) + geom_point()
+</code></pre>
+<p><img style="display: block; margin: auto;" title="plot of chunk unnamed-chunk-2" src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2" width="50%"></p>
+<ul>
+<li>기본적인 산포도를 그리기 위해서는 다음과 같은 형식을 따른다. 여기서 <code>data=</code>는 시각화에 사용할 데이터를 결정하고, <code>aes()</code>는 Aesthetic mapping, 시각적 맵핑을 의미한다. <code>aes()</code> 안의 <code>x=</code>는 x-위치, <code>y=</code>는 y-위치, <code>col=</code>는 색깔, <code>shape=</code>은 모양을 나타내고, 데이터의 어떤 컬럼을 각 시각적 특성으로 나타낼 것인지를 결정한다. 마지막으로 <code>geom_point()</code>는 앞에서 결정한 시각적 특성을 점으로 시각화하겠다는 것을 나타낸다.</li>
+</ul>
+<pre><code class="r">ggplot(data= , aes(x=  , y=   , col=  , size=  , shape=   )) + geom_point()
+</code></pre>
+<ul>
+<li>두 개 이상의 기하학적 대상으로 시각화하는 경우(점과 선)</li>
+</ul>
+<pre><code class="r">ggplot(data, aes(x=  , y=   , col=  , size=  , shape=   )) + 
+  geom_point() + 
+  geom_line()  
+</code></pre>
+<ul>
+<li>점, 선, 그리고 데이터를 가장 잘 나타내는 선(<code>geom_smooth</code>)으로 데이터 시각화</li>
+</ul>
+<pre><code class="r">ggplot(data, aes(x=  , y=   , col=  , size=  , shape=   )) + 
+  geom_point() + 
+  geom_line() +
+  geom_smooth(method='lm/glm/gam/loess/MASS::rlm', span=  , formula=  )
+</code></pre>
+<ul>
+<li>만약 x-위치를 결정하는 컬럼이 범주 데이터라면 한 위치에 여러 점이 찍힐 수 있다. 이럴 때에는 <code>geom_jitter()</code>을 사용하여 위치를 살짝 변경하거나, <code>geom_boxplot()</code> 또는 <code>geom_violin()</code>을 사용하여 분포로 표시할 수도 있다.</li>
+</ul>
+<pre><code class="r">ggplot(mpg, aes(x=class, y=cty)) + geom_point() + 
+  labs(title='자동차 연비(1999-2008)', caption='점이 겹친다')
+ggplot(mpg, aes(x=class, y=cty)) + geom_jitter() + 
+  labs(title='자동차 연비(1999-2008)', caption='geom_jitter()')
+ggplot(mpg, aes(x=class, y=cty)) + geom_boxplot() + 
+  labs(title='자동차 연비(1999-2008)', caption='geom_boxplot()')
+ggplot(mpg, aes(x=class, y=cty)) + geom_violin() + 
+  labs(title='자동차 연비(1999-2008)', caption='geom_violin()')
+</code></pre>
+<ul>
+<li>연속 변수의 분포를 히스토그램(histograms)과 빈도폴리곤(frequency polygons)으로 나타내기
+<ul>
+<li><code>bins</code> : 구획의 갯수</li>
+<li><code>binwidth</code> : 한 구획의 길이점</li>
+<li><code>breaks</code> : 구획의 시작점과 끝점</li>
+</ul>
+</li>
+</ul>
+<pre><code class="r">ggplot(data = , aes(x= )) + geom_histogram(bins=  , binwidth=  , breaks=  )
+ggplot(data = , aes(x= )) + geom_freqpoly(bins=  , binwidth=  , breaks=  )  
+</code></pre>
+<pre><code class="r">ggplot(data = mpg, aes(x=cty)) + geom_histogram(bins= 30)
+ggplot(data = mpg, aes(x=cty)) + geom_freqpoly(bins= 30)
+</code></pre>
+<p><img title="plot of chunk unnamed-chunk-9" src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-9" width="50%"><img title="plot of chunk unnamed-chunk-9" src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-9" width="50%"></p>
+<pre><code class="r">ggplot(data = mpg, aes(x=cty)) + geom_histogram(binwidth= 5)
+ggplot(data = mpg, aes(x=cty)) + geom_freqpoly(binwidth= 5)  
+</code></pre>
+<p><img title="plot of chunk unnamed-chunk-10" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACQCAMAAABd9VXeAAAAvVBMVEUAAAAAAGYAOpAAZrYzMzM6AAA6ADo6AGY6OmY6OpA6kNtNTU1NTW5NTY5NbqtNjshZWVlmAABmADpmAGZmOpBmtv9uTU1uTY5ujshuq+SOTU2OTY6ObquOjsiOq+SOyP+QOgCQOjqQZgCQ2/+rbk2rbo6r5P+2ZgC2/9u2///Ijk3Ijm7Ijo7IyP/I///bkDrb25Db///kq27kq47k///r6+v/tmb/yI7/25D/5Kv//7b//8j//9v//+T////3b6fbAAAACXBIWXMAAAsSAAALEgHS3X78AAADZElEQVR4nO2c62KaMBSAqXXrJlu7dle7bribm9rh6pwXsHn/x1oIXkEkJwRCDuf7gW0lhq8nSZtwiMOQ4pi+gLIgMdtovNi/Ixz9ofl3Gik28djjd/cqPiASG7oem3fZ0BMHPGLhbx6xv33uJg6MtdttyRZbHzKb4ihyGsViTCJirzKpT8SE2H7EUIlB+5g1YtBR0Q6xNCRGYiRGYiTWCLFcssV01QCj8REjMQgkRmIkRmIkZlxs4rpul8+gX/SRiXHu/fATvoixaDln+c69nMqtK6qI5X5oAU6I3fvC7bP4BlHElh/ES/F1xbqJRUbR+mLhdcW6iXEpPeuKdRM7hMRIjMRIjMRwiAWvB+uDGipiqnXJsBZb9RxB6yHjPMsjlo29YmwcRewsy85eseDmG86I4W2KP9/iFAuukfaxHOwVwx2xWWf7pVhSRDOD3hsaxZKillyqOogtLrZiYkkRkK+oIpb7oQVI9LFdUxRLilryFesQsUM05SuaFotCtjcoiiVFDH1s1eP/ecx20xZ9+YqGxXImmvaKJSOGRizZx/CIncZiMd4MF08zJ5v2iq2+cKnFc3x9rKmjYi4qYqp1yUCjIonZKaZy+SRGYiRGYhjEwlv3pZ/KV0QgNvHYpJvKV0Qgxpl7qXxFvWISXUCZE2Lh3TSVr6hXzEzEwo9+9HK4rohAbPneP5KviEBsuM7iPlxXRCCWgMRIjMRIjMRKFytHGSa2piox2FUdo/ERIzESIzESIzESqxI9YiXPoPUCEUvlUpm++FNAxNDtr7gBkK9Yn3dkxAD5ivV5R0YM2R6mO3aj4jFUOl5VZQptuEViBsrQXtzWQWK2oSy22XFXns3tekiZRJI8AFWx7T7k8kXE7XpgGX76qA8sE6MottuHHFRs7oHLPP7w4fWwYk1xBK0wvJtCy4S3V/B6IoqIQX+T0e16hSh3K48YsO2L2/XwfjmH9suYCkfFxO16Kfjpl9NKR8XaQ2K2QWK2QWL6Cd4oP0gjgUGx7Ge6dGBGbPHEOfvVc1pfO4zNzkupwohYtI3N+JxHbHExEI93lYARsbgR8iO3KqtBmhXj7XDcyT1dCWNNcdb6w8WCm2fKe5edxtzgMQiuWw+8q5VUheE/0OJZ3lIwKzZzygqY6YiVB4nZBonZxn+9Jpjuhfe1AQAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-10" width="50%"><img title="plot of chunk unnamed-chunk-10" src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-10" width="50%"></p>
+<pre><code class="r">ggplot(data = mpg, aes(x=cty)) + geom_histogram(breaks= c(0,5,10,15:25,45))
+ggplot(data = mpg, aes(x=cty)) + geom_freqpoly(breaks= c(0,5,10,15:25,45))  
+</code></pre>
+<p><img title="plot of chunk unnamed-chunk-11" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACQCAMAAABd9VXeAAAAxlBMVEUAAAAAAGYAOpAAZrYzMzM6AAA6ADo6AGY6OmY6OpA6kNtNTU1NTW5NTY5NbqtNjshZWVlmAABmADpmAGZmOpBmtv9uTU1uTY5ubqtujshuq6tuq+SOTU2OTY6ObquOjsiOq+SOyP+QOgCQOjqQZgCQ2/+rbk2rbo6r5P+2ZgC2/9u2///Ijk3Ijm7Ijo7IyP/I///bkDrb25Db///kq27kq47k/8jk///r6+v/tmb/yI7/25D/5Kv//7b//8j//9v//+T///+lnys8AAAACXBIWXMAAAsSAAALEgHS3X78AAADpklEQVR4nO2cfX+aMBCAqXXrJpu13Vs3um64rXNTO1zpQFRqvv+XWkhRUYEQDCYc9/xhaXoSnh6JkN+hQYBiqD6AqkCxutFkMT9mvZHZUF2LyJtQTEpvB7agmI9iQmK9PVAsvwXFfBQTIkVMFU3OmEBvKCbagmI+iqFYBIqJtqCY30gx1zRNa3lrvhoAE6PcOeEXeBkjJLDI/L3Z9Qhpt9v8k3VNipgq0sXuHOb2lf0i8G/UPWPzj+wHdQMmFhm5NglsaGJUitBZ8ZxAE9tGoDcUE21BMR/FUCwCxURbUMwXEBMgRUwVTc6YQG8oJtqCYv6e2OLNMH4BJfbYNxite2BiGcmCIEYmUcZOoJ2KNGOXP2BmDO6p+OvdaostAoNZ81hcrMcYWwQOLDKyIYglYIvADwO2Clf/leBExtgi8HgAacF02ok3AusBlNjT1MgWgWGNsdlZJMYmRGCzYofsI9CbjmLZCPSmpViUsrRLxbqLPfbplccU6m0LvBtNwBkDO8ayEehNSzF6Gs6eZ91sFiRFTBWbMfaNSs1ewhtjOCvm7VtHMZwV8/aNYqItKOajGIpFaC4WXpuvHYg1wa5NXEtuTXC0qV6MEthya4ITm0ciXSy88eTWBGuSsfCzE/2QuBKcENtsHV1s/sGRXROsh9goflJC4kqwHmI7yBKLjYCIxToohmI6iG0pohiKodgB8MTiGKl9ZnDcjCUSp0HGUAzFyr2LB4o1V6z0ISR2AEus19v6rJbjhWIVi8UcX6zAmoekA5JFQbEC9YqqTXYoKFaqJlgjMsVK1QRX1iLxkqpUTXAdxErVBNdBbDMrrigw2IqMR0kxvBCBO2gUO0qMRLF6gWJ1o/Fi+7P/Hq7Ni1rVWeTF7Dx/ks78yuOFFBXbfF5nMTJtXhSrs+DE0D+PB5yY5W3X4x1QUbHNFVYG4R962NwoEtjcmOVPhxPjfrrxeLspKjbmHnKUD25UeOPxYsLrc85+5lf/+LuRljEmxouK6iwKZNXKj2FfkygrY/wxxgoo8qNYnQV/HAa8cRgX2EgZY1JmxZ06i6yOutwpj4rJmhVrB4rVDRSrGygmm8XblMdoJKJMLPWJLomoEJs9M05+943W9w4h09OKOlEgFn2JzeSUZmx2NmQPd1WCArGnk5C+UqvqTkiVYvQ8nKR9uYEUFJ2K09ZfKra4fJH1DUQHo2ryGC4uWvd0qFXWidIPaPYkb0WoFJsa1SUML6lqB4rVDbBi/wEuioh6BXHWtQAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-11" width="50%"><img title="plot of chunk unnamed-chunk-11" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACQCAMAAABd9VXeAAAAwFBMVEUAAAAAAGYAOpAAZrYzMzM6AAA6ADo6AGY6OmY6OpA6kNtNTU1NTW5NTY5NbqtNjshmAABmADpmAGZmOpBmtv9uTU1uTY5ubqtujshuq6tuq+SOTU2OTY6ObquOjk2OjsiOq+SOyP+QOgCQOjqQZgCQ2/+rbk2r5P+2ZgC2/9u2///Ijk3Ijm7Ijo7I///bkDrb25Db///kq27kq47k/8jk///r6+v/tmb/yI7/25D/5Kv//7b//8j//9v//+T///9pSbRWAAAACXBIWXMAAAsSAAALEgHS3X78AAAEYklEQVR4nO2cDVvTMBDHj4GiTBF8Q6eoQwXlZchwW/cC+f7fijRdadcmba5LSJrd/+HZuiPt5bdL0izPpcACFbiugC0RWNu0yWDjsmQ2b8wE5r6qODOBua8qzmwNDIxXFWcmMKwXArNk1gZDCvyYzJiPGLQmYkgvUGqLBGbGTGBILwRGYEizJTAo36EJzIx5A8GG3W63d3/afXUWGBjX1WDxPbyIMRb12OxDd3/E2M7OTn1jzQvU39aTSl6Hq4Fg+yE+4L4+GJdC5k/EZp/EG2dDgwkmb8FiomGfRf3QwDgU46PiGxYa2KpQXgiMwNBmAsN4SZCCBSuQEZgZM4FhBFau2kSbHDGMFwKzaLYBlgL5BDZ/e758CQrs7gSEOjeBgSmCFQIYu44jtmWmKa6SOY7Y4W9zEfMKzGRT9AmM/XmfHolF4CZrHiA5MlFVnLkYsYPHPiYWgaMeu8CuUnkJlpNYBL49E6twqJVgkBy5kixiYhH48gy/YOpvxCZ7y4OodxsUWDI0ikXgsPrYdDcGEwNiYKPiHitL34uXYGppe4GcOU/mGCwOmWyq2HawuxM+85is9bPFTzADPzT9BAs2YsH2MbW0vXgKxpvh9Lnqx6aOQPnBhbI+9pNDTV+u0cdg7GXE1h8VPQVbf1RcAcuTtX1U9BVMKV0vBGbZTGCaXmBMYHbNGwi2+NJ9PUDnBLcAbNhnwx46J1gGBlYJFObKphj10TnBIPnocCosd704HqFzggsRS5KDwWZoFOYKsMXXQfyGWgmGohket7kwKBc3QaAwq8FmHwf4nOA2gF0sd0qgVoLlYInZF7CC9C5XAVbejmqGQGEmML3LlcCWPFlXM06gMBOY1uVkN6xgwdL/hAoGjMCMmLXBtFRxHXAyGbYfsbG3EdO6XPU0nsBMmI2C1f1UlpFlpeN8hQYECrMnYCkUpAdBgEFhfgxQtFQRKMxPD1aGkJaW0zkBS+tRDZavbVz1yqqW6ByAZRWocA65KaN2Z4Ic3pOD5b/X6hgkf1kgdKua0BkD01vzQDaXleKo4U81rODBdPIVi65s3XJTs4QOD6bICYa86puxBWm6VZZqkhPsh7kGrElOsB/mGrAmOcF+mGvAslFRItxTWZyUbjYAEJi70s6z1GyJwNomAstUeSMoKM2s0D1hdjTSLs0L7qtLNwDLbt31EpkV+ifcn+6PtEvH1+4rSzcAyyZbWor6+icMPx+PtEtffcv275XVAOwSBbY4HmmfMDv6jyjNIxX1lKVtRyzOrNA+QTz/UD9ig5X9ewVZ7mMiswJxQpI5o93HIqN9DDMqFjIrasXB3I2K7RCBtU0E1jYRmGnN30m20RiUMzDpji6DcgE2fQZbf0+g82uPscm2JScOwOKH2Fxv84hNd8/F5i4rcgCWNEL+yqnsNUiXYLwdXssebmBEjpripPOPg80PX6ieQLS2XA0e5/ODzg3vatacOL1Bi528luQSbAL2AkZTqtaJwNqmYMEeAFjPI2nWhNXkAAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-11" width="50%"></p>
+<ul>
+<li>범주 변수의 분포를 막대그림(bar chart)으로 나타내기</li>
+</ul>
+<pre><code class="r">ggplot(data=mpg, aes(x=class)) + geom_bar(col='blue', fill='red')
+#ggplot(data=mpg, aes(x=class)) + geom_bar(aes(col='blue', fill='red')) 라고 쓰지 않도록 조심하자.
+#aes의 존재 유무에 따른 차이는 나중에 설명된다. 
+</code></pre>
+<p><img title="plot of chunk unnamed-chunk-12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACQCAMAAABd9VXeAAABqlBMVEUAAAAAADoAAGYAAP8AOpAAZmYAZrYzMzM6AAA6ADo6AGY6OpA6kNtNTU1NTVlNTWlNTW5NTXlNTYNNTY5NWWRNY25NZG9NZHlNZKtNaatNbqtNbrVNb2RNb7VNeXlNjshTTU1Tf81ZZG5ZjuReU01eXk1eg45eneRkTW5mAABmADpmAGZmtv9pXl5pbmNpf15pf2lpq7Vpq+RuTU1uTY5uY1luY25uZFlubm5ubqtueWRug45ujoNujo5ujshunZ1uq6tuq7Vuq+RvTU15TU15eU2DTU2Djm6DyMiOTU2OTY6OY26Obo6ObquOeWSOjk2Ojo6Ooo6OyMiOyOSOyP+QOgCQOjqQ2/+dnW6rY02rY1mrbk2rbo6rtY6r5Mir5P+1b021jk21q261//+2ZgC2///IeU3IeVnIjk3IjlnIjm7Ijo7Iq27IyI7I/8jI///Nq27bkDrbtmbb25Db/7bb///kjlnkq27kq47ktY7kyI7k5P/k/8jk///r6+v/AAD/omT/tYP/tmb/yIP/yI7/25D/5Kv/5OT//7X//7b//8j//9v//+T///+zlQfzAAAACXBIWXMAAAsSAAALEgHS3X78AAAFd0lEQVR4nO2cjV8bNRjHO5xFhWgVX3HjnKgTQa3DlzErbjd1oqty8ybq1PoCs06xY3PchnbT7nqO0vzPPkla1pYLdwf3mj2/D6Rt7p4k33uSXHNJk6OKKpd0AaISgmVN9zLYzT4NfPQ+ELsBgiVczsAGCJZwOQMbZBzsPnfd3A2sfYGM1yHQUg12y027g1km/Nk6rZqKgf32OXjseoUCGx0eHvaurElIArZ93A0MPGXrlwQYVcpjNWC6riAYtDFbyTambK84oFjKGdgAwRAsmnIGNkAwBIumnIENEAzBoilnYIMQwNKpvQxbBhSLAwIbYFVEsGjKGdggYjD5Q7Csg0mTRzAEQzAEQ7D0gzlzPp8rZgysfWG87u9JsCx5HzfuJMCsk2Wfsy2ywYPXoGL/2suwxZn7u1z3N9si9Zj0esbusc3plU5ALUKIz9mW1INtnc9xHbzGP7bK+21jaQHrOqsjANtfr5giMLrGPDbUQ9dVxsE2X1ly6UdUAJt2cZYKYHR5JpVgslu9f49NpbONBc9h0GNSZRwsYY9Jv1yG47HGaFIekxqEA+baNaoA1nxIPTDRxlStioEV2nhMarDXHO6CMZe5dYpZ99jWefjm0egMW1QC6xloqgWmrMeUbWNyZR0MqmHzQbfBZsbBtr4EqOaIem0Me8WsgWGvmGGw1gIZq8X8wDQWMPajHT3mR9xxVUXbjHkaKcJhS19ljH0aKR6PtT6p0ZinkWIBc96sUapiG6uyiT8Ve8UBIRiCIRiCIRiCIZjqYIHnyiME202BBxXRG9CEPBa5QVJVEcEQDMEQTAGw8BYEpQ0suXIiWNcAwRAsmnKGDtb3wFQlsL5H3CqB9U0jSe5j8gMJGlAPsLTv/SaP9+cx9cDSvvebPN4D7G6v2C/pzK3sQEIGgR/mIFjCBpndM8dLCJY13btgfGHVYOR/de+U/z1G+eolps6tvvd9b5Qkfscp7nIvjCcYX1g1ENcqe4OJczpgARQYTFIYP1XRNrnbIBivO7OkULGIduc0Kfx8+wWIsd+bHVuFw+y1BocffmmWEDL2EzkMBseFqa1XCXmKx8N7W7yw3yR/yywK352AmFW2tATiTy2Qx1ZLunXGOPGcWIXHg50ZFb5fYGZFcsgUSQUFAyu48O2/2C67OvjdYumsT9J/nl0/zJbJjdctje1xzTZegMPrT28UNfvQuU+PgUHV5KZw7dvfPHP5jGYXTQDTxJbYlyrOPKtIlvEkHDDYgjtbs19/udK+wcGe0OySiIQ6szMjOENv35g4Vb5siqQCgrGFVXDZCxW2YEeDa0cY2A/swy9HqTPPctZFSZ15dnjSMuAzgMEAwTK5KfviaTCvwdW19e7pts6owcIo6c5rhs7rLbgTXMjBIPbdeR4JKblkdO4jljQHs/XBSu8JxhdWsQz1bhbVjsecuV+PiIWNIj9NbHR9cRKus/Pqxx2PcVMwZv+GKFe3eK2zZ2s8QWNC73jMmduAKrpRKunVD42Jjsecud91l4yqLKn3336j/KMpkgoGxhdWWUS0McLaxyI0Bq31ASFHb79I+MYfIr/jrP4T8tkRepEUvvria9HGuKl9EmwfYW2i2ANGqxr30GLpHWiTQF1lHigS8ugfcObzxlvMlEeKNjaQ0WKRORcSfdwUSQUD8y2fnbN/U1mC/jJCsKwJwbImBAtRrr95ClsIFo6aD+SGVgBsLZfL8x2IRjth6IoXjO1fs5ZvjlwdubY5vdLI0+0w9KziBROVEELw3IElCPLcifkIskoG7MrQCt98CKBmumHIir8qNg5eHbmSp40DS2vgqeVREYaeVTKdx59TufunZugy37pseXsDszCFN+isCcGyJgTLmpQF+x/HCtly87wNpgAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-12" width="50%"></p>
+<ul>
+<li>다른 종류의 막대 그림 : 만약 분포 또는 빈도가 이미 하나의 변수(아래에서 <code>df$n</code>)로 저장되어 있다면 <code>stat='identity'</code>을 사용한다.</li>
+</ul>
+<pre><code class="r">data(mpg, package='ggplot2')
+dat &lt;- table(mpg$manufacturer)
+df &lt;- as.data.frame(dat)
+colnames(df) = c('name', 'n')
+print(head(df))
+</code></pre>
+<pre>##        name  n
+## 1      audi 18
+## 2 chevrolet 19
+## 3     dodge 37
+## 4      ford 25
+## 5     honda  9
+## 6   hyundai 14
+</pre>
+<pre><code class="r">ggplot(df, aes(x=name, y=n)) + geom_bar(stat='identity')
+</code></pre>
+<p><img title="plot of chunk unnamed-chunk-13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACQCAIAAADlSTK7AAAACXBIWXMAAAsSAAALEgHS3X78AAAPVklEQVR4nO3db0wbZ54H8K+b4KbGF3D441xnvOdhQ9QjVpqjCRZOs9XcH62S20w5nYlOSOvoVpuAq1UILxadOpXOL+q+yEpl6akdmkYrhUq+FbAr+qw2bKS7WD0aqNMcm1ydXBpoTM8zuRISAblAtiZZ3wsTQhIggI15Cr/PK2w/88yM/eXxeJ5nnjElk0kQstKeWekNIASgIBJOUBAJFyiIhAvrs7OamzdvPvlkYWHhrM8vvEDWKsnaitbI1hYWFj72DLWIhAsURMIFCiLhAgWRcCFLP1Yy6MiRI/O8+s4772RtS0gGUYtIuEBBJFygIBIuUBAJF0zfumFgNTU187waCoWytiUkg771XXxPXdEa6TRbkRVlsIvv23f6hqyg+c+dIY3TZ3SMSLhAQSRcoCASLlAQCRcoiIQLFETCBQoi4QIFkXAhnSAaHfWKoihKU2S2h4QsQhpBjLR179EYYypCHcbMh0GKIlmsNLr43A3NbgBGfNDpEGD0Yk+lAMDtkUNxA24BwM6dO1Nlz58/P2sdT/Y5LrbAQsovpJKMlOGnkmyu6KnlF1JJmn3NkSYlGJZVBkTig6h8/OXp/NGgh2xWks0VPWaB73/Gr2t2NzDGPD31HYbocKZXFVnTlh5Eo6N+5rGg4EB3rwEg0hN2OoT0t4ysKUv/aha8jY56RQkCkk9rFoADe0J+pRWQVebO4BaSNSGdY0TB28y8cz4kZBHohDbhAo3QJhm2tBkQqEUkXKAgEi5QEAkXKIiEC1n6sTJXb+Ny9DXPfwU+5rgIn5/e29XX17yQAqv/AvuFlOGn93b19TXPWoDm0CacoiASLlAQCRcoiIQLFETCBQoi4QIFkXCBgki4QEEkXEgniJEmRZlxST1dYE+WLp2Lp0JQGWNM8w2GOgy6wJ6kI52Lp5obUn84nE4IRpzfC+wXUoafYQQ06GFpIk0hx4Fm6D2cXmC/kDL8DCOgQQ+zGGjebXpEbdfjRSJNSo+n2SsAdIE9Scc8LWLXz47i5/3J+i1zvG501PvjNawhdRFz6gJ7r1eI9ISdnoalbQ3deXTNmv+r2bV1rhQCkbbWGBBUwkhdYu+lC+zJ0s0TxL1Vh/d1dr2/d+/sL7sbGHu04Zv/Avvlu1cMWQXmOUbs6jyO4/vmP0YkJDPmaxHfTybfz96WkDWNuvgIFyiIhAsURMIFCiLhAgWRcGGFZ3pYVJllHQ3AzxbSoIdltLSxCMtRyaxl+BlGQIMeCFlJNGPs7NZmh+QKDjqhFpFwgVrE1WAVtN/UIhIuUBAJFyiIhAsURMIFCiLhQrpBnHGPUprpgSxdWkGMNCn+1tiDBzTTA1m6dM4jRuBhmqO+DQCwtJkeZuJ/0ENGKuFnLELWZtFYSIF0guh2u2HEpx7o8UXP9PAYzgc9ZKQSfsYiZG0WjVkLLOOgB5rpgaQjY118GZnpIWtoSgneZK6v2U0zPZClSzeI05PTAcL8Mz2sPtSsZhCd0CZcoCASLlAQCRcoiIQLFETCBQoi4QIFkXCBZnrIdiUrNeihpqZmngKhUCgjK6WZHrhb0fLd0WP5JmDIQpm5Bj3Q5aTLKyO9L2uhC4eOEQkXKIiEC/TVvMJWwSQNGUEtIuECBZFwgYJIuEBBJFygIBIuZDCINNMDWbrMBZFmeiBpMCWTyYxUZHQ09VY2eAUg0lQfP9DsXfRMD2Qty9gJ7SXM9EA3jFimSrK2oiVXQjM9EE5lLIipmR4ARHrCToeQqWrJWpHMGL39yP79+/fvf/vTBS7w0ksvpVkga5VkbUVrc2uTyWQGBz2suZkeSAbRCW3ChYydviEkHdQiEi5QEAkXKIiEC1kPYqSpvsN48ump22TM9uqMO2jMUs/DV42OekWp/0WfMVuxxyv8cPbNmG+NKR8e8gb6Fr1t00/OsfvzmWeRJdQ2k2EYT1aSeph66alb9eQGPHXBOXDWIrobUp3US2D0djtV1XnxWma36HFbywSX/Sll5tmLNHYw07VFmo71zlHJxamXllzn4i3/r2bjFwf9nSMAYJW1UMOZQ97zfybEzsVgdamht9wfHlLahwCYbRU/PfkGXq95b8vPTv5IgNFR/25fLBoFzGZzIrFbZa90eQN9CcBcHugIlEderwlG7wBW4A4AscSiX5uACUjCVecbb5m6/0uxJBZP3IgOJWCvZj++qQTDqa3Kl8S/cOaEww/uEgO7T/vAqzelCliL5b3bBifz0NkZAwDJV+dsbUktuiGn/J9+dehXf+//fBIA1ot1v34Ph5SWIQCAuULreOOM7+/aR+8DmNpHAECkqb5nHJcux26UqSqCwXMAAGuBvGvjjM0A7NUs8Fz9g/vXmMsDP807+dF/GV+MJibv45FiH/zww0PeL/0dgck3lVR1G3Ks6yfv3HlQpkKWzs2oeuqteoSsssIT3i/9HYeuveZv1QHAujEvcXss8cQHOfUWw2xDYofq6Q3+dxV77doP3z43dhcwQ/wHTcU/+1tvAACkYsRuAIBUVYWLGxubvXpTffxAI45N7Znk05q9QqRJCYYhyXIWWsSL13N9GmNMkxF+NwIgMfp8I2OB8sTwVfQFPkI1Y4ypW0cu9xhAkSX/fK8BGL1nTMNFKmOqnLAlZLUhJ/BW1BVgjAVc0bcCfUbPIGRN80lOF2SVaaU3UCLKam2JGduLTp+xibLKNJ8kFd/WB3MSsqr5LF81hcZlSfJpqowKcVi/kNeoyiixyyrTfMVobTvVEYKq+SRJLku9mzsaGdN8UoWM+C1AVhljmuv+H0fR9y9XNlYzxlid/d7QJ4bR939wqYyxQMn9379rGFfG71urNMZU153Bnke+qWLFTsn3j2LPZUh1jLFAyd1bn+U1qnLBJjMqVFYnwfrNV03HTn9jtlczzSdJW796619vAUhYBMgqq7bDViCrTJPH21+fvuNXCLIkq4xV507+cVfAJ8nVLisq6nzX+18M+ETxr6okyadpMuBSmSpjU469mmm+Yru9KnBgerrzyh/7JFllmozbjldle0mB3ZJXJkrbN8Nerfkk+/M3brjrZNghmiXfK/HL99f/6QtGz+W7tjw7pKp9Ug4AmOzFqQ/74Gsa03xyVRUGxpzOeK8xdR+eykbGGGOaD3EdRkcIKmOs0TEYW/bLSY2J6zm/8yutACCrblw9YZZ2CECqAblkJIb6FKUdAODSAeQ6n+/uNSrRnW+xOERAhyiIAC4ZcPnLAZQrLmiX9ARytkCPx6JRIKqEAYi5QEFhrm1kGKUWPRxUpho/e6nkEAFMDKPIghcqBRFSrhnmic0CxsT8HABAbpEr/EmfVF7S2+2saXSE2u4CG9Fbr6T+f+VqZ6qSlEu3Jm+1P9jsZ3UdE4gGFQUA8B1dB9Z/Z4cAYIsNAzrw8ItPKrIA0Idhe/FFAPbCdevGNyN+cfsLtrN/yDEmULHLNjGMom8S0XbFn1omLxcWmAvyBYdoxMcttnwAcBTJHjeungAgeGugBMNhJYyc9WWvlHs9HyvBO0BLq7n8J9e6x36w53zLv+t+P2CVRQCic+PkVOUfX8CPylNrEXDhN7HwiBIGrHLBuDHy3Qr778/elv/6OXzd7m8FgBJln2e45TNLFa583L3R8swG6MNIXB8bwqaNO/bgY11o+B5aW/1KKyCWi3qfDgAlco0HPboOOLwQjIdvqQo9DkclAKFyj7TsLaLeNzrq0RhjagU+O/HwyPbr0QSAbYLZnmoRZcivugHAUe7sbmvrdr5cjrgOAIkRHcA2AVHWB6CPRSFsE4swOQbRIblSLaJPqii1AJiYHHmuCP33HrSIcoVUZkut0VKE8Vx09xp6PDZuDCN/88ztLHrZNzo+3tfRveeAW4/HAEx8cgKNTJXhcj2+U+sSJuv3GWOs2g67231reJ25QmOM1ZXA7naLebh382sA+sAIisTHFwbEIoz/zxCAoZv3kbtZcDgHn91ojp1qO2P68sIoijD87IMW0aexn3x3ekGhMPfeHyYB4PboZx9Mv5nuv5Ehq4x51t373yuAu0GVpaoq0f7M56HTzvHTt3dKkk9TH+7Fc2Uq03zF9vzUtw8ARJqOjZVCVpnqwp3hW7lm2/XE+pz7d393amjY7Av4pIJNuPGF4X655Jv+7omb/Xv+fENqR3I2QVZrrjT/ZtIhAlvLJJ/GmOoaje3UGFNdVoxDFB0IheBxI9J0DI1THzcA0TH1Eevx5W8R3a/uCgb9SicAq62qUtjaZ24PKApEmxlAeeBVKFNNixUGPABe9DhbglAbvJ4vFEUBzDYRQHngdZc3oCipY8RyIeJE0O8HrEA0qoQBCzARDtrMGBn+vm+8pXWqRYyZS7YLDgDI9dQgGDwHfxBAfpGoPPqbo8B70Hm6ORyL+hVJkpweT1l7uNWvALC75PGb43A8LFvzmuOXQUU5DQDr/rNv3/esLe3+VIu4Dn3CS7nrPm9RlBbA6lJn+TEheMpy3wsoCmA1W3bZ4W6o+UgJjiA8Yq+qyh/b1lg+6G+darT83pLtguXBklvL/uTfwuGgEoZZqvMKBVNvJgCElTA25Ng+UZRfPihtsVqHwqljUfh7XPbE2BCAya9vPPy6iOvwFJnbA8HUw3MKXHaz8R/hkaGp7ywAemugFRVyRf8FvxIGzHk5O/6ycmffr4MBP7B+PcLBIGw2xHWj42Q4poeVVsCOqF/phMuOcUBwIAaHCAgeZzB1CxRZHowbgrcGiqIAkiRlcPTNStLbj6QG/Xz69sJH/zxZxwKW/fTtI+16Bsosh0fWu7DdWbRMVjvzU1slU45M/29B8mlLuO1V6tfbU29VFGlSgoM+jfvRlgvcnZWuduanRoMeCBc4O6FN1ioKIuECBZFwgYJIuEBBJFygIGbIQPPu2tpak8lkMplqu6afM818ZqB59+7a2t0mk8m0u7mreeqPAQDoqjU9uuxaQ0HMnOOoSiaTyVOHj3d2ARhoPth2oH/mMwB6omUnk8n+n+Pom0j90fbbgYHm3W+W9SeTyWTyFPatzShSEDPHU1YKAKVlnujVAWBL/dmTOGgymUz7jiN6dSBV5sDfbnn0DwD9l3t6jpaaHiu6tlAQl01Xran08hupFvGphQ+fmu74Olu/5anFVx8K4nI6XLUXQFfn8fmLlZZ5jr/ZPIDUUSV9NZOM2lt1+Pg+k8lk6sRh9Fzun7vklvqzp1xHS00mU+lR16n392ZvG/lBfc2EC9QiEi5QEAkXKIiECxREwgUKIuECBZFw4f8BsKtMAjysusgAAAAASUVORK5CYII=" alt="plot of chunk unnamed-chunk-13" width="50%"></p>
+<hr>
+<h3>참고자료</h3>
+<ul>
+<li>RStudio &#8211; Help &#8211; Cheatsheets &#8211; Data Visualization with ggplot2</li>
+<li><a href="https://bookdown.org/">R Bookdown</a>
+<ul>
+<li><a href="https://socviz.co/">Data Visualization</a></li>
+<li><a href="https://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a></li>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/hadley/ggplot2-book">ggplot2</a></li>
+<li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html">Top 50 ggplot2 Visualizations</a></li>
+</ul>
+</p>
+                                </div>
+
+                                    <span class="tags-links"><i class="fa fa-tags" aria-hidden="true"></i>Tags:                <a href="https://ds.sumeun.org/tags/ggplot2/" rel="tag">ggplot2</a>
+                            <a href="https://ds.sumeun.org/tags/%EA%B8%B0%ED%95%98%ED%95%99%EC%A0%81%EB%8C%80%EC%83%81/" rel="tag">기하학적대상</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%8B%9C%EA%B0%81%EC%A0%81%EB%A7%B5%ED%95%91/" rel="tag">시각적맵핑</a>
+                            <a href="https://ds.sumeun.org/tags/%EC%A7%80%EC%98%B4/" rel="tag">지옴</a>
+            </span>
+                             </div>
+                    </div>
+                </div>
+
+                            <div class="bgwhite post-pad">
+                <nav class="navigation post-navigation" role="navigation">
+                    <h2 class="screen-reader-text">Post navigation</h2>
+                    <div class="nav-links">
+                                            <div class="nav-previous">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_aes2.png"></div>
+                                                        <div class="post-nav-content">
+                            <a href="https://ds.sumeun.org/posts/975/" rel="prev"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp;Prev Post<br><h4>ggplot2: Aesthetic mapping and scales</h4></a></div>
+                        </div>
+                    
+                                            <div class="nav-next">
+                                                            <div class="nav-post-thumb"><img src="https://ds.sumeun.org/wp-content/uploads/2019/03/datatable.png"></div>
+                                                        <div class="post-nav-content">
+                                <a href="https://ds.sumeun.org/?p=965" rel="next">Next Post&nbsp;<i class="fa fa-long-arrow-right" aria-hidden="true"></i><br><h4>보호된 글: data.table vs dplyr 01/02</h4></a>
+                            </div>
+                        </div>
+                                        </div>
+                </nav>
+            </div>
+        
+                <!-- Start of related post -->
+                                <div class="bgwhite post-pad">
+                    <div id="related-posts">
+                        <h2>Related Posts</h2>
+                        <div class="related-posts">
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/2022-02-20-23-17-29.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220220/">2월 20 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2546/">[R스터디:RQuestions] 첫 번째 시간/alluvial plot</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2546/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/mountains-g458727e4c_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220208/">2월 08 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2511/">서울특별시 시간별 (초)미세먼지 03: 극단값 확인</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2511/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/clouds-g2eea9a1b2_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220206/">2월 06 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2507/">서울시 미세/초미세 먼지(2/N)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2507/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2022/02/mountains-g17ae98004_640.jpg)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20220205/">2월 05 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2501/">서울시의 미세/초미세먼지(1/n)</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2501/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2020/12/ggplot2_tips02.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20201201/">12월 01 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2250/">ggplot2 tips 2</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2250/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/12/ggplot2_dualAxis.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191221/">12월 21 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2086/">ggplot2 dual axis</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2086/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/02/BigData2nd_ad01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20191204/">12월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/2069/">개정판 발간! R로 하는 빅데이터 분석: 데이터 전처리와 시각화</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/2069/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/07/ggplot2_tips01.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190724/">7월 24 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1905/">ggplot2 tips</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1905/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/04/population-350x135.gif)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190404/">4월 04 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1089/">gganimate 예: 한국의 인구 구조 변화</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1089/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_coord.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190312/">3월 12 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/1005/">ggplot2: 좌표계</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/1005/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                <div class="related-item">
+                                        <div class="post-content-wrap">
+                                                                                         <div class="post-thumb" style="background-image:url(https://ds.sumeun.org/wp-content/uploads/2019/03/ggplot2_aes2.png)">
+                                <div class="post-date">
+                                    <span><a href="https://ds.sumeun.org/archives/20190307/">3월 07 </a></span>
+                                </div>
+                            </div>
+                                                            <div class="post-content">
+                                                <h2><a href="https://ds.sumeun.org/posts/975/">ggplot2: Aesthetic mapping and scales</a></h2>
+                                                <div class="metabar-wrap">
+                                                    <span class="post-comment"><a href="https://ds.sumeun.org/posts/970/#respond"><i class="fa fa-comments" aria-hidden="true"></i>0</a></span>
+                                                </div>
+                                                <div class="continue-read"><a href="https://ds.sumeun.org/posts/975/"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                    </div>
+                    </div>
+                </div>
+                        <!-- End of related post -->
+
+                <!-- Start of author bio -->
+                            <div class="bgwhite post-pad">
+                <div class="author-bio">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="author-image">
+                                <img alt="" src="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=96&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b01a9308217a3cf8ff32d0e2b703b714?s=192&amp;d=mm&amp;r=g 2x" class="avatar avatar-96 photo" height="96" width="96" loading="lazy">                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="author-desc">
+                                <span class="author-name"><a href="https://ds.sumeun.org/authors/1/">admin !!!</a></span>
+                                                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <!-- End of author bio -->
+
+                <!-- Start of comment box -->
+                <div class="bgwhite post-pad">
+                        <h2 class="comments-title">Comments on this post</h2>
+                        <span>0 Comments</span>
+                        </div>                          <!-- </div> bgwhite post-pad since comment form and comments are in different divs -->
+                         		<div class="bgwhite post-pad">
+		<p class="static-comments-note">기존 공개 댓글은 읽기 전용으로 보존되어 있습니다.</p><!-- #respond -->
+	 </div>
+<!-- #comments -->
+                        <!-- End comment wrap -->
+                <!-- End of comment box -->
+
+            </div>
+
+                            <div class="col-md-4 right-sidebar">
+                    <!-- place sidebar here -->
+                    <aside id="search-2" class="widget widget_search"><p><a href="https://ds.sumeun.org/search/">검색</a></p></aside>
+		<aside id="recent-posts-2" class="widget widget_recent_entries">
+		<h1 class="widget-title">최신 글</h1>
+		<ul>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2624/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어 2</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2621/">영어로 잘못 쓴 한글과 한글로 잘못 쓴 영어</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2603/">Relative Risk Regression</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2596/">[파이썬] R과 차이점 01</a>
+									</li>
+											<li>
+					<a href="https://ds.sumeun.org/posts/2591/">[PYTHON] 파이썬(3.8) 표준 라이브러리의 패키지 목록(알파벳 순)</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h1 class="widget-title">최신 댓글</h1><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">지나가다</span> - <a href="https://ds.sumeun.org/posts/930/#comment-947635">Long to Wide form</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947464">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">magic</span> - <a href="https://ds.sumeun.org/posts/1936/#comment-947459">변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?</a></li><li class="recentcomments"><span class="comment-author-link">admin</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947429">날짜와 시간 자료</a></li><li class="recentcomments"><span class="comment-author-link">Seongdeok</span> - <a href="https://ds.sumeun.org/posts/1111/#comment-947428">날짜와 시간 자료</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">보관함</h1>
+			<ul>
+					<li><a href="https://ds.sumeun.org/archives/202209/">2022년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202207/">2022년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202204/">2022년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202203/">2022년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202202/">2022년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202201/">2022년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202107/">2021년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202103/">2021년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202102/">2021년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202101/">2021년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202012/">2020년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202009/">2020년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202008/">2020년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202007/">2020년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202005/">2020년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202004/">2020년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202002/">2020년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/202001/">2020년 1월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201912/">2019년 12월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201911/">2019년 11월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201910/">2019년 10월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201909/">2019년 9월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201908/">2019년 8월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201907/">2019년 7월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201906/">2019년 6월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201905/">2019년 5월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201904/">2019년 4월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201903/">2019년 3월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201902/">2019년 2월</a></li>
+	<li><a href="https://ds.sumeun.org/archives/201901/">2019년 1월</a></li>
+			</ul>
+
+			</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">카테고리</h1>
+			<ul>
+					<li class="cat-item cat-item-144"><a href="https://ds.sumeun.org/categories/144/">Analysis</a>
+</li>
+	<li class="cat-item cat-item-143"><a href="https://ds.sumeun.org/categories/143/">BigData</a>
+</li>
+	<li class="cat-item cat-item-443"><a href="https://ds.sumeun.org/categories/443/">caret</a>
+</li>
+	<li class="cat-item cat-item-96"><a href="https://ds.sumeun.org/categories/96/">character</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="https://ds.sumeun.org/categories/31/">data preprocessing</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="https://ds.sumeun.org/categories/32/">descriptive statistics</a>
+</li>
+	<li class="cat-item cat-item-78"><a href="https://ds.sumeun.org/categories/78/">dplyr</a>
+</li>
+	<li class="cat-item cat-item-371"><a href="https://ds.sumeun.org/categories/371/">EDA</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="https://ds.sumeun.org/categories/178/">flow control</a>
+</li>
+	<li class="cat-item cat-item-187"><a href="https://ds.sumeun.org/categories/187/">ggplot2</a>
+</li>
+	<li class="cat-item cat-item-103"><a href="https://ds.sumeun.org/categories/103/">git</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="https://ds.sumeun.org/categories/95/">hangul</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://ds.sumeun.org/categories/120/">matrix</a>
+</li>
+	<li class="cat-item cat-item-390"><a href="https://ds.sumeun.org/categories/390/">ML</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="https://ds.sumeun.org/categories/77/">Packages</a>
+</li>
+	<li class="cat-item cat-item-264"><a href="https://ds.sumeun.org/categories/264/">Python</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://ds.sumeun.org/categories/28/">R</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="https://ds.sumeun.org/categories/80/">regular expressions</a>
+</li>
+	<li class="cat-item cat-item-159"><a href="https://ds.sumeun.org/categories/159/">RegularExpression</a>
+</li>
+	<li class="cat-item cat-item-357"><a href="https://ds.sumeun.org/categories/357/">RL</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="https://ds.sumeun.org/categories/82/">summary statistics</a>
+</li>
+	<li class="cat-item cat-item-166"><a href="https://ds.sumeun.org/categories/166/">Visualization</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="https://ds.sumeun.org/categories/172/">가로형</a>
+</li>
+	<li class="cat-item cat-item-358"><a href="https://ds.sumeun.org/categories/358/">강화학습</a>
+</li>
+	<li class="cat-item cat-item-210"><a href="https://ds.sumeun.org/categories/210/">객체</a>
+</li>
+	<li class="cat-item cat-item-483"><a href="https://ds.sumeun.org/categories/483/">기술적문제</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="https://ds.sumeun.org/categories/29/">기술통계</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="https://ds.sumeun.org/categories/104/">깃</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="https://ds.sumeun.org/categories/234/">날짜</a>
+</li>
+	<li class="cat-item cat-item-162"><a href="https://ds.sumeun.org/categories/162/">데이터</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="https://ds.sumeun.org/categories/174/">데이터 가공</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="https://ds.sumeun.org/categories/30/">데이터 전처리</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="https://ds.sumeun.org/categories/114/">데이터가공</a>
+</li>
+	<li class="cat-item cat-item-207"><a href="https://ds.sumeun.org/categories/207/">데이터테이블</a>
+</li>
+	<li class="cat-item cat-item-456"><a href="https://ds.sumeun.org/categories/456/">모형평가</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="https://ds.sumeun.org/categories/94/">문자열</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://ds.sumeun.org/categories/1/">미분류</a>
+</li>
+	<li class="cat-item cat-item-242"><a href="https://ds.sumeun.org/categories/242/">배열</a>
+</li>
+	<li class="cat-item cat-item-209"><a href="https://ds.sumeun.org/categories/209/">변수</a>
+</li>
+	<li class="cat-item cat-item-146"><a href="https://ds.sumeun.org/categories/146/">분석</a>
+</li>
+	<li class="cat-item cat-item-248"><a href="https://ds.sumeun.org/categories/248/">불러오기</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="https://ds.sumeun.org/categories/145/">빅데이터</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="https://ds.sumeun.org/categories/122/">선형대수</a>
+</li>
+	<li class="cat-item cat-item-173"><a href="https://ds.sumeun.org/categories/173/">세로형</a>
+</li>
+	<li class="cat-item cat-item-198"><a href="https://ds.sumeun.org/categories/198/">소개</a>
+</li>
+	<li class="cat-item cat-item-213"><a href="https://ds.sumeun.org/categories/213/">숫자</a>
+</li>
+	<li class="cat-item cat-item-165"><a href="https://ds.sumeun.org/categories/165/">시각화</a>
+</li>
+	<li class="cat-item cat-item-235"><a href="https://ds.sumeun.org/categories/235/">시간</a>
+</li>
+	<li class="cat-item cat-item-438"><a href="https://ds.sumeun.org/categories/438/">에러</a>
+</li>
+	<li class="cat-item cat-item-132"><a href="https://ds.sumeun.org/categories/132/">연산</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="https://ds.sumeun.org/categories/81/">요약통계</a>
+</li>
+	<li class="cat-item cat-item-319"><a href="https://ds.sumeun.org/categories/319/">이론</a>
+</li>
+	<li class="cat-item cat-item-320"><a href="https://ds.sumeun.org/categories/320/">자료분석</a>
+</li>
+	<li class="cat-item cat-item-195"><a href="https://ds.sumeun.org/categories/195/">자료형</a>
+</li>
+	<li class="cat-item cat-item-179"><a href="https://ds.sumeun.org/categories/179/">전처리</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="https://ds.sumeun.org/categories/79/">정규표현식</a>
+</li>
+	<li class="cat-item cat-item-481"><a href="https://ds.sumeun.org/categories/481/">주의사항</a>
+</li>
+	<li class="cat-item cat-item-265"><a href="https://ds.sumeun.org/categories/265/">파이썬</a>
+</li>
+	<li class="cat-item cat-item-76"><a href="https://ds.sumeun.org/categories/76/">패키지</a>
+</li>
+	<li class="cat-item cat-item-214"><a href="https://ds.sumeun.org/categories/214/">표기법</a>
+</li>
+	<li class="cat-item cat-item-93"><a href="https://ds.sumeun.org/categories/93/">한글</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="https://ds.sumeun.org/categories/133/">함수</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://ds.sumeun.org/categories/121/">행렬</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="https://ds.sumeun.org/categories/123/">행렬대수</a>
+</li>
+	<li class="cat-item cat-item-289"><a href="https://ds.sumeun.org/categories/289/">화일</a>
+</li>
+	<li class="cat-item cat-item-151"><a href="https://ds.sumeun.org/categories/151/">흐름제어문</a>
+</li>
+			</ul>
+
+			</aside><aside id="meta-2" class="widget widget_meta"><h1 class="widget-title">메타</h1>
+		<ul>
+			<li></li>			<li></li>
+			<li><a href="https://ds.sumeun.org/feed.xml">엔트리 피드</a></li>
+			<li><a href="https://ds.sumeun.org/comments-feed.xml">댓글 피드</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</aside>                </div>
+            
+        </div>
+    </div>
+</section>
+<!-- End of single page content -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+ <!-- Start of footer section -->
+        <section class="footer-sec">
+            <div class="container">
+                <div class="row">
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>2026 10월</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="일요일">일</th>
+		<th scope="col" title="월요일">월</th>
+		<th scope="col" title="화요일">화</th>
+		<th scope="col" title="수요일">수</th>
+		<th scope="col" title="목요일">목</th>
+		<th scope="col" title="금요일">금</th>
+		<th scope="col" title="토요일">토</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td id="today">23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="이전과 다음 달" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://ds.sumeun.org/archives/202209/">&laquo; 9월</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav></div></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="media_image-3" class="widget widget_media_image"><img width="300" height="200" src="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg" class="image wp-image-863  attachment-medium size-medium" alt="" loading="lazy" style="max-width: 100%; height: auto;" srcset="https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS-300x200.jpg 300w, https://ds.sumeun.org/wp-content/uploads/2019/01/data.table_tableS.jpg 640w" sizes="(max-width: 300px) 100vw, 300px"></aside>                        </div>
+                    
+                                            <div class="col-md-4 mob-margin-top">
+                            <aside id="tag_cloud-3" class="widget widget_tag_cloud"><h1 class="widget-title">태그</h1><div class="tagcloud"><a href="https://ds.sumeun.org/tags/add/" class="tag-cloud-link tag-link-108 tag-link-position-1" style="font-size: 8pt;" aria-label="add (2 아이템)">add</a>
+<a href="https://ds.sumeun.org/tags/aggregate/" class="tag-cloud-link tag-link-55 tag-link-position-2" style="font-size: 10.333333333333pt;" aria-label="aggregate (3 아이템)">aggregate</a>
+<a href="https://ds.sumeun.org/tags/by/" class="tag-cloud-link tag-link-54 tag-link-position-3" style="font-size: 10.333333333333pt;" aria-label="by (3 아이템)">by</a>
+<a href="https://ds.sumeun.org/tags/cv/" class="tag-cloud-link tag-link-389 tag-link-position-4" style="font-size: 10.333333333333pt;" aria-label="CV (3 아이템)">CV</a>
+<a href="https://ds.sumeun.org/tags/data-table/" class="tag-cloud-link tag-link-183 tag-link-position-5" style="font-size: 18.888888888889pt;" aria-label="data.table (10 아이템)">data.table</a>
+<a href="https://ds.sumeun.org/tags/data-preprocessing/" class="tag-cloud-link tag-link-147 tag-link-position-6" style="font-size: 21.027777777778pt;" aria-label="data preprocessing (13 아이템)">data preprocessing</a>
+<a href="https://ds.sumeun.org/tags/dplyr/" class="tag-cloud-link tag-link-184 tag-link-position-7" style="font-size: 15.194444444444pt;" aria-label="dplyr (6 아이템)">dplyr</a>
+<a href="https://ds.sumeun.org/tags/eda/" class="tag-cloud-link tag-link-168 tag-link-position-8" style="font-size: 16.166666666667pt;" aria-label="EDA (7 아이템)">EDA</a>
+<a href="https://ds.sumeun.org/tags/filter/" class="tag-cloud-link tag-link-74 tag-link-position-9" style="font-size: 10.333333333333pt;" aria-label="filter (3 아이템)">filter</a>
+<a href="https://ds.sumeun.org/tags/for/" class="tag-cloud-link tag-link-39 tag-link-position-10" style="font-size: 10.333333333333pt;" aria-label="for (3 아이템)">for</a>
+<a href="https://ds.sumeun.org/tags/ggplot2/" class="tag-cloud-link tag-link-188 tag-link-position-11" style="font-size: 21.027777777778pt;" aria-label="ggplot2 (13 아이템)">ggplot2</a>
+<a href="https://ds.sumeun.org/tags/lm/" class="tag-cloud-link tag-link-314 tag-link-position-12" style="font-size: 10.333333333333pt;" aria-label="lm (3 아이템)">lm</a>
+<a href="https://ds.sumeun.org/tags/log/" class="tag-cloud-link tag-link-340 tag-link-position-13" style="font-size: 12.277777777778pt;" aria-label="log (4 아이템)">log</a>
+<a href="https://ds.sumeun.org/tags/melt/" class="tag-cloud-link tag-link-176 tag-link-position-14" style="font-size: 10.333333333333pt;" aria-label="melt (3 아이템)">melt</a>
+<a href="https://ds.sumeun.org/tags/mutate/" class="tag-cloud-link tag-link-83 tag-link-position-15" style="font-size: 10.333333333333pt;" aria-label="mutate (3 아이템)">mutate</a>
+<a href="https://ds.sumeun.org/tags/palette/" class="tag-cloud-link tag-link-283 tag-link-position-16" style="font-size: 10.333333333333pt;" aria-label="palette (3 아이템)">palette</a>
+<a href="https://ds.sumeun.org/tags/slice/" class="tag-cloud-link tag-link-73 tag-link-position-17" style="font-size: 10.333333333333pt;" aria-label="slice (3 아이템)">slice</a>
+<a href="https://ds.sumeun.org/tags/%EA%B2%BD%EB%A1%9C%EB%B6%84%EC%84%9D/" class="tag-cloud-link tag-link-345 tag-link-position-18" style="font-size: 10.333333333333pt;" aria-label="경로분석 (3 아이템)">경로분석</a>
+<a href="https://ds.sumeun.org/tags/%EA%B3%84%EB%9F%89%EA%B2%BD%EC%A0%9C%ED%95%99/" class="tag-cloud-link tag-link-334 tag-link-position-19" style="font-size: 13.833333333333pt;" aria-label="계량경제학 (5 아이템)">계량경제학</a>
+<a href="https://ds.sumeun.org/tags/%EB%82%B4%EC%83%9D%EC%84%B1/" class="tag-cloud-link tag-link-333 tag-link-position-20" style="font-size: 12.277777777778pt;" aria-label="내생성 (4 아이템)">내생성</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-149 tag-link-position-21" style="font-size: 8pt;" aria-label="데이터전처리 (2 아이템)">데이터전처리</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%85%8C%EC%9D%B4%EB%B8%94/" class="tag-cloud-link tag-link-182 tag-link-position-22" style="font-size: 18.111111111111pt;" aria-label="데이터테이블 (9 아이템)">데이터테이블</a>
+<a href="https://ds.sumeun.org/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84/" class="tag-cloud-link tag-link-25 tag-link-position-23" style="font-size: 13.833333333333pt;" aria-label="데이터프레임 (5 아이템)">데이터프레임</a>
+<a href="https://ds.sumeun.org/tags/%EB%9E%9C%EB%8D%A4%ED%8F%AC%EB%A0%88%EC%8A%A4%ED%8A%B8/" class="tag-cloud-link tag-link-368 tag-link-position-24" style="font-size: 17.138888888889pt;" aria-label="랜덤포레스트 (8 아이템)">랜덤포레스트</a>
+<a href="https://ds.sumeun.org/tags/%EB%A1%9C%EA%B7%B8/" class="tag-cloud-link tag-link-434 tag-link-position-25" style="font-size: 8pt;" aria-label="로그 (2 아이템)">로그</a>
+<a href="https://ds.sumeun.org/tags/%EB%AA%A8%ED%98%95%EC%9D%B4%ED%95%B4/" class="tag-cloud-link tag-link-375 tag-link-position-26" style="font-size: 12.277777777778pt;" aria-label="모형이해 (4 아이템)">모형이해</a>
+<a href="https://ds.sumeun.org/tags/%EB%AC%B8%EC%9E%90%EC%97%B4/" class="tag-cloud-link tag-link-20 tag-link-position-27" style="font-size: 19.666666666667pt;" aria-label="문자열 (11 아이템)">문자열</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%94%EC%A3%BC%ED%98%95/" class="tag-cloud-link tag-link-288 tag-link-position-28" style="font-size: 12.277777777778pt;" aria-label="범주형 (4 아이템)">범주형</a>
+<a href="https://ds.sumeun.org/tags/%EB%B2%A1%ED%84%B0/" class="tag-cloud-link tag-link-19 tag-link-position-29" style="font-size: 10.333333333333pt;" aria-label="벡터 (3 아이템)">벡터</a>
+<a href="https://ds.sumeun.org/tags/%EB%B3%80%EC%88%98%EC%84%A0%ED%83%9D/" class="tag-cloud-link tag-link-367 tag-link-position-30" style="font-size: 8pt;" aria-label="변수선택 (2 아이템)">변수선택</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-321 tag-link-position-31" style="font-size: 22pt;" aria-label="선형모형 (15 아이템)">선형모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%84%A0%ED%98%95%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-322 tag-link-position-32" style="font-size: 13.833333333333pt;" aria-label="선형회귀 (5 아이템)">선형회귀</a>
+<a href="https://ds.sumeun.org/tags/%EC%8B%9C%EA%B0%81%ED%99%94/" class="tag-cloud-link tag-link-150 tag-link-position-33" style="font-size: 15.194444444444pt;" aria-label="시각화 (6 아이템)">시각화</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%88%EC%B8%A1%EB%AA%A8%ED%98%95/" class="tag-cloud-link tag-link-338 tag-link-position-34" style="font-size: 18.111111111111pt;" aria-label="예측모형 (9 아이템)">예측모형</a>
+<a href="https://ds.sumeun.org/tags/%EC%98%A4%EC%B0%A8%EC%83%81%EA%B4%80/" class="tag-cloud-link tag-link-335 tag-link-position-35" style="font-size: 13.833333333333pt;" aria-label="오차상관 (5 아이템)">오차상관</a>
+<a href="https://ds.sumeun.org/tags/%EC%9B%90%EC%9D%B8%EA%B2%B0%EA%B3%BC/" class="tag-cloud-link tag-link-336 tag-link-position-36" style="font-size: 13.833333333333pt;" aria-label="원인결과 (5 아이템)">원인결과</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%B5%EC%8B%A0%EA%B2%BD%EB%A7%9D/" class="tag-cloud-link tag-link-369 tag-link-position-37" style="font-size: 12.277777777778pt;" aria-label="인공신경망 (4 아이템)">인공신경망</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EA%B3%BC%EA%B4%80%EA%B3%84/" class="tag-cloud-link tag-link-337 tag-link-position-38" style="font-size: 13.833333333333pt;" aria-label="인과관계 (5 아이템)">인과관계</a>
+<a href="https://ds.sumeun.org/tags/%EC%9D%B8%EC%BD%94%EB%94%A9/" class="tag-cloud-link tag-link-22 tag-link-position-39" style="font-size: 17.138888888889pt;" aria-label="인코딩 (8 아이템)">인코딩</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%84%EC%B2%98%EB%A6%AC/" class="tag-cloud-link tag-link-181 tag-link-position-40" style="font-size: 18.111111111111pt;" aria-label="전처리 (9 아이템)">전처리</a>
+<a href="https://ds.sumeun.org/tags/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D/" class="tag-cloud-link tag-link-59 tag-link-position-41" style="font-size: 12.277777777778pt;" aria-label="정규표현식 (4 아이템)">정규표현식</a>
+<a href="https://ds.sumeun.org/tags/%ED%8C%94%EB%A0%88%ED%8A%B8/" class="tag-cloud-link tag-link-282 tag-link-position-42" style="font-size: 10.333333333333pt;" aria-label="팔레트 (3 아이템)">팔레트</a>
+<a href="https://ds.sumeun.org/tags/%ED%94%84%EB%A6%B0%ED%8A%B8/" class="tag-cloud-link tag-link-436 tag-link-position-43" style="font-size: 8pt;" aria-label="프린트 (2 아이템)">프린트</a>
+<a href="https://ds.sumeun.org/tags/%ED%95%A8%EC%88%98/" class="tag-cloud-link tag-link-318 tag-link-position-44" style="font-size: 10.333333333333pt;" aria-label="함수 (3 아이템)">함수</a>
+<a href="https://ds.sumeun.org/tags/%ED%9A%8C%EA%B7%80/" class="tag-cloud-link tag-link-408 tag-link-position-45" style="font-size: 13.833333333333pt;" aria-label="회귀 (5 아이템)">회귀</a></div>
+</aside>                        </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- End of footer section -->
+
+        <!-- Start of bottom footer section -->
+        <section class="bot-footer">
+            <div class="container">
+            <p>Made with   <span>  <i class="fa fa-heart"></i>  </span>By <a href="https://codethemes.co/" target="_blank">Code Themes</a></p>
+            </div>
+        </section>
+        <div><!-- boxed layout or full-width layout end -->
+    </div>
+    <script type="text/javascript">
+        jQuery(function(){
+        var arrLiveStats=[];
+        var WSM_PREFIX="wsm";
+		
+        jQuery(".if-js-closed").removeClass("if-js-closed").addClass("closed");
+                var wsmFnSiteLiveStats=function(){
+                           jQuery.ajax({
+                               type: "POST",
+                               url: wsm_ajaxObject.ajax_url,
+                               data: { action: 'liveSiteStats', requests: JSON.stringify(arrLiveStats), r: Math.random() }
+                           }).done(function( strResponse ) {
+                                if(strResponse!="No"){
+                                    arrResponse=JSON.parse(strResponse);
+                                    jQuery.each(arrResponse, function(key,value){
+                                    
+                                        $element= document.getElementById(key);
+                                        oldValue=parseInt($element.getAttribute("data-value").replace(/,/g, ""));
+                                        diff=parseInt(value.replace(/,/g, ""))-oldValue;
+                                        $class="";
+                                        
+                                        if(diff>=0){
+                                            diff="+"+diff;
+                                        }else{
+                                            $class="wmcRedBack";
+                                        }
+
+                                        $element.setAttribute("data-value",value);
+                                        $element.innerHTML=diff;
+                                        jQuery("#"+key).addClass($class).show().siblings(".wsmH2Number").text(value);
+                                        
+                                        if(key=="SiteUserOnline")
+                                        {
+                                            var onlineUserCnt = arrResponse.wsmSiteUserOnline;
+                                            if(jQuery("#wsmSiteUserOnline").length)
+                                            {
+                                                jQuery("#wsmSiteUserOnline").attr("data-value",onlineUserCnt);   jQuery("#wsmSiteUserOnline").next(".wsmH2Number").html("<a target=\"_blank\" href=\"?page=wsm_traffic&subPage=UsersOnline&subTab=summary\">"+onlineUserCnt+"</a>");
+                                            }
+                                        }
+                                    });
+                                    setTimeout(function() {
+                                        jQuery.each(arrResponse, function(key,value){
+                                            jQuery("#"+key).removeClass("wmcRedBack").hide();
+                                        });
+                                    }, 1500);
+                                }
+                           });
+                       }
+                       if(arrLiveStats.length>0){
+                          setInterval(wsmFnSiteLiveStats, 10000);
+                       }});
+        </script><script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-includes/js/masonry.min.js" id="masonry-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/slick.min.js" id="jquery-slick-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/app.js" id="purplous-lite-app-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/fitvids.min.js" id="jquery-fitvids-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/jquery.validate.min.js" id="jquery-validate-js"></script>
+<script type="text/javascript" src="https://ds.sumeun.org/wp-content/themes/purplous-lite/assets/js/main.js" id="purplous-lite-main-js"></script>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=default&amp;ver=1.3.13" id="mathjax-js"></script>
+  </body>
+</html>

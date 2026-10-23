@@ -1,0 +1,51 @@
+# Copy into the NEW blog repository as .github/workflows/pages.yml only after
+# the public export is reviewed. Never publish the existing ds audit repository.
+name: Publish reviewed static blog
+
+on:
+  workflow_dispatch:
+    inputs:
+      production:
+        description: Publish indexable production HTML after cutover checks
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build saved public HTML
+        env:
+          SITE_MODE: ${{ inputs.production && 'production' || 'preview' }}
+        run: python3 tools/build_site.py --source site --output _site --mode "$SITE_MODE"
+      - name: Require the reviewed export directory
+        run: |
+          test -f _site/index.html
+          test -f _site/.nojekyll
+          test ! -e _site/CNAME
+          test -f public-manifest.json
+          python3 tools/prepare_routing.py \
+            --manifest public-manifest.json \
+            --site _site \
+            --upstream "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" \
+            --output _validated-routing
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

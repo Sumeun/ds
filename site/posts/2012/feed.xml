@@ -1,0 +1,29 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 도대체 그래디언트가 무엇인가?	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=2012" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/2012/</link>
+	<description>R</description>
+	<lastBuildDate>Sun, 03 May 2020 04:15:57 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: awesome		</title>
+		<link>https://ds.sumeun.org/posts/2012/#comment-584</link>
+
+		<dc:creator>awesome</dc:creator>
+		<pubDate>Sun, 03 May 2020 04:15:57 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/2012/#comment-584</guid>
+
+					<description>i love it for real</description>
+			<ns3:encoded>&lt;p&gt;i love it for real&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

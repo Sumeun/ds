@@ -1,0 +1,94 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	숨은원리 데이터사이언스의 댓글	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=comments-rss2" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/</link>
+	<description>R</description>
+	<lastBuildDate>Tue, 04 Nov 2025 23:23:08 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		지나가다 작성 Long to Wide form의 댓글		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-947635</link>
+
+		<dc:creator>지나가다</dc:creator>
+		<pubDate>Tue, 04 Nov 2025 23:23:08 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-947635</guid>
+
+					<description>우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.</description>
+			<ns3:encoded>&lt;p&gt;우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		admin 작성 변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?의 댓글		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-947464</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Tue, 22 Nov 2022 01:46:05 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947464</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1936#comment-947459&amp;quot;&amp;gt;magic&amp;lt;/a&amp;gt;의 응답.
+
+다중 회귀 분석의 의미를 생각해보세요. y=b0 + b1 G (G: Gender)에서 b1는 유의미하지 않은 데, y=b0 + b1G + b2S (S:Socioeconomic status)에서 b1은 유의미하다면 Socioeconimic status가 동일한 집단 내에서는 b1이 유의미하다는 뜻입니다</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1936/#comment-947459"&gt;magic&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;다중 회귀 분석의 의미를 생각해보세요. y=b0 + b1 G (G: Gender)에서 b1는 유의미하지 않은 데, y=b0 + b1G + b2S (S:Socioeconomic status)에서 b1은 유의미하다면 Socioeconimic status가 동일한 집단 내에서는 b1이 유의미하다는 뜻입니다&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		magic 작성 변수 선택 방법: 선형 회귀 분석으로 변수를 선택한다면?의 댓글		</title>
+		<link>https://ds.sumeun.org/posts/1936/#comment-947459</link>
+
+		<dc:creator>magic</dc:creator>
+		<pubDate>Tue, 01 Nov 2022 09:38:01 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947459</guid>
+
+					<description>성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?</description>
+			<ns3:encoded>&lt;p&gt;성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		admin 작성 날짜와 시간 자료의 댓글		</title>
+		<link>https://ds.sumeun.org/posts/1111/#comment-947429</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Sat, 02 Apr 2022 17:17:33 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947429</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1111#comment-947428&amp;quot;&amp;gt;Seongdeok&amp;lt;/a&amp;gt;의 응답.
+
+네. DST가 적용된 시간입니다. https://data.iana.org/time-zones/tz-link.html 의 자료를 쓴다고 하는데요. DST는 각 정부가 정하는 거라, 과거 정보는 정확하지만 미래에는 어떻게 될지 불확실하다고 합니다.</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/1111/#comment-947428"&gt;Seongdeok&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;네. DST가 적용된 시간입니다. &lt;a href="https://data.iana.org/time-zones/tz-link.html" rel="nofollow ugc"&gt;https://data.iana.org/time-zones/tz-link.html&lt;/a&gt; 의 자료를 쓴다고 하는데요. DST는 각 정부가 정하는 거라, 과거 정보는 정확하지만 미래에는 어떻게 될지 불확실하다고 합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Seongdeok 작성 날짜와 시간 자료의 댓글		</title>
+		<link>https://ds.sumeun.org/posts/1111/#comment-947428</link>
+
+		<dc:creator>Seongdeok</dc:creator>
+		<pubDate>Wed, 23 Mar 2022 01:06:27 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947428</guid>
+
+					<description>혹시 as.POSIXct 함수에서 timezone을 지정하게 되면 
+
+Daylight Saving Time 을 조정한 시간을 주게 되는 상황인가요?</description>
+			<ns3:encoded>&lt;p&gt;혹시 as.POSIXct 함수에서 timezone을 지정하게 되면 &lt;/p&gt;
+&lt;p&gt;Daylight Saving Time 을 조정한 시간을 주게 되는 상황인가요?&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

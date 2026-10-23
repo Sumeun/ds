@@ -1,0 +1,98 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: Long to Wide form	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=930" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/930/</link>
+	<description>R</description>
+	<lastBuildDate>Tue, 04 Nov 2025 23:23:08 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: 지나가다		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-947635</link>
+
+		<dc:creator>지나가다</dc:creator>
+		<pubDate>Tue, 04 Nov 2025 23:23:08 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-947635</guid>
+
+					<description>우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.</description>
+			<ns3:encoded>&lt;p&gt;우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-978</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Fri, 22 Jan 2021 15:55:25 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-978</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=930#comment-976&amp;quot;&amp;gt;admin&amp;lt;/a&amp;gt;의 응답.
+
+만약 merge해야할 갯수가 많다면 다음 링크의 multiple values를 참조하세요.
+https://dcl-wrangle.stanford.edu/pivot-advanced.html
+
+data.table의 melt나 dcast도 활용 가능하고,
+stack, unstack도 사용 가능한 것으로 알고 있습니다</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/930/#comment-976"&gt;admin&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;만약 merge해야할 갯수가 많다면 다음 링크의 multiple values를 참조하세요.&lt;br&gt;
+&lt;a href="https://dcl-wrangle.stanford.edu/pivot-advanced.html" rel="nofollow ugc"&gt;https://dcl-wrangle.stanford.edu/pivot-advanced.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;data.table의 melt나 dcast도 활용 가능하고,&lt;br&gt;
+stack, unstack도 사용 가능한 것으로 알고 있습니다&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-976</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Fri, 22 Jan 2021 05:33:45 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-976</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=930#comment-921&amp;quot;&amp;gt;이유&amp;lt;/a&amp;gt;의 응답.
+
+네 그것도 한 방법입니다</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/930/#comment-921"&gt;이유&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;네 그것도 한 방법입니다&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: 이유		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-921</link>
+
+		<dc:creator>이유</dc:creator>
+		<pubDate>Thu, 17 Dec 2020 03:04:36 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-921</guid>
+
+					<description>너무 감사합니다. wide to long 만 이틀째 공부하던 중이엇습니다. 만약 value 를 두 열로 살리고 싶으면, 따로따로 해서 merge 해야 하는군요. 이게 문제였는데 드디어 이해했습니다.</description>
+			<ns3:encoded>&lt;p&gt;너무 감사합니다. wide to long 만 이틀째 공부하던 중이엇습니다. 만약 value 를 두 열로 살리고 싶으면, 따로따로 해서 merge 해야 하는군요. 이게 문제였는데 드디어 이해했습니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: 가로형/세로형 변환(reshape2::melt/dcast) – 숨은원리 데이터사이언스: R로 하는 데이터 사이언스		</title>
+		<link>https://ds.sumeun.org/posts/930/#comment-34</link>
+
+		<dc:creator>가로형/세로형 변환(reshape2::melt/dcast) &amp;#8211; 숨은원리 데이터사이언스: R로 하는 데이터 사이언스</dc:creator>
+		<pubDate>Wed, 13 Mar 2019 06:56:36 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-34</guid>
+
+					<description>[&amp;#8230;] Long to Wide form [&amp;#8230;]</description>
+			<ns3:encoded>&lt;p&gt;[&amp;#8230;] Long to Wide form [&amp;#8230;]&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

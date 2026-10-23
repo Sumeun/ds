@@ -1,0 +1,15 @@
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" version="2.0">
+<channel>
+	<title>
+	댓글: 다차원 배열 : 변환하고 요약하기	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1777" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1777/</link>
+	<description>R</description>
+	<lastBuildDate>Wed, 29 May 2019 05:50:09 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+</channel>
+</rss>

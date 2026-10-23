@@ -1,0 +1,29 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: 선형 모형 1: 선형의 의미	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1806" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1806/</link>
+	<description>R</description>
+	<lastBuildDate>Sun, 27 Sep 2020 04:39:12 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: 로지스틱 회귀(Logistic Regression) – 숨은원리 데이터사이언스: R로 하는 데이터 사이언스		</title>
+		<link>https://ds.sumeun.org/posts/1806/#comment-640</link>
+
+		<dc:creator>로지스틱 회귀(Logistic Regression) &amp;#8211; 숨은원리 데이터사이언스: R로 하는 데이터 사이언스</dc:creator>
+		<pubDate>Sun, 27 Sep 2020 04:39:12 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1806/#comment-640</guid>
+
+					<description>[&amp;#8230;] 모형)은 Linear Model에 링크 함수(연결함수; Link function)을 적용한 것이기에, 선형 모형 1: 선형의 의미에서 설명한 바와 같이, 선형은 계수의 선형 함수임을 의미합니다. (GLM은 [&amp;#8230;]</description>
+			<ns3:encoded>&lt;p&gt;[&amp;#8230;] 모형)은 Linear Model에 링크 함수(연결함수; Link function)을 적용한 것이기에, 선형 모형 1: 선형의 의미에서 설명한 바와 같이, 선형은 계수의 선형 함수임을 의미합니다. (GLM은 [&amp;#8230;]&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

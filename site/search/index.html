@@ -1,0 +1,9 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<title>검색 – 숨은원리 데이터사이언스</title><link rel="canonical" href="https://ds.sumeun.org/search/">
+<style>body{max-width:900px;margin:3rem auto;padding:1rem;font:18px sans-serif}input{font:inherit;width:75%}li{margin:1rem 0}</style></head>
+<body><a href="https://ds.sumeun.org/">홈으로</a><h1>검색</h1><form id="search"><input id="q" aria-label="검색어" name="q"><button>검색</button></form><p id="status"></p><ul id="results"></ul>
+<script>let index=[];const q=document.getElementById('q'),results=document.getElementById('results'),status=document.getElementById('status');
+function search(){const words=q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);results.replaceChildren();if(!words.length){status.textContent='검색어를 입력하세요.';return;}
+const matches=index.filter(p=>words.every(w=>(p.title+' '+p.text).toLowerCase().includes(w)));status.textContent=matches.length+'개의 검색 결과';for(const p of matches){const li=document.createElement('li'),a=document.createElement('a');a.href=p.url;a.textContent=p.title;li.append(a);results.append(li);}}
+fetch('https://ds.sumeun.org/search-index.json').then(r=>r.json()).then(data=>{index=data;q.value=new URLSearchParams(location.search).get('q')||'';search();}).catch(()=>status.textContent='검색 자료를 불러오지 못했습니다.');
+document.getElementById('search').addEventListener('submit',e=>{e.preventDefault();history.replaceState(null,'','?q='+encodeURIComponent(q.value));search();});</script></body></html>

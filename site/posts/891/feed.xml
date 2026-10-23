@@ -1,0 +1,113 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: BigData Analysis with R	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=891" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/891/</link>
+	<description>R</description>
+	<lastBuildDate>Thu, 05 Dec 2019 14:37:00 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/891/#comment-410</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Tue, 03 Dec 2019 15:12:56 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/891/#comment-410</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=891#comment-251&amp;quot;&amp;gt;Nam-Hyeon Jee&amp;lt;/a&amp;gt;의 응답.
+
+감사합니다! ^^</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/891/#comment-251"&gt;Nam-Hyeon Jee&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;감사합니다! ^^&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: Nam-Hyeon Jee		</title>
+		<link>https://ds.sumeun.org/posts/891/#comment-251</link>
+
+		<dc:creator>Nam-Hyeon Jee</dc:creator>
+		<pubDate>Mon, 04 Nov 2019 04:19:09 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/891/#comment-251</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=891#comment-243&amp;quot;&amp;gt;admin&amp;lt;/a&amp;gt;의 응답.
+
+제가 괜한 오해를 했네요. 죄송합니다 ㅠ
+자료 공유해 주셔서 감사합니다 :)
+데이터과학 분야의 또 다른 숨은원리 출간하시면 필히 구매 하겠습니다 ^^</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/891/#comment-243"&gt;admin&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;제가 괜한 오해를 했네요. 죄송합니다 ㅠ&lt;br&gt;
+자료 공유해 주셔서 감사합니다 🙂&lt;br&gt;
+데이터과학 분야의 또 다른 숨은원리 출간하시면 필히 구매 하겠습니다 ^^&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/891/#comment-243</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Fri, 01 Nov 2019 16:04:46 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/891/#comment-243</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=891#comment-239&amp;quot;&amp;gt;Nam-Hyeon Jee&amp;lt;/a&amp;gt;의 응답.
+
+안녕하세요? 오해하게 해서 죄송합니다. 댓글을 삭제한 것이 아니라, 승인을 해야 댓글이 뜹니다. 워드프레스 기본설정이 그렇게 되 있는 것 같은데, 스팸글이 많아서 그렇게 두고 있습니다. 예제 코드와 데이터 화일은 글의 마지막에 첨부하였습니다. 책과 약간 다를 수 있지만 조금만 수정하면 될 것입니다. 책을 열독해주셔서 감사합니다. 그럼 즐거운 주말되세요 ^^</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/891/#comment-239"&gt;Nam-Hyeon Jee&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;안녕하세요? 오해하게 해서 죄송합니다. 댓글을 삭제한 것이 아니라, 승인을 해야 댓글이 뜹니다. 워드프레스 기본설정이 그렇게 되 있는 것 같은데, 스팸글이 많아서 그렇게 두고 있습니다. 예제 코드와 데이터 화일은 글의 마지막에 첨부하였습니다. 책과 약간 다를 수 있지만 조금만 수정하면 될 것입니다. 책을 열독해주셔서 감사합니다. 그럼 즐거운 주말되세요 ^^&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: Nam-Hyeon Jee		</title>
+		<link>https://ds.sumeun.org/posts/891/#comment-239</link>
+
+		<dc:creator>Nam-Hyeon Jee</dc:creator>
+		<pubDate>Fri, 01 Nov 2019 00:13:32 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/891/#comment-239</guid>
+
+					<description>출간 되자 마자 1독 하고, 다시 2독 중 입니다 ^^
+
+그런데 8장, 9장 부분에 데이터 프레임을 타이핑 해서 만들어야 하니..
+이부분이 좀 귀찮기도 하고, 공부 흐름이 끊어 집니다.
+8장의 &amp;#039;서울시 한강공원 ~.csv&amp;#039; 데이터도 구해야 하구요.
+
+해외 원서에서는 예제 코드를 공유해 주던데, 이 책도 사용된 코드를 공유해 주셨으면 합니다.</description>
+			<ns3:encoded>&lt;p&gt;출간 되자 마자 1독 하고, 다시 2독 중 입니다 ^^&lt;/p&gt;
+&lt;p&gt;그런데 8장, 9장 부분에 데이터 프레임을 타이핑 해서 만들어야 하니..&lt;br&gt;
+이부분이 좀 귀찮기도 하고, 공부 흐름이 끊어 집니다.&lt;br&gt;
+8장의 &amp;#8216;서울시 한강공원 ~.csv&amp;#8217; 데이터도 구해야 하구요.&lt;/p&gt;
+&lt;p&gt;해외 원서에서는 예제 코드를 공유해 주던데, 이 책도 사용된 코드를 공유해 주셨으면 합니다.&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+		<item>
+		<title>
+		글쓴이: admin		</title>
+		<link>https://ds.sumeun.org/posts/891/#comment-69</link>
+
+		<dc:creator>admin</dc:creator>
+		<pubDate>Tue, 18 Jun 2019 17:26:33 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/891/#comment-69</guid>
+
+					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=891#comment-68&amp;quot;&amp;gt;정철용&amp;lt;/a&amp;gt;의 응답.
+
+안녕하세요? 교재로 고려해주셔서 감사합니다.
+1부 보내드리겠습니다. ^^</description>
+			<ns3:encoded>&lt;p&gt;&lt;a href="https://ds.sumeun.org/posts/891/#comment-68"&gt;정철용&lt;/a&gt;의 응답.&lt;/p&gt;
+&lt;p&gt;안녕하세요? 교재로 고려해주셔서 감사합니다.&lt;br&gt;
+1부 보내드리겠습니다. ^^&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>

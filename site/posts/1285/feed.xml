@@ -1,0 +1,29 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+	<title>
+	댓글: R colorspace 팔레트(palette) 큰 그림	</title>
+	<ns0:link href="https://ds.sumeun.org/?feed=rss2&amp;p=1285" rel="self" type="application/rss+xml" />
+	<link>https://ds.sumeun.org/posts/1285/</link>
+	<description>R</description>
+	<lastBuildDate>Mon, 20 May 2019 15:37:53 +0000</lastBuildDate>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.2</generator>
+	<item>
+		<title>
+		글쓴이: colorspace 팔레트 – 숨은원리 데이터사이언스: R로 하는 데이터 사이언스		</title>
+		<link>https://ds.sumeun.org/posts/1285/#comment-61</link>
+
+		<dc:creator>colorspace 팔레트 &amp;#8211; 숨은원리 데이터사이언스: R로 하는 데이터 사이언스</dc:creator>
+		<pubDate>Mon, 20 May 2019 15:37:53 +0000</pubDate>
+		<guid isPermaLink="false">https://ds.sumeun.org/posts/1285/#comment-61</guid>
+
+					<description>[&amp;#8230;] http://141.164.34.82/?p=1285 [&amp;#8230;]</description>
+			<ns3:encoded>&lt;p&gt;[&amp;#8230;] &lt;a href="https://ds.sumeun.org/posts/1285/" rel="nofollow ugc"&gt;http://141.164.34.82/?p=1285&lt;/a&gt; [&amp;#8230;]&lt;/p&gt;
+</ns3:encoded>
+		
+			</item>
+	</channel>
+</rss>
