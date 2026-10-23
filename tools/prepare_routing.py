@@ -215,6 +215,7 @@ server {{
     error_log {REMOTE_ROOT}/logs/error.log;
 {noindex}    if ($request_method !~ ^(GET|HEAD)$) {{ return 405; }}
     if ($arg_preview != "") {{ return 404; }}
+    if ($arg_sitemap != "") {{ return {code} https://ds.sumeun.org/sitemap.xml; }}
     if ($ds_static_date_target != "") {{
         return {code} https://ds.sumeun.org$ds_static_date_target;
     }}
@@ -238,6 +239,9 @@ server {{
     location ~* (?:\\.php(?:/|$)|^/(?:wp-admin|wp-json|mysqladmin|xhprof)(?:/|$)) {{
         return 404;
     }}
+    location = /wp-sitemap.xml {{ return {code} https://ds.sumeun.org/sitemap.xml; }}
+    location = /sitemap_index.xml {{ return {code} https://ds.sumeun.org/sitemap.xml; }}
+    location ~ ^/wp-sitemap-[A-Za-z0-9_-]+\\.xml$ {{ return {code} https://ds.sumeun.org/sitemap.xml; }}
     # Already forbidden on the source; do not expose the underlying text file.
     location = /wp-content/uploads/2019/02/UTF-8test.txt {{ return 403; }}
     location / {{ include {REMOTE_ROOT}/routing/proxy.conf; }}
