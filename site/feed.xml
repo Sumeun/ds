@@ -32,7 +32,7 @@
 		<category>data.table</category>
 		<category>데이터테이블</category>
 		<category>전처리</category>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/2624/</guid>
+		<guid isPermaLink="false">http://ds.sumeun.org/?p=2624</guid>
 
 					<description>keyboard strokes: 한영타 변환 2/2: 영to한 keyboard strokes: 한영타 변환 2/2: 영to한 2022-09-11 들어가기 지난 포스팅에 이어 이번에는 반대방향의 변환을 해보자. 예를 들어 안녕? 잘 잤어?를 영어로 치면 dkssud? wkf wkTdj?가 된다. 이를 의도했던 한글로 변환하고자 한다면? KoNLP? 혹시 KoNLP 패키지에 이미 비슷한 기능이 있지 않을까? library(KoNLP) ## Checking user defined dictionary! HangulAutomata(&amp;#39;dkssud? wkf wkTdj?&amp;#39;, [&amp;#8230;]</description>
 		
@@ -58,7 +58,7 @@
 		<category>패키지</category>
 		<category>데이터테이블</category>
 		<category>인코딩</category>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/2621/</guid>
+		<guid isPermaLink="false">http://ds.sumeun.org/?p=2621</guid>
 
 					<description>keyboard strokes: 한영타 변환 1/2 keyboard strokes: 한영타 변환 1/2 2022-09-05 문제 개요 한영 키보드를 쓰다보면 한글 입력 상태인 줄 알고 키보드를 쳤는데 영어 입력 상태로 되어 있는 경우가 종종 있다. 예를 들면 안녕?이라고 치고 싶었는데, 영어 입력 상태에서 dkssud?이라고 입력되어 있는 상황인 거다. 이렇게 잘못 입력된 영어를 한글로 바꿀 수 있는 방법, 그리고 반대로 [&amp;#8230;]</description>
 		
@@ -80,7 +80,7 @@
 		<category>선형모형</category>
 		<category>선형회귀</category>
 		<category>회귀</category>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/2603/</guid>
+		<guid isPermaLink="false">http://ds.sumeun.org/?p=2603</guid>
 
 					<description>Relative Risk Regression Relative Risk Regression 2022-06-29 Relative Risk Regression 결과값이 삶/죽음, 예/아니오 와 같이 이항 반응(binary response)인 경우 가장 널리 사용되는 분석 방법은 logistic regression이다. \[\textrm{logit}(\mathbb{E}[y]) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots\] 이름이 로지스틱인 이유는 위의 식을 다음과 같이 변형할 수 있기 때문이다. \[\mathbb{E}[y] = \textrm{logistic}( \beta_0 + \beta_1 x_1 [&amp;#8230;]</description>
 		
@@ -99,7 +99,7 @@
 				<category>Python</category>
 		<category>데이터 전처리</category>
 		<category>data preprocessing</category>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/2596/</guid>
+		<guid isPermaLink="false">http://ds.sumeun.org/?p=2596</guid>
 
 					<description>R과 파이썬의 차이 01 R과 파이썬의 차이 01 2022-04-29 코드 편집 들여쓰기(indentation)의 구성도 중요함 문서 편집기에서 눈에 보기에 줄이 맞아도 들여쓰기 오류가 발생할 수 있다. 코드 편집기에 따라 탭의 스페이스 개수가 다를 수 있다. 그리고 탭과 스페이스는 같은 문자가 아니기 때문에 이 둘을 혼용하면 눈으로 보기에는 들여쓰기가 일치하게 보이지만 구성이 달라 IndentationError가 발생한다. PEP1에 따르면 [&amp;#8230;]</description>
 		
@@ -123,7 +123,7 @@
 		<category>psl</category>
 		<category>python</category>
 		<category>python standard library</category>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/2591/</guid>
+		<guid isPermaLink="false">http://ds.sumeun.org/?p=2591</guid>
 
 					<description>py_standard_modules.knit 파이썬(3.8) 표준 라이브러리의 패키지 목록(알파벳 순) 패키지 또는 모듈(확장자가 py인 파일)의 이름을 지을 주의할 점: 파이썬 표준 라이브러리의 패키지 이름은 제외하는 게 좋다. 왜냐하면 파이썬 표준 라이브러리의 패키지와 본인이 만든 모듈의 이름이 같으면 import가 제대로 안 될 수도 있다(import 순서에 따라 둘 중 하나만 import된다). 아래 표는 파이썬 3.8의 표준 라이브러리의 패키지 목록과 기능을 [&amp;#8230;]</description>
 		

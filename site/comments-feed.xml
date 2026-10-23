@@ -18,7 +18,7 @@
 
 		<dc:creator>지나가다</dc:creator>
 		<pubDate>Tue, 04 Nov 2025 23:23:08 +0000</pubDate>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/930/#comment-947635</guid>
+		<guid isPermaLink="false">http://141.164.34.82/?p=930#comment-947635</guid>
 
 					<description>우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.</description>
 			<ns3:encoded>&lt;p&gt;우연하게 귀한 글 보게 되었습니다. 롱과 와이드 타입에 대해서 개념을 잡게 되었습니다. 감사합니다.&lt;/p&gt;
@@ -32,7 +32,7 @@
 
 		<dc:creator>admin</dc:creator>
 		<pubDate>Tue, 22 Nov 2022 01:46:05 +0000</pubDate>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947464</guid>
+		<guid isPermaLink="false">http://141.164.34.82/?p=1936#comment-947464</guid>
 
 					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1936#comment-947459&amp;quot;&amp;gt;magic&amp;lt;/a&amp;gt;의 응답.
 
@@ -49,7 +49,7 @@
 
 		<dc:creator>magic</dc:creator>
 		<pubDate>Tue, 01 Nov 2022 09:38:01 +0000</pubDate>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/1936/#comment-947459</guid>
+		<guid isPermaLink="false">http://141.164.34.82/?p=1936#comment-947459</guid>
 
 					<description>성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?</description>
 			<ns3:encoded>&lt;p&gt;성별변수(더미변수)가 종속변수와의 상관관계, 즉 단순회귀에서는 유의미한 결과를 주지 않는데(표준화계수:  .025, p: .732) 다른 독립변수와 함께 다중회귀분석을 하면 유의미해집니다(표준화계수: -.154, p: .003). 어떻게 해석해야 좋을까요?&lt;/p&gt;
@@ -63,7 +63,7 @@
 
 		<dc:creator>admin</dc:creator>
 		<pubDate>Sat, 02 Apr 2022 17:17:33 +0000</pubDate>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947429</guid>
+		<guid isPermaLink="false">http://141.164.34.82/?p=1111#comment-947429</guid>
 
 					<description>&amp;lt;a href=&amp;quot;https://ds.sumeun.org/?p=1111#comment-947428&amp;quot;&amp;gt;Seongdeok&amp;lt;/a&amp;gt;의 응답.
 
@@ -80,7 +80,7 @@
 
 		<dc:creator>Seongdeok</dc:creator>
 		<pubDate>Wed, 23 Mar 2022 01:06:27 +0000</pubDate>
-		<guid isPermaLink="false">https://ds.sumeun.org/posts/1111/#comment-947428</guid>
+		<guid isPermaLink="false">http://141.164.34.82/?p=1111#comment-947428</guid>
 
 					<description>혹시 as.POSIXct 함수에서 timezone을 지정하게 되면 
 
